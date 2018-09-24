@@ -30,8 +30,7 @@ namespace OwnableCI_TestLib.Tests
        public void FirsOne()
         {
            
-            page = new LoginPage(chrome);            
-            page.NavigateToPage();
+            page = new LoginPage(chrome);   
             page.Login();
             chrome.Close();
             chrome.Quit();

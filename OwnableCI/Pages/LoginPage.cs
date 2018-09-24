@@ -34,8 +34,6 @@ namespace OwnableCI_TestLib.Pages
         private IWebElement PassField;
 
 
-
-
         #endregion
 
 
@@ -47,7 +45,7 @@ namespace OwnableCI_TestLib.Pages
         public LoginPage(IWebDriver browser) : base(browser) {
 
             PageFactory.InitElements(driver, this);
-
+            NavigateToPage();            
         }
 
         
@@ -64,6 +62,7 @@ namespace OwnableCI_TestLib.Pages
         public override void NavigateToPage(string parameter = "http://dev.ownable.us/app/home")
         {
             this.driver.Navigate().GoToUrl(parameter);
+            InitPage(this);
         }
     }
 }

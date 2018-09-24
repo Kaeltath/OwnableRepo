@@ -62,6 +62,7 @@
     <Compile Include="Tests\BaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Configs\Config.xml" />
     <Content Include="Drivers\chromedriver.exe" />
   </ItemGroup>
   <ItemGroup>

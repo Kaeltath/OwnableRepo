@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
+using System.Reflection;
 
 namespace OwnableCI_TestLib.Pages
 {
     abstract class BasePage
     {
         public IWebDriver driver;
+        public string errorMessageToLog;
 
         public BasePage(IWebDriver driver)
         {
@@ -35,6 +37,33 @@ namespace OwnableCI_TestLib.Pages
         {
             WebDriverWait _wait = new WebDriverWait(driver, new TimeSpan(0, 1, 0));
             _wait.Until(d => d.FindElement(By.Id(element.GetAttribute("id"))));
+        }
+
+        //
+        public void InitPage(object Obj)
+        {
+            
+            FieldInfo[] fieldInfo = Obj.GetType().GetFields(
+                         BindingFlags.NonPublic |
+                         BindingFlags.Instance);
+
+            
+            foreach (FieldInfo field in fieldInfo)
+            {
+                IWebElement elem = (IWebElement)field.GetValue(Obj);
+                try
+                {                    
+                    if (!elem.Displayed)
+                    {
+                        errorMessageToLog = "Element " + field.Name + " is not loadede, or not visible, please check the problem"; 
+                    }
+                }
+                catch (Exception e)
+                {                    
+                    throw e;
+                }
+
+            }
         }
     }
 }
