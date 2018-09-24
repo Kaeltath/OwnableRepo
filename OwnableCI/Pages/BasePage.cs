@@ -17,6 +17,7 @@ namespace OwnableCI_TestLib.Pages
         {
             this.driver = driver;
             //Initializes all IWebElements for the page
+            PageFactory.InitElements(driver, this);
             this.driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 30); ;
         }
 

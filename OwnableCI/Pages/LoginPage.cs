@@ -8,6 +8,10 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI_TestLib.Constants;
 using System.Threading;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support;
+
+
 
 namespace OwnableCI_TestLib.Pages
 {
@@ -19,9 +23,16 @@ namespace OwnableCI_TestLib.Pages
         //
 
         #region IWebelements        
+
+        [FindsBy(How = How.XPath, Using = "//button[text() = ' Sign Up ']")]
         private IWebElement SignUpButton;
+
+        [FindsBy(How = How.XPath, Using = "//input[@type = 'email']")]
         private IWebElement EmailField;
+
+        [FindsBy(How = How.XPath, Using = "//input[@type = 'password']")]
         private IWebElement PassField;
+
 
 
 
@@ -33,17 +44,19 @@ namespace OwnableCI_TestLib.Pages
         /// Call the base class constructor
         /// </summary>
         /// <param name="browser"></param>
-        public LoginPage(IWebDriver browser) : base(browser) { }
+        public LoginPage(IWebDriver browser) : base(browser) {
+
+            PageFactory.InitElements(driver, this);
+
+        }
 
         
-        public void Login()
+        public void Login( string username = "123", string pass = "321")
         {
-            SignUpButton = driver.FindElement(By.XPath("//button[text() = ' Sign Up ']"));
-            SignUpButton.Click();
-            EmailField = driver.FindElement(By.XPath("//input[@type = 'email']"));            
-            PassField= driver.FindElement(By.XPath("//input[@type = 'password']"));
-            EmailField.SendKeys("user@user.user");
-            PassField.SendKeys("Qq1!qwe123@");
+            ChromeOptions options = new ChromeOptions();           
+            SignUpButton.Click();            
+            EmailField.SendKeys(username);
+            PassField.SendKeys(pass);
             Thread.Sleep(50000);
 
         }
