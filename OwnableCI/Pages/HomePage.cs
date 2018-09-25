@@ -15,7 +15,7 @@ using OpenQA.Selenium.Support;
 
 namespace OwnableCI_TestLib.Pages
 {
-    class LoginPage : BasePage
+    class HomePage : BasePage
     {
 
         //
@@ -42,7 +42,7 @@ namespace OwnableCI_TestLib.Pages
         /// Call the base class constructor
         /// </summary>
         /// <param name="browser"></param>
-        public LoginPage(IWebDriver browser) : base(browser) {
+        public HomePage(IWebDriver browser) : base(browser) {
 
             PageFactory.InitElements(driver, this);
             NavigateToPage();            
@@ -51,7 +51,7 @@ namespace OwnableCI_TestLib.Pages
         
         public void Login( string username = "123", string pass = "321")
         {
-            ChromeOptions options = new ChromeOptions();           
+            ChromeOptions options = new ChromeOptions();
             SignUpButton.Click();            
             EmailField.SendKeys(username);
             PassField.SendKeys(pass);
