@@ -57,13 +57,28 @@
     <Compile Include="Constants\TestProperties.cs" />
     <Compile Include="Enums\BrowserType.cs" />
     <Compile Include="Pages\BasePage.cs" />
-    <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestDataObjs\CodeAndState.cs" />
+    <Compile Include="TestDataObjs\CreditCard.cs" />
+    <Compile Include="TestDataObjs\StatesAndCodes.cs" />
+    <Compile Include="TestDataObjs\TestUser.cs" />
     <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="XMLParsers\XMLParseCreditCards.cs" />
+    <Compile Include="XMLParsers\XMLParseStatesAndCodes.cs" />
+    <Compile Include="XMLParsers\XMLParseTestUsers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Configs\Config.xml" />
     <Content Include="Drivers\chromedriver.exe" />
+    <Content Include="XMLTestAsserts\CreditCards.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLTestAsserts\StatesAndCodes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="XMLTestAsserts\TestUsers.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
