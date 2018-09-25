@@ -61,7 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestDataObjs\CodeAndState.cs" />
     <Compile Include="TestDataObjs\CreditCard.cs" />
-    <Compile Include="TestDataObjs\StatesAndCodes.cs" />
     <Compile Include="TestDataObjs\TestUser.cs" />
     <Compile Include="Tests\BaseTest.cs" />
     <Compile Include="XMLParsers\XMLParseCreditCards.cs" />

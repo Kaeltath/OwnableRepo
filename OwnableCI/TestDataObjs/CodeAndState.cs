@@ -8,5 +8,9 @@ namespace OwnableCI.TestDataObjs
 {
     class CodeAndState
     {
+        public string Fullname;
+        public string Name;
+        public string Code;
+        public string ExpResult;
     }
 }

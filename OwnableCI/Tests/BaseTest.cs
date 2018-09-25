@@ -23,6 +23,7 @@ namespace OwnableCI_TestLib.Tests
         private HomePage page;
         private List<TestUser> users = new XMLParseTestUsers().UsersForTests();
         private List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
+        private List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
 
         [SetUp]
         public void Init()

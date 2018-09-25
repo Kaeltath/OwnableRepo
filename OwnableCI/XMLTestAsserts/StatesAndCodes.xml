@@ -1,8 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <states>
   <state>
-    <name></name>
-    <code></code>
-    <ExpResult></ExpResult>
+    <fullname>Texas</fullname>
+    <name>TX</name>
+    <code>78701</code>
+    <ExpResult>Pass</ExpResult>
   </state>
 </states>
