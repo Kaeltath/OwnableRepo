@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Users>
+  <user>
+    <FirstName>John</FirstName>
+    <LastName>Smith</LastName>
+    <Adress>1113 Shade Tree Ln</Adress>
+    <City>Allen</City>
+    <State>TX</State>
+    <Zip>75013</Zip>
+    <Mobile>2145551212</Mobile>
+    <BirthDate>05/15/1970</BirthDate>
+    <LastDigitsOFSocial>6543</LastDigitsOFSocial>    
+    <ExpectedResult>AcceptWithRisk</ExpectedResult>
+  </user>
+  <user>
+    <FirstName>Jane</FirstName>
+    <LastName>Doe</LastName>
+    <Adress>1923 Lake Forest Rd</Adress>
+    <City>Grapevine</City>
+    <State>TX</State>
+    <Zip>76051</Zip>
+    <Mobile>1722234010</Mobile>
+    <BirthDate>08/04/1972</BirthDate>
+    <LastDigitsOFSocial>6777</LastDigitsOFSocial>
+    <ExpectedResult>Pass</ExpectedResult>
+  </user>
+  <user>
+    <FirstName>Robert</FirstName>
+    <LastName>Williams</LastName>
+    <Adress>235 Grape St</Adress>
+    <City>Denver</City>
+    <State>CO</State>
+    <Zip>80220</Zip>
+    <Mobile>1842234100</Mobile>
+    <BirthDate>08/04/1972</BirthDate>
+    <LastDigitsOFSocial>6123</LastDigitsOFSocial>
+    <ExpectedResult>AcceptWithRisk</ExpectedResult>
+  </user>
+</Users>

@@ -12,13 +12,18 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
 using NUnit.Framework;
 using System.Threading;
+using OwnableCI.XMLParsers;
+using OwnableCI.TestDataObjs;
 
 namespace OwnableCI_TestLib.Tests
 {
     public class BaseTest
     {
         private IWebDriver chrome;
-        private LoginPage page;
+        private HomePage page;
+        private List<TestUser> users = new XMLParseTestUsers().UsersForTests();
+        private List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
+        private List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
 
         [SetUp]
         public void Init()
@@ -29,8 +34,8 @@ namespace OwnableCI_TestLib.Tests
        [Test]
        public void FirsOne()
         {
-           
-            page = new LoginPage(chrome);   
+            new XMLParseTestUsers();
+            page = new HomePage(chrome);   
             page.Login();
             chrome.Close();
             chrome.Quit();
