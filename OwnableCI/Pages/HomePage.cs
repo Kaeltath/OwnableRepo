@@ -17,13 +17,9 @@ namespace OwnableCI_TestLib.Pages
 {
     class HomePage : BasePage
     {
-
-        //
-        // to declare all needed elements
-        //
-
         #region IWebelements        
 
+        #region Header:
         [FindsBy(How = How.XPath, Using = @"id(""header"")/div[2]/div[1]/div[1]/div[1]/a[1]/logo-color[1]/img[1]")]
         protected IWebElement lblOwnableLogo;
 
@@ -82,8 +78,9 @@ namespace OwnableCI_TestLib.Pages
 
         [FindsBy(How = How.XPath, Using = @"id(""v-pills-tab"")/a[5]")]
         protected IWebElement lnkTVs;
+        #endregion
 
-
+        #region Home(Landing):
         [FindsBy(How = How.XPath, Using = @"id(""container"")/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/button[1]")]
         protected IWebElement btnGetStarted;
 
@@ -138,8 +135,9 @@ namespace OwnableCI_TestLib.Pages
 
         [FindsBy(How = How.XPath, Using = @"id(""wrapper"")/app-root[1]/ng-component[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/section[1]/ng-component[1]/div[1]/div[1]/info-plate[1]/div[1]/div[2]/div[3]/div[4]/a[1]")]
         protected IWebElement lnkQuality_LearnMore;
+        #endregion
 
-
+        #region Footer:
         [FindsBy(How = How.XPath, Using = @"id(""wrapper"")/app-root[1]/ng-component[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/footer[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]/button[1]")]
         protected IWebElement lnkAccount_SignUp;
 
@@ -214,8 +212,8 @@ namespace OwnableCI_TestLib.Pages
 
         [FindsBy(How = How.XPath, Using = @"id(""wrapper"")/app-root[1]/ng-component[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/footer[1]/div[1]/div[1]/div[1]/div[1]/div[5]/div[1]/div[1]/div[1]/div[5]/a[1]/span[1]/i[2]")]
         protected IWebElement lblFollowUs_YouTube;
-                
-
+        #endregion
+        
 
         //To be moved to LoginPage.cs
         //[FindsBy(How = How.XPath, Using = "//input[@type = 'email']")]
@@ -223,7 +221,7 @@ namespace OwnableCI_TestLib.Pages
 
         //[FindsBy(How = How.XPath, Using = "//input[@type = 'password']")]
         //private IWebElement PassField;
-
+        
         #endregion
 
 
