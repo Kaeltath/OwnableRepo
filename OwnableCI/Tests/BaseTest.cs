@@ -1,5 +1,4 @@
-﻿
-using OpenQA.Selenium;
+﻿using OpenQA.Selenium;
 using OwnableCI_TestLib.Pages;
 using OwnableCI_TestLib.Constants;
 using System;
@@ -14,6 +13,7 @@ using NUnit.Framework;
 using System.Threading;
 using OwnableCI.XMLParsers;
 using OwnableCI.TestDataObjs;
+using OwnableCI.Pages;
 
 namespace OwnableCI_TestLib.Tests
 {
