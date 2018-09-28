@@ -214,8 +214,7 @@ namespace OwnableCI_TestLib.Pages
         
         #endregion
 
-
-
+        
         // <summary>
         /// Call the base class constructor
         /// </summary>
@@ -226,11 +225,6 @@ namespace OwnableCI_TestLib.Pages
             NavigateToPage();            
         }
 
-        
-        public void ClickbtnSignIn( )
-        {
-            btnSignIn.Click();
-        }
 
         public override void NavigateToPage(string parameter = "https://staging.ownable.us/app/home")
         {

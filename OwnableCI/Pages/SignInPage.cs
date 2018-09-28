@@ -45,7 +45,7 @@ namespace OwnableCI.Pages
         public IWebElement lnkDontRememberYourPassword;
 
 
-        [FindsBy(How = How.XPath, Using = "//button[@name='submit']/span[@class='auth0-label-submit']")]
+        [FindsBy(How = How.XPath, Using = "//button[@name='submit']/span[text()='Log In']")]
         public IWebElement btnLogIn;
 
         #endregion
@@ -60,7 +60,7 @@ namespace OwnableCI.Pages
 
         public override void NavigateToPage(string parameter = "")
         {
-            new HomePage(browser).ClickbtnSignIn();
+            new HomePage(browser).btnSignIn.Click();
             InitPage(this);
         }
     }
