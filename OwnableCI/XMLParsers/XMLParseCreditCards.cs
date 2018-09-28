@@ -14,7 +14,7 @@ namespace OwnableCI.XMLParsers
         public List<CreditCard> CardsForTests()
         {
             List<CreditCard> parsedCards = new List<CreditCard>();
-            XDocument cardsXML = XDocument.Load(@"XMLTestAsserts\CreditCards.xml");
+            XDocument cardsXML = XDocument.Load(@"OwnableCI\XMLTestAsserts\CreditCards.xml");
             var xmlUsers = cardsXML.Root.Elements("card");
             foreach (XElement elem in xmlUsers)
             {

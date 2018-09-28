@@ -14,7 +14,7 @@ namespace OwnableCI.XMLParsers
         public List<TestUser> UsersForTests()
         {
             List<TestUser> parsedUsers = new List<TestUser>();
-            XDocument usersXml = XDocument.Load(@"XMLTestAsserts\TestUsers.xml");
+            XDocument usersXml = XDocument.Load(@"OwnableCI\XMLTestAsserts\TestUsers.xml");
             var xmlUsers = usersXml.Root.Elements("user");
             foreach (XElement elem in xmlUsers)
             {
