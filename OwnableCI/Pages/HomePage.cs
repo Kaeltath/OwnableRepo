@@ -211,10 +211,14 @@ namespace OwnableCI_TestLib.Pages
         [FindsBy(How = How.XPath, Using = "//i[contains(@class,'youtube')]")]
         public IWebElement lblFollowUs_YouTube;
         #endregion
-        
+
+        #region LoadedElements:
+        public Dictionary<string, IWebElement> logedUserControls;
         #endregion
 
-        
+        #endregion
+
+
         // <summary>
         /// Call the base class constructor
         /// </summary>
@@ -225,6 +229,37 @@ namespace OwnableCI_TestLib.Pages
             NavigateToPage();            
         }
 
+        public HomePage(IWebDriver browser, bool navigate) : base(browser)
+        {
+            if (navigate)
+            {
+                PageFactory.InitElements(driver, this);
+                NavigateToPage();
+            } 
+        }
+
+
+        //TODO declare elements
+        public void LoadLogedControls()
+        {
+            logedUserControls.Add("ELEMENT_NAME", driver.FindElement(By.XPath("")));
+
+            foreach (KeyValuePair<string, IWebElement> pair in logedUserControls)
+            {   
+                try
+                    {
+                    if (!pair.Value.Displayed)
+                    {
+                        errorMessageToLog = "Element " + pair.Key + " is not loadede, or not visible, please check the problem";
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw e;
+                }
+
+            }
+        }
 
         public override void NavigateToPage(string parameter = "https://staging.ownable.us/app/home")
         {

@@ -50,7 +50,9 @@ namespace OwnableCI_TestLib.Pages
             
             foreach (FieldInfo field in fieldInfo)
             {
-                IWebElement elem = (IWebElement)field.GetValue(Obj);
+                IWebElement elem;
+                try { elem = (IWebElement)field.GetValue(Obj); }
+                catch (Exception) { continue; }
                 try
                 {                    
                     if (!elem.Displayed)

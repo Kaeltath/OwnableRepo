@@ -58,6 +58,7 @@
     <Compile Include="Enums\BrowserType.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\HomePage.cs" />
+    <Compile Include="Pages\PageWihMemebersipCreation.cs" />
     <Compile Include="Pages\SignInPage.cs" />
     <Compile Include="Pages\SignUpPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="TestDataObjs\CreditCard.cs" />
     <Compile Include="TestDataObjs\TestUser.cs" />
     <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Tests\UserCreationTest.cs" />
     <Compile Include="XMLParsers\XMLParseCreditCards.cs" />
     <Compile Include="XMLParsers\XMLParseStatesAndCodes.cs" />
     <Compile Include="XMLParsers\XMLParseTestUsers.cs" />

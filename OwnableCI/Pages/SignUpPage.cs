@@ -63,5 +63,10 @@ namespace OwnableCI.Pages
             new HomePage(browser).btnSignUp.Click();
             InitPage(this);
         }
+
+        public static implicit operator SignUpPage(SignInPage v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

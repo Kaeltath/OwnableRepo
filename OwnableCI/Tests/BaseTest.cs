@@ -17,31 +17,27 @@ using OwnableCI.Pages;
 
 namespace OwnableCI_TestLib.Tests
 {
+    [TestFixture]
     public class BaseTest
     {
-        private IWebDriver chrome;
-        private HomePage page;
-        private static List<TestUser> users = new XMLParseTestUsers().UsersForTests();
-        private List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
-        private List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
+        internal IWebDriver chrome;
+        internal BasePage page;
+        internal static List<TestUser> users = new XMLParseTestUsers().UsersForTests();
+        internal static List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
+        internal static List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
 
-        [SetUp]
-        public void Init()
+        [OneTimeSetUp]
+        public void CreateBrowser()
         {
             chrome = new ChromeDriver("D:\\SelTestLib\\OwnableCI_TestLib\\OwnableCI_TestLib\\Drivers");
         }
 
-        [TestCaseSource("users")]
-       [Test]
-       public void FirsOne()
+        [OneTimeTearDown]
+        public void CloseBrowser()
         {
-            new XMLParseTestUsers();
-            page = new HomePage(chrome);   
-            page.Login();
             chrome.Close();
             chrome.Quit();
-
         }
-        
+
     }
 }
