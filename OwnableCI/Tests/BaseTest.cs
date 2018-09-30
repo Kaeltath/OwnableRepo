@@ -21,7 +21,7 @@ namespace OwnableCI_TestLib.Tests
     {
         private IWebDriver chrome;
         private HomePage page;
-        private List<TestUser> users = new XMLParseTestUsers().UsersForTests();
+        private static List<TestUser> users = new XMLParseTestUsers().UsersForTests();
         private List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
         private List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
 
@@ -31,6 +31,7 @@ namespace OwnableCI_TestLib.Tests
             chrome = new ChromeDriver("D:\\SelTestLib\\OwnableCI_TestLib\\OwnableCI_TestLib\\Drivers");
         }
 
+        [TestCaseSource("users")]
        [Test]
        public void FirsOne()
         {
