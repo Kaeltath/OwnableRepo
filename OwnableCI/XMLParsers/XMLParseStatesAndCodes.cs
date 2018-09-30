@@ -13,7 +13,7 @@ namespace OwnableCI.XMLParsers
         public List<CodeAndState> CardsForTests()
         {
             List<CodeAndState> parseCodes = new List<CodeAndState>();
-            XDocument cardsXML = XDocument.Load(@"XMLTestAsserts\StatesAndCodes.xml");
+            XDocument cardsXML = XDocument.Load(@"OwnableCI\XMLTestAsserts\StatesAndCodes.xml");
             var xmlUsers = cardsXML.Root.Elements("state");
             foreach (XElement elem in xmlUsers)
             {
