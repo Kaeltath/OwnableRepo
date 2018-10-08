@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OwnableCI.TestDataObjs
 {
-    class CreditCard
+    public class CreditCard
     {
        public string Number;
-        public string ExpRes;
+       public string ExpRes;
     }
 }

@@ -15,22 +15,36 @@ using OwnableCI.XMLParsers;
 using OwnableCI.TestDataObjs;
 using OwnableCI.Pages;
 using OwnableCI_TestLib.Tests;
+using OwnableCI;
 
 namespace OwnableCI.Tests
-{   
-    //[TestFixture]
+{
+    [TestFixtureSource(typeof(TestProperties), "users")]
+    [TestFixture]
     class UserCreationTest : BaseTest
     {
-        [TestCaseSource("users")]
-        [Test]
-        public void FirsOne(TestUser user)
+        private TestUser user;
+        
+        public UserCreationTest(TestUser inpUser)
         {
-            SignUpPage page = new SignUpPage(chrome);
+            this.user = inpUser;
+        }
+
+        
+        [Test]
+        public void FirsOne()
+        {
+            string currentTestName = "User Creation";
+            log.Debug("Starting " + currentTestName + " Test;");
+            log.Debug("For user " + user.FirstName+ user.LastName + ";");
+            string birth = user.BirthDate;
+            int i = 1 + 1;
+            SignUpPage page = new SignUpPage(driverForRun);
             page.inputEmail.SendKeys("testtest@test.test");
             page.inputPassword.SendKeys("123qweQWE!@#");
             page.chkIAgreeToTheTerms.Click();
             page.btnLogIn.Click();
-            PageWihMemebersipCreation memberinput = new PageWihMemebersipCreation(chrome);            
+            PageWihMemebersipCreation memberinput = new PageWihMemebersipCreation(driverForRun);            
 
         }
 

@@ -224,7 +224,7 @@ namespace OwnableCI_TestLib.Pages
         /// </summary>
         /// <param name="browser"></param>
         public HomePage(IWebDriver browser) : base(browser)
-        {
+        {   
             PageFactory.InitElements(driver, this);
             NavigateToPage();            
         }

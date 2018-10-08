@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OwnableCI.TestDataObjs
 {
-    class TestUser
+    public class TestUser
     {
         public string FirstName;
         public string LastName;

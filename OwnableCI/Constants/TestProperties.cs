@@ -1,4 +1,6 @@
-﻿using OwnableCI_TestLib.Enums;
+﻿using OwnableCI.TestDataObjs;
+using OwnableCI.XMLParsers;
+using OwnableCI_TestLib.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace OwnableCI_TestLib.Constants
 {
-    public class TestProperties
+    public static class TestProperties
     {
-        public static BrowserType BROWSER_TYPE = BrowserType.FireFox;
+        public static List<TestUser> users = new XMLParseTestUsers().UsersForTests();
+        public static List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
+        public static List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
     }
 }

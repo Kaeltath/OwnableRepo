@@ -20,23 +20,21 @@ namespace OwnableCI_TestLib.Tests
     [TestFixture]
     public class BaseTest
     {
-        internal IWebDriver chrome;
-        internal BasePage page;
-        internal static List<TestUser> users = new XMLParseTestUsers().UsersForTests();
-        internal static List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
-        internal static List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
+       
+        internal log4net.ILog log = log4net.LogManager.GetLogger(typeof(BaseTest));
+        internal IWebDriver driverForRun;
 
         [OneTimeSetUp]
         public void CreateBrowser()
         {
-            chrome = new ChromeDriver("D:\\SelTestLib\\OwnableCI_TestLib\\OwnableCI_TestLib\\Drivers");
+            driverForRun = new ChromeDriver("D:\\SelTestLib\\OwnableCI_TestLib\\OwnableCI_TestLib\\Drivers");
         }
 
         [OneTimeTearDown]
         public void CloseBrowser()
         {
-            chrome.Close();
-            chrome.Quit();
+            driverForRun.Close();
+            driverForRun.Quit();
         }
 
     }
