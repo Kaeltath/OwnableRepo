@@ -30,7 +30,7 @@ namespace OwnableCI.Tests
             page.inputPassword.SendKeys("123qweQWE!@#");
             page.chkIAgreeToTheTerms.Click();
             page.btnLogIn.Click();
-            PageWihMemebersipCreation memberinput = new PageWihMemebersipCreation(chrome);            
+            MemberCreation_PersonalInfoPage memberinput = new MemberCreation_PersonalInfoPage(chrome);            
 
         }
 
