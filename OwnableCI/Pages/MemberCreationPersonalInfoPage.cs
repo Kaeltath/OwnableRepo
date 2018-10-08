@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace OwnableCI.Pages
 {
-    class MemberCreation_PersonalInfoPage: HomePage
+    class MemberCreationPersonalInfoPage : HomePage
     {
         #region IWebelements 
         [FindsBy(How = How.XPath, Using = "//button[text()='Finish later']")]
@@ -72,7 +72,7 @@ namespace OwnableCI.Pages
         public IWebElement btnNext;
         #endregion
 
-        public MemberCreation_PersonalInfoPage(IWebDriver usedBrowser): base(usedBrowser, false)
+        public MemberCreationPersonalInfoPage(IWebDriver usedBrowser): base(usedBrowser, false)
         {
             driver = usedBrowser;
             PageFactory.InitElements(driver, this);
