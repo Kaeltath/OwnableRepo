@@ -44,7 +44,7 @@ namespace OwnableCI.Tests
             page.inputPassword.SendKeys("123qweQWE!@#");
             page.chkIAgreeToTheTerms.Click();
             page.btnLogIn.Click();
-            MemberCreationPersonalInfoPage memberInput = new MemberCreationPersonalInfoPage(driverForRun);            
+            MemberCreationFirstPage memberInput = new MemberCreationFirstPage(driverForRun);            
 
         }
 
