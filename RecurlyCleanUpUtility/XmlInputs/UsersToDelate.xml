@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+<Users>
+  <user>
+    <FirstName>Vasya</FirstName>
+    <LastName>Pupkin</LastName>
+    <Adress>1113 Shade Tree Ln</Adress>
+    <City>Kozyatun</City>
+    <State>TX</State>
+    <Zip>75013</Zip>
+    <Mobile>0975555777</Mobile>
+    <BirthDate>05/15/1970</BirthDate>
+    <LastDigitsOFSocial>6543</LastDigitsOFSocial>    
+  </user>
+</Users>
