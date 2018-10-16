@@ -7,16 +7,20 @@ using Recurly;
 
 namespace RecurlyCleanUpUtility
 {
+
     class Program
     {
         static log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        static bool Succided = true;
 
-        static void Main(string[] args)
+        static int Main(string[] args)
         {
-            //TO DO: Deside exception handling
-            RecurlyClient client = new RecurlyClient(XmlParser.GetUsers(Logger));
-            client.DeleteAcounts();
+            int result;
+            RecurlyClient client = new RecurlyClient(Logger);
+            client.DeleteAcounts(out Succided);
             Console.ReadLine();
+            result = Succided ? 0 : 1;
+            return result;
         }
     }
 }

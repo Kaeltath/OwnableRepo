@@ -10,8 +10,6 @@ namespace RecurlyCleanUpUtility
 {
     public class XmlParser
     {
-        log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
         public static List<User> GetUsers(log4net.ILog Logger)
         {
             List<User> users = new List<User>();
@@ -39,8 +37,7 @@ namespace RecurlyCleanUpUtility
             }
             catch (Exception ex)
             {
-                Logger.Error("Failed to load Users file: " + ex.Message);
-                return null;
+                throw ex;
             }
         }
 

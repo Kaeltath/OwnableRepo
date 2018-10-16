@@ -4,15 +4,16 @@ using Recurly;
 using System.Net;
 using RecurlyCleanUpUtility.Entities;
 using System.Collections.Generic;
+using log4net;
 
 namespace RecurlyCleanUpUtility
 {
     internal class RecurlyClient
     {
-        log4net.ILog Logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+        ILog logger;
 
         #region Members
-        private bool success = true;
+        private bool initialyzed = true;
         private string apiKey;
         private string publicKey;
         private string subdomain;       
@@ -24,9 +25,9 @@ namespace RecurlyCleanUpUtility
         #endregion
 
         #region Consrtuctors
-        public RecurlyClient(List<User> InputList)
+        public RecurlyClient(ILog Logger)
         {
-            inputList = InputList;
+            logger = Logger;
             Initialyze();
         }
         #endregion
@@ -46,29 +47,38 @@ namespace RecurlyCleanUpUtility
                 }
                 else
                 {
-                    Console.WriteLine("No setting read from appconfig");
-                    success = false;
-
+                    logger.Debug("No setting read from appconfig, Client will not be initialyzed");
+                    initialyzed = false;
+                    return;
                 }
             }
             catch (Exception ex)
             {
-                Logger.Error("Failed to readd App setings: " + ex.Message);
-                success = false;
+                logger.Error("Failed to readd App setings: " + ex.Message);
+                initialyzed = false;
+                return;
             }
 
             Recurly.Configuration.SettingsManager.Initialize(apiKey, subdomain, "", pageSize);
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;// |= (SecurityProtocolType)(SecurityProtocolTypeTls12 | SecurityProtocolTypeTls11); 
             ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
 
-            if (success)
-            {
-                Logger.Info("Client initialyzed successfully");
-            }           
+            logger.Info("Client initialyzed successfully");
+     
         }
 
-        private void FillOperationalList()
+        private void FillOperationalAndInputLists()
         {
+            try
+            {
+                inputList = XmlParser.GetUsers(logger);
+            }
+            catch (Exception ex)
+            {
+                logger.Error("Users was not retrived: " + ex.Message);
+                throw ex;
+            }
+
             operationalList = new List<Account>();
             try
             {
@@ -91,9 +101,10 @@ namespace RecurlyCleanUpUtility
                 var response = (HttpWebResponse)ex.Response;
                 var statusCode = response.StatusCode;
 
-                Logger.Debug(String.Format("Recurly Client Received: {0} - {1}, Reponce message: {2}",
+                logger.Debug(String.Format("Recurly client received Exception: {0} - {1}, Reponce message: {2}",
                     (int)statusCode, statusCode, response));
-                success = false;
+
+                throw ex;
             }
 
         }
@@ -128,9 +139,32 @@ namespace RecurlyCleanUpUtility
 
         #region Public Methods
 
-        public void DeleteAcounts()
+        public void DeleteAcounts(out bool Succueded)
         {
-            FillOperationalList();
+            Succueded = true;
+
+            if(!initialyzed)
+            {
+                logger.Debug("Client wasn't initialyzed, returning");
+                Succueded = false;
+                return;
+            }
+            try
+            {
+                FillOperationalAndInputLists();
+            }
+            catch (Exception)
+            {
+                Succueded = false;
+                return;
+            }
+
+            if (operationalList.Count < 1)
+            {
+                logger.Debug("No user to proccess");
+                Succueded = false;
+                return;
+            }
 
             foreach (Account acc in operationalList)
             {
@@ -149,9 +183,11 @@ namespace RecurlyCleanUpUtility
                     var response = (HttpWebResponse)ex.Response;
                     var statusCode = response.StatusCode;
 
-                    Logger.Debug(String.Format("Recurly Client Received: {0} - {1}, Reponce message: {2}",
+                    logger.Debug(String.Format("Recurly Client Received: {0} - {1}, Reponce message: {2}",
                         (int)statusCode, statusCode, response));
-                    success = false;
+
+                    Succueded = false;
+                    return;
                 }
             }
         }
