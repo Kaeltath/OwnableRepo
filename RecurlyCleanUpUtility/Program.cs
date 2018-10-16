@@ -18,7 +18,6 @@ namespace RecurlyCleanUpUtility
             int result;
             RecurlyClient client = new RecurlyClient(Logger);
             client.DeleteAcounts(out Succided);
-            Console.ReadLine();
             result = Succided ? 0 : 1;
             return result;
         }

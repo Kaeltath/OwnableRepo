@@ -72,6 +72,10 @@ namespace RecurlyCleanUpUtility
             try
             {
                 inputList = XmlParser.GetUsers(logger);
+                if (inputList.Count < 1)
+                {
+                    logger.Debug("No data was found in input file");
+                }
             }
             catch (Exception ex)
             {
@@ -101,7 +105,7 @@ namespace RecurlyCleanUpUtility
                 var response = (HttpWebResponse)ex.Response;
                 var statusCode = response.StatusCode;
 
-                logger.Debug(String.Format("Recurly client received Exception: {0} - {1}, Reponce message: {2}",
+                logger.Error(String.Format("Recurly client received Exception: {0} - {1}, Reponce message: {2}",
                     (int)statusCode, statusCode, response));
 
                 throw ex;
@@ -161,7 +165,7 @@ namespace RecurlyCleanUpUtility
 
             if (operationalList.Count < 1)
             {
-                logger.Debug("No user to proccess");
+                logger.Debug("No accounts fould to procceess according to input");
                 Succueded = false;
                 return;
             }
