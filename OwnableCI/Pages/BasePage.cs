@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Support.PageObjects;
 using System.Reflection;
+using OwnableCI.TestDataObjs;
 
 namespace OwnableCI_TestLib.Pages
 {
@@ -28,6 +29,11 @@ namespace OwnableCI_TestLib.Pages
         /// </summary>
         /// <param name="parameter">Any parameter you want to tag on to the end of request</param>
         public abstract void NavigateToPage(string parameter = "");
+        /// <summary>
+        /// Login specific user
+        /// </summary>
+        /// <returns>bool - login succeeded</returns>
+        public abstract void Login(TestUser user);
 
         /// <summary>
         /// Waits for an element to be displayed for 1 minute

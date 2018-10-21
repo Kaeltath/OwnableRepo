@@ -10,8 +10,8 @@ using OwnableCI_TestLib.Constants;
 using System.Threading;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support;
-
-
+using OwnableCI.Pages;
+using OwnableCI.TestDataObjs;
 
 namespace OwnableCI_TestLib.Pages
 {
@@ -261,7 +261,13 @@ namespace OwnableCI_TestLib.Pages
             }
         }
 
-        public override void NavigateToPage(string parameter = "https://staging.ownable.us/app/home")
+        public override void Login(TestUser user)
+        {
+            SignInPage signIn = new SignInPage(driver);
+            signIn.Login(user);
+        }
+
+        public override void NavigateToPage(string parameter = "http://staging.ownable.us/app/home")
         {
             this.driver.Navigate().GoToUrl(parameter);
             InitPage(this);

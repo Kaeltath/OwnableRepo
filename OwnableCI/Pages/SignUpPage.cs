@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Pages;
 using System;
 using System.Collections.Generic;
@@ -62,6 +63,11 @@ namespace OwnableCI.Pages
         {
             new HomePage(browser).btnSignUp.Click();
             InitPage(this);
+        }
+
+        public override void Login(TestUser user)
+        {
+            throw new NotImplementedException();
         }
 
         public static implicit operator SignUpPage(SignInPage v)
