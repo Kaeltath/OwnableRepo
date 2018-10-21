@@ -73,6 +73,7 @@
     <Compile Include="TestDataObjs\CreditCard.cs" />
     <Compile Include="TestDataObjs\TestUser.cs" />
     <Compile Include="Tests\BaseTest.cs" />
+    <Compile Include="Tests\LoginsTest.cs" />
     <Compile Include="Tests\UserCreationTest.cs" />
     <Compile Include="XMLParsers\XMLParseCreditCards.cs" />
     <Compile Include="XMLParsers\XMLParseStatesAndCodes.cs" />
@@ -88,6 +89,7 @@
     </Content>
     <Content Include="XMLTestAsserts\TestUsers.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
