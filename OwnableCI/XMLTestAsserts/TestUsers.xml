@@ -4,6 +4,9 @@
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
     <Adress>1113 Shade Tree Ln</Adress>
+    <Email>ownabletestmailforJohn@gmail.com</Email>
+    <UserName>ownabletestmailforJohn@gmail.com</UserName>
+    <Password>John1!Smith1!</Password>
     <City>Allen</City>
     <State>TX</State>
     <Zip>75013</Zip>
@@ -16,6 +19,9 @@
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
     <Adress>1923 Lake Forest Rd</Adress>
+    <Email>ownabletestmailforjane@gmail.com</Email>
+    <UserName>ownabletestmailforJane@gmail.com</UserName>
+    <Password>Jane1!Doe1!</Password>
     <City>Grapevine</City>
     <State>TX</State>
     <Zip>76051</Zip>
@@ -28,6 +34,9 @@
     <FirstName>Robert</FirstName>
     <LastName>Williams</LastName>
     <Adress>235 Grape St</Adress>
+    <Email>ownabletestmailforRobert@gmail.com</Email>
+    <UserName>ownabletestmailforRobert@gmail.com</UserName>
+    <Password>Robert1!Williams1!</Password>
     <City>Denver</City>
     <State>CO</State>
     <Zip>80220</Zip>

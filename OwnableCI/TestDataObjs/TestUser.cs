@@ -10,6 +10,8 @@ namespace OwnableCI.TestDataObjs
     {
         public string FirstName;
         public string LastName;
+        public string Email;
+        public string Password;
         public string Adress;
         public string City;
         public string State;

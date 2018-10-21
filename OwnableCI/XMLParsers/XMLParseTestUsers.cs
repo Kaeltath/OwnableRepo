@@ -23,6 +23,8 @@ namespace OwnableCI.XMLParsers
                     FirstName = elem.Element("FirstName").Value,
                     LastName = elem.Element("LastName").Value,
                     Adress = elem.Element("Adress").Value,
+                    Email = elem.Element("Email").Value,
+                    Password = elem.Element("Password").Value,
                     City = elem.Element("City").Value,
                     State = elem.Element("State").Value,
                     Zip = elem.Element("Zip").Value,
