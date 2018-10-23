@@ -1,9 +1,6 @@
 ﻿using OwnableCI.TestDataObjs;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Configuration;
 using System.Xml.Linq;
 
 namespace OwnableCI.XMLParsers
@@ -12,8 +9,9 @@ namespace OwnableCI.XMLParsers
     {
         public List<CodeAndState> CardsForTests()
         {
+            var appSettings = ConfigurationManager.AppSettings;
             List<CodeAndState> parseCodes = new List<CodeAndState>();
-            XDocument cardsXML = XDocument.Load(@"OwnableCI\XMLTestAsserts\StatesAndCodes.xml");
+            XDocument cardsXML = XDocument.Load(appSettings["TestStatesAndCodesXMLPath"]);
             var xmlUsers = cardsXML.Root.Elements("state");
             foreach (XElement elem in xmlUsers)
             {

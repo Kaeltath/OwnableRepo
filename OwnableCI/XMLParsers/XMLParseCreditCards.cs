@@ -1,6 +1,7 @@
 ﻿using OwnableCI.TestDataObjs;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,9 @@ namespace OwnableCI.XMLParsers
 
         public List<CreditCard> CardsForTests()
         {
+            var appSettings = ConfigurationManager.AppSettings;
             List<CreditCard> parsedCards = new List<CreditCard>();
-            XDocument cardsXML = XDocument.Load(@"OwnableCI\XMLTestAsserts\CreditCards.xml");
+            XDocument cardsXML = XDocument.Load(appSettings["TestCardsXMLPath"]);
             var xmlUsers = cardsXML.Root.Elements("card");
             foreach (XElement elem in xmlUsers)
             {

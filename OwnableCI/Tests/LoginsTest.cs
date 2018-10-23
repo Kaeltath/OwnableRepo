@@ -21,7 +21,7 @@ namespace OwnableCI.Tests
     {
         private TestUser user;
         private IWebElement confirmElement;
-        private bool isfirtLogin = true;
+        private bool expectedResults;
 
         public EmailValidationTest(TestUser User)
         {
@@ -41,10 +41,12 @@ namespace OwnableCI.Tests
                 SignInPage page = new SignInPage(driverForRun);
                 page.Login(user);
                 Thread.Sleep(5000);
+                var loginPassed = driverForRun.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
+                Assert.That(loginPassed.Count < 1, "Login did not passed, incorect credentials");
                 var emailValidationPanel = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']"));
-                var emailValidationSkipButton = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[@text='Skip']"));
-                isfirtLogin = (emailValidationPanel.Count > 0 && emailValidationSkipButton.Count < 1);
-                Assert.That(isfirtLogin);
+                var emailValidationSkipButton = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
+                expectedResults = (emailValidationPanel.Count > 0 && emailValidationSkipButton.Count < 1);
+                Assume.That(expectedResults, "Not the first login");
             });
         }
 
@@ -57,7 +59,13 @@ namespace OwnableCI.Tests
                 string currentTestName = "User Creation";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                Assume.That(isfirtLogin, "Not first Login, not running the test");
+                SignInPage page = new SignInPage(driverForRun);
+                page.Login(user);
+                Thread.Sleep(5000);
+                var emailValidationPanel = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']"));
+                var emailValidationSkipButton = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
+                expectedResults = (emailValidationPanel.Count > 0 && emailValidationSkipButton.Count > 0);
+                Assume.That(expectedResults, "Not first Login, not running the test");
                 Assert.That(ValidateEmail());
             });
         }
@@ -74,6 +82,8 @@ namespace OwnableCI.Tests
                 SignInPage page = new SignInPage(driverForRun);
                 page.Login(user);
                 Thread.Sleep(5000);
+                var loginPassed = driverForRun.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
+                Assert.That(loginPassed.Count < 1, "Login did not passed, incorect credentials");
                 confirmElement = driverForRun.FindElement(By.XPath("//div[@class='modal-body']"));
                 Assume.That(confirmElement != null, "Not a user, but member");
             });           
@@ -91,8 +101,9 @@ namespace OwnableCI.Tests
                 SignInPage page = new SignInPage(driverForRun);
                 page.Login(user);
                 Thread.Sleep(5000);
+                var loginPassed = driverForRun.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
+                Assert.That(loginPassed.Count < 1, "Login did not passed, incorect credentials");
                 confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-
                 Assert.That(confirmElement.Text == String.Format("Hello, " + user.FirstName));
             });
         }
@@ -121,7 +132,7 @@ namespace OwnableCI.Tests
                 Thread.Sleep(4000);
                 page.Login(user);
                 Thread.Sleep(4000);
-                var element = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[@text='Skip']"));
+                var element = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
                 if (element.Count > 0)
                 { element[0].Click(); }
             }

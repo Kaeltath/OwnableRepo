@@ -5,15 +5,16 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.IE;
 using NUnit.Framework;
 using System.Diagnostics;
+using System.Configuration;
 
 namespace OwnableCI_TestLib.Tests
 {
     [TestFixture]
     public class BaseTest
     {
-       
         internal log4net.ILog log = log4net.LogManager.GetLogger(typeof(BaseTest));
         internal IWebDriver driverForRun;
+        
 
         protected void TestAction(Action action)
         {
@@ -23,13 +24,13 @@ namespace OwnableCI_TestLib.Tests
             }
             catch (Exception ex)
             {
-                //StackTrace trace = new StackTrace();
+                StackTrace trace = new StackTrace();
                 //var screenshot = ((ITakesScreenshot)driverForRun).GetScreenshot();
                 //var filePath = String.Format(@"C:\Screenshots\{0}",trace.GetFrame(1).GetMethod().Name);
 
                 //screenshot.SaveAsFile(filePath, ScreenshotImageFormat.Png);
 
-                log.ErrorFormat("Exception occured in Test: {0}", ex.Message);
+                log.ErrorFormat("Test: {0} Thrown Exception: {1}", trace.GetFrame(1).GetMethod().Name, ex.Message);
 
                 throw;
             }
@@ -38,7 +39,8 @@ namespace OwnableCI_TestLib.Tests
         [OneTimeSetUp]
         public void CreateBrowser()
         {
-            driverForRun = new ChromeDriver("D:\\Downloads\\chromedriver_win32");
+            var appsettings = ConfigurationManager.AppSettings;
+            driverForRun = new ChromeDriver(appsettings["ChromeDriverPath"]);
         }
 
         [OneTimeTearDown]

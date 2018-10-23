@@ -1,6 +1,7 @@
 ﻿using OwnableCI.TestDataObjs;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,8 +14,9 @@ namespace OwnableCI.XMLParsers
       
         public List<TestUser> UsersForTests()
         {
+            var appSettings = ConfigurationManager.AppSettings;
             List<TestUser> parsedUsers = new List<TestUser>();
-            XDocument usersXml = XDocument.Load(@"OwnableCI\XMLTestAsserts\TestUsers.xml");
+            XDocument usersXml = XDocument.Load(appSettings["TestUsersXMLPath"]);
             var xmlUsers = usersXml.Root.Elements("user");
             foreach (XElement elem in xmlUsers)
             {

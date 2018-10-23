@@ -63,27 +63,28 @@ namespace OwnableCI_TestLib.Pages
         [FindsBy(How = How.XPath, Using = "//div[@role='tablist']//span[text()='Top deals']")]
         public IWebElement lnkTopDeals;
 
-
-        [FindsBy(How = How.XPath, Using = @"id(""v-pills-tab"")/a[2]")]
+        //Understand how to work with ' symbol
+        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']/a[5]")]
         //[FindsBy(How = How.XPath, Using = "//div[@role='tablist']//a[text()=" TV's "]")]
         public IWebElement lnkTVs;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@role='tablist']//a[text()=' Electronics ']")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//a[text()=' Electronics ']")]
         public IWebElement lnkElectronics;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@role='tablist']//a[text()=' Computers ']")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//a[text()=' Computers ']")]
         public IWebElement lnkComputers;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@role='tablist']//a[text()=' Appliances ']")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//a[text()=' Appliances ']")]
         public IWebElement lnkAppliances;
         #endregion
 
         #region Home(Landing):
-        [FindsBy(How = How.XPath, Using = "//span[text()='get started!']")]
-        public IWebElement btnGetStarted;
+        //Looks like was removed
+        //[FindsBy(How = How.XPath, Using = "//span[text()='get started!']")]
+        //public IWebElement btnGetStarted;
 
 
         [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'top_deals')]")]
@@ -96,26 +97,29 @@ namespace OwnableCI_TestLib.Pages
         [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'tvs')]")]
         public IWebElement lblTVs;
 
+        //ask why it's needed, and rewrite
         [FindsBy(How = How.XPath, Using = @"id(""wrapper"")/app-root[1]/ng-component[1]/mat-sidenav-container[1]/mat-sidenav-content[1]/section[1]/ng-component[1]/div[1]/div[1]/div[2]/product-category-grid[1]/ul[1]/li[2]/product-category-card[1]/a[1]/h3[1]")]
         //[FindsBy(How = How.XPath, Using = "//ul[@class='product-category-list']//*[text()="TV's"]")]
         public IWebElement lnkCategory_TVs;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'electronics')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'Electronics')]")]
         public IWebElement lblElectronics;
 
+        //ask why it's needed, and rewrite
         [FindsBy(How = How.XPath, Using = "//ul[@class='product-category-list']//*[text()='Electronics']")]
         public IWebElement lnkCategory_Electronics;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'computers')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'Computers')]")]
         public IWebElement lblComputers;
 
+        //ask why it's needed, and rewrite
         [FindsBy(How = How.XPath, Using = "//ul[@class='product-category-list']//*[text()='Computers']")]
         public IWebElement lnkCategory_Computers;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'appliances')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'Appliances')]")]
         public IWebElement lblAppliances;
         
         [FindsBy(How = How.XPath, Using = "//ul[@class='product-category-list']//*[text()='Appliances']")]
@@ -213,18 +217,20 @@ namespace OwnableCI_TestLib.Pages
         #endregion
 
         #region LoadedElements:
-        public Dictionary<string, IWebElement> logedUserControls;
+        protected Dictionary<string, IWebElement> logedUserControls;
         #endregion
 
         #endregion
 
+        log4net.ILog logger;
 
         // <summary>
         /// Call the base class constructor
         /// </summary>
         /// <param name="browser"></param>
         public HomePage(IWebDriver browser) : base(browser)
-        {   
+        {
+            logger = log4net.LogManager.GetLogger(typeof(HomePage));
             PageFactory.InitElements(driver, this);
             NavigateToPage();            
         }
@@ -250,14 +256,14 @@ namespace OwnableCI_TestLib.Pages
                     {
                     if (!pair.Value.Displayed)
                     {
-                        errorMessageToLog = "Element " + pair.Key + " is not loadede, or not visible, please check the problem";
+                        logger.Debug("Element " + pair.Key + " is not loadede, or not visible, please check the problem");
                     }
                 }
                 catch (Exception e)
                 {
+                    logger.ErrorFormat("Control {0} thrown an exception, message {1}", pair.Key, e.Message);
                     throw e;
                 }
-
             }
         }
 
@@ -267,7 +273,7 @@ namespace OwnableCI_TestLib.Pages
             signIn.Login(user);
         }
 
-        public override void NavigateToPage(string parameter = "http://staging.ownable.us/app/home")
+        public override void NavigateToPage(string parameter = "http://dev.ownable.us/app/home")
         {
             this.driver.Navigate().GoToUrl(parameter);
             InitPage(this);

@@ -15,34 +15,4 @@
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>    
     <ExpectedResult>AcceptWithRisk</ExpectedResult>
   </user>
-  <user>
-    <FirstName>Jane</FirstName>
-    <LastName>Doe</LastName>
-    <Adress>1923 Lake Forest Rd</Adress>
-    <Email>ownabletestmailforjane@gmail.com</Email>
-    <UserName>ownabletestmailforJane@gmail.com</UserName>
-    <Password>Jane1!Doe1!</Password>
-    <City>Grapevine</City>
-    <State>TX</State>
-    <Zip>76051</Zip>
-    <Mobile>1722234010</Mobile>
-    <BirthDate>08/04/1972</BirthDate>
-    <LastDigitsOFSocial>6777</LastDigitsOFSocial>
-    <ExpectedResult>Pass</ExpectedResult>
-  </user>
-  <user>
-    <FirstName>Robert</FirstName>
-    <LastName>Williams</LastName>
-    <Adress>235 Grape St</Adress>
-    <Email>ownabletestmailforRobert@gmail.com</Email>
-    <UserName>ownabletestmailforRobert@gmail.com</UserName>
-    <Password>Robert1!Williams1!</Password>
-    <City>Denver</City>
-    <State>CO</State>
-    <Zip>80220</Zip>
-    <Mobile>1842234100</Mobile>
-    <BirthDate>08/04/1972</BirthDate>
-    <LastDigitsOFSocial>6123</LastDigitsOFSocial>
-    <ExpectedResult>AcceptWithRisk</ExpectedResult>
-  </user>
 </Users>

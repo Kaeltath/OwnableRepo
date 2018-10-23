@@ -13,12 +13,14 @@ namespace OwnableCI_TestLib.Pages
 {
     abstract class BasePage
     {
-        public IWebDriver driver;
-        public string errorMessageToLog;
+        protected IWebDriver driver;
+        protected string errorMessageToLog;
+        private log4net.ILog logger;
 
         public BasePage(IWebDriver driver)
         {
             this.driver = driver;
+            logger = log4net.LogManager.GetLogger(typeof(BasePage));
             //Initializes all IWebElements for the page
             PageFactory.InitElements(driver, this);
             this.driver.Manage().Timeouts().ImplicitWait = new TimeSpan(0, 0, 30); ;
@@ -50,7 +52,7 @@ namespace OwnableCI_TestLib.Pages
         {
             
             FieldInfo[] fieldInfo = Obj.GetType().GetFields(
-                         BindingFlags.NonPublic |
+                         BindingFlags.Public |
                          BindingFlags.Instance);
 
             
@@ -67,7 +69,8 @@ namespace OwnableCI_TestLib.Pages
                     }
                 }
                 catch (Exception e)
-                {                    
+                {
+                    logger.ErrorFormat("Field {0}, thrown an exception {1}", field.Name, e.Message);              
                     throw e;
                 }
 
