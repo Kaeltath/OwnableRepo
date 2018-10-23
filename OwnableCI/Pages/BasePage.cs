@@ -35,7 +35,7 @@ namespace OwnableCI_TestLib.Pages
         /// Login specific user
         /// </summary>
         /// <returns>bool - login succeeded</returns>
-        public abstract void Login(TestUser user);
+        public abstract bool Login(TestUser user);
 
         /// <summary>
         /// Waits for an element to be displayed for 1 minute

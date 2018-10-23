@@ -38,11 +38,8 @@ namespace OwnableCI.Tests
                 string currentTestName = "User Creation";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                SignInPage page = new SignInPage(driverForRun);
-                page.Login(user);
-                Thread.Sleep(5000);
-                var loginPassed = driverForRun.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
-                Assert.That(loginPassed.Count < 1, "Login did not passed, incorect credentials");
+                SignInPage page = new SignInPage(driverForRun);              
+                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
                 var emailValidationPanel = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']"));
                 var emailValidationSkipButton = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
                 expectedResults = (emailValidationPanel.Count > 0 && emailValidationSkipButton.Count < 1);
@@ -60,8 +57,7 @@ namespace OwnableCI.Tests
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 SignInPage page = new SignInPage(driverForRun);
-                page.Login(user);
-                Thread.Sleep(5000);
+                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
                 var emailValidationPanel = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']"));
                 var emailValidationSkipButton = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
                 expectedResults = (emailValidationPanel.Count > 0 && emailValidationSkipButton.Count > 0);
@@ -80,10 +76,7 @@ namespace OwnableCI.Tests
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 SignInPage page = new SignInPage(driverForRun);
-                page.Login(user);
-                Thread.Sleep(5000);
-                var loginPassed = driverForRun.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
-                Assert.That(loginPassed.Count < 1, "Login did not passed, incorect credentials");
+                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
                 confirmElement = driverForRun.FindElement(By.XPath("//div[@class='modal-body']"));
                 Assume.That(confirmElement != null, "Not a user, but member");
             });           
@@ -99,10 +92,7 @@ namespace OwnableCI.Tests
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 SignInPage page = new SignInPage(driverForRun);
-                page.Login(user);
-                Thread.Sleep(5000);
-                var loginPassed = driverForRun.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
-                Assert.That(loginPassed.Count < 1, "Login did not passed, incorect credentials");
+                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
                 confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
                 Assert.That(confirmElement.Text == String.Format("Hello, " + user.FirstName));
             });

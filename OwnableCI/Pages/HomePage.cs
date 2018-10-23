@@ -267,10 +267,10 @@ namespace OwnableCI_TestLib.Pages
             }
         }
 
-        public override void Login(TestUser user)
+        public override bool Login(TestUser user)
         {
             SignInPage signIn = new SignInPage(driver);
-            signIn.Login(user);
+            return signIn.Login(user);
         }
 
         public override void NavigateToPage(string parameter = "http://dev.ownable.us/app/home")

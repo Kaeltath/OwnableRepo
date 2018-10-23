@@ -65,7 +65,7 @@ namespace OwnableCI.Pages
             InitPage(this);
         }
 
-        public override void Login(TestUser user)
+        public override bool Login(TestUser user)
         {
             throw new NotImplementedException();
         }

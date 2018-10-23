@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OwnableCI.Pages
@@ -65,11 +66,14 @@ namespace OwnableCI.Pages
             InitPage(this);
         }
 
-        public override void Login(TestUser user)
+        public override bool Login(TestUser user)
         {
             inputEmail.SendKeys(user.Email);
             inputPassword.SendKeys(user.Password);
             btnLogIn.Click();
+            Thread.Sleep(4000);
+            var loginPassed = browser.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
+            return (loginPassed.Count < 1);
         }
     }
 }
