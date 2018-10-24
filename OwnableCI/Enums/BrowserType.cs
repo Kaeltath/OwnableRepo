@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OwnableCI_TestLib.Enums
+﻿namespace OwnableCI_TestLib.Enums
 {
     public enum BrowserType
     {
