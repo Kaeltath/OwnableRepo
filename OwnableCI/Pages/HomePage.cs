@@ -95,7 +95,7 @@ namespace OwnableCI_TestLib.Pages
         public IWebElement lnkCategory_TVs;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'Electronics')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'electronics')]")]
         public IWebElement lblElectronics;
 
         //ask why it's needed, and rewrite
@@ -103,7 +103,7 @@ namespace OwnableCI_TestLib.Pages
         public IWebElement lnkCategory_Electronics;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'Computers')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'computers')]")]
         public IWebElement lblComputers;
 
         //ask why it's needed, and rewrite
@@ -111,7 +111,7 @@ namespace OwnableCI_TestLib.Pages
         public IWebElement lnkCategory_Computers;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'Appliances')]")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='image-box']//img[contains(@src,'appliances')]")]
         public IWebElement lblAppliances;
         
         [FindsBy(How = How.XPath, Using = "//ul[@class='product-category-list']//*[text()='Appliances']")]
@@ -265,7 +265,7 @@ namespace OwnableCI_TestLib.Pages
             return signIn.Login(user);
         }
 
-        public override void NavigateToPage(string parameter = "http://dev.ownable.us/app/home")
+        public override void NavigateToPage(string parameter = "http://staging.ownable.us/app/home")
         {
             this.driver.Navigate().GoToUrl(parameter);
             InitPage(this);

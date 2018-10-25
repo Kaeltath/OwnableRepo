@@ -66,7 +66,7 @@ namespace OwnableCI.Pages
             inputEmail.SendKeys(user.Email);
             inputPassword.SendKeys(user.Password);
             btnLogIn.Click();
-            Thread.Sleep(4000);
+            Thread.Sleep(2000);
             var loginPassed = browser.FindElements(By.XPath("//div[@id='auth0-lock-container-1']//span[text()='Wrong email or password.']"));
             return (loginPassed.Count < 1);
         }
