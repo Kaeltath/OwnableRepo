@@ -4,6 +4,8 @@ using OpenQA.Selenium.Chrome;
 using NUnit.Framework;
 using System.Diagnostics;
 using System.Configuration;
+using System.Threading;
+using OwnableCI.TestDataObjs;
 
 namespace OwnableCI_TestLib.Tests
 {
@@ -46,6 +48,49 @@ namespace OwnableCI_TestLib.Tests
         {
             driverForRun.Close();
             driverForRun.Quit();
+        }
+
+        public void SmallSleep()
+        {
+            Thread.Sleep(2000);
+        }
+
+        public void MidSleep()
+        {
+            Thread.Sleep(3500);
+        }
+
+        public void BigSleep()
+        {
+            Thread.Sleep(5000);
+        }
+
+        public virtual bool ValidateGuest()
+        {
+            SmallSleep();
+            driverForRun.FindElement(By.XPath("//button[text()=' Sign In ']"));
+            return true;
+        }
+
+        public virtual bool ValidateUser(TestUser user)
+        {
+            MidSleep();        
+            driverForRun.FindElement(By.XPath("//div[@class='modal-content']//button/div[text()=' START BROWSING ']")).Click();
+            SmallSleep();
+            var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
+            if (confirmElement.Text == String.Format("Hello, " + user.Email.ToLower()))
+            { return true; }
+            else
+            { return false; }
+        }
+
+        public virtual bool ValidateMember(TestUser user)
+        {
+            var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
+            if (confirmElement.Text == String.Format("Hello, " + user.FirstName))
+            { return true; }
+            else
+            { return false; }
         }
 
     }
