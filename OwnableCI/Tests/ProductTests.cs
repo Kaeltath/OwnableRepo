@@ -92,6 +92,58 @@ namespace OwnableCI.Tests
         }
 
         [Test]
+        [Ignore("WishList not working")]
+        [Order(4)]
+        public void AddingProductToCartFromWishListUser()
+        {
+            string currentTestName = "User Creation";
+            log.Debug("Starting " + currentTestName + " Test;");
+            log.Debug("For user " + user.FirstName + user.LastName + ";");
+            HomePage home = new HomePage(driverForRun, false);
+            SmallSleep();
+            Product product = new Product(ProductCategories.Top_deals, 2, home, driverForRun);
+            SmallSleep();
+            int counter = GetContainerCounter(ProductContainer.Cart);
+            int prodctsInCart = CountProductsInContainer(ProductContainer.Cart, product, home);
+            Assume.That(prodctsInCart > 0, "Product already in cart, test will not proceed");
+            MidSleep();
+            AddProductToContainer(ProductContainer.WishList, InterctionControlSet.Product_Title, home, product);
+            Assert.That(CountProductsInContainer(ProductContainer.WishList, product, home) == 1, "Product did not got to WishList");
+            MidSleep();
+            AddProductToContainer(ProductContainer.Cart, InterctionControlSet.Container_Switch, home, product);
+            MidSleep();
+            Assert.That(prodctsInCart == (CountProductsInContainer(ProductContainer.Cart, product, home) + 1), "Product wasn't added properly");
+            Assert.That(counter == (GetContainerCounter(ProductContainer.Cart) + 1), "Conter wasn't updated properly");
+        }
+
+        [Test]
+        [Ignore("WishList not working")]
+        [Order(5)]
+        public void MovingProductFromCartToWishListUser()
+        {
+            string currentTestName = "User Creation";
+            log.Debug("Starting " + currentTestName + " Test;");
+            log.Debug("For user " + user.FirstName + user.LastName + ";");
+            HomePage home = new HomePage(driverForRun, false);
+            SmallSleep();
+            Product product = new Product(ProductCategories.Top_deals, 3, home, driverForRun);
+            SmallSleep();
+            int counterCart = GetContainerCounter(ProductContainer.Cart);
+            int prodctsInCart = CountProductsInContainer(ProductContainer.Cart, product, home);
+            int counterWishList = GetContainerCounter(ProductContainer.WishList);
+            int prodctsInWishList = CountProductsInContainer(ProductContainer.WishList, product, home);
+            Assume.That(prodctsInCart < 1, "Product not in cart, test will not proceed");
+            Assume.That(prodctsInWishList > 0, "Product already in wishist, test will not proceed");
+            MidSleep();
+            AddProductToContainer(ProductContainer.WishList, InterctionControlSet.Container_Switch, home, product);
+            MidSleep();
+            Assert.That(CountProductsInContainer(ProductContainer.WishList, product, home) == 1, "Product did not got to WishList");
+            Assert.That(CountProductsInContainer(ProductContainer.Cart, product, home) == 0, "Product wasn't removed from cart properly");
+            Assert.That(counterCart == (GetContainerCounter(ProductContainer.Cart) - 1), "Cart Conter wasn't updated properly");
+            Assert.That(counterWishList == (GetContainerCounter(ProductContainer.WishList) + 1), "WishList Conter wasn't updated properly");
+        }
+
+        [Test]
         [Ignore("Blocked by bag + rework")]
         public void AddingProductToWishListTest()
         {
@@ -128,7 +180,6 @@ namespace OwnableCI.Tests
 
         [Test]
         [Ignore("Blocked by bag + rework")]
-        [Order(4)]
         public void RemovingProductFromWishListTest()
         {
             string currentTestName = "User Creation";
@@ -267,7 +318,12 @@ namespace OwnableCI.Tests
                             driverForRun.FindElement(By.XPath("//div[@class='modal-content']//button[text()=' view cart ']")).Click();
                             break;
                         case InterctionControlSet.Container_Switch:
-                            throw new NotImplementedException();
+                            SmallSleep();
+                            driverForRun.FindElement(By.XPath("//button[@routerlink='wishlist']")).Click();
+                            MidSleep();
+                            driverForRun.FindElement(By.XPath("//div[@class='product-card-container']//div[@class='add-to-cart ng-star-inserted']/button")).Click();
+                            MidSleep();
+                            break;
                         default: break;
                     }
                     break;
@@ -292,7 +348,12 @@ namespace OwnableCI.Tests
                             driverForRun.FindElement(By.XPath("//button/span[text()='Add to Wishlist']")).Click();
                             break;
                         case InterctionControlSet.Container_Switch:
-                            throw new NotImplementedException();
+                            SmallSleep();
+                            page.lblCart.Click(); 
+                            MidSleep();
+                            driverForRun.FindElement(By.XPath("//div[@class='cart-item ng-star-inserted']//button[text()='Move to wishlist']")).Click();
+                            SmallSleep();
+                            break;
                         default: break;
                     }
                     break;
