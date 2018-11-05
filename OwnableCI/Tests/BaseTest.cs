@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Configuration;
 using System.Threading;
 using OwnableCI.TestDataObjs;
+using System.IO;
+using System.Reflection;
 
 namespace OwnableCI_TestLib.Tests
 {
@@ -39,8 +41,11 @@ namespace OwnableCI_TestLib.Tests
         [OneTimeSetUp]
         public void CreateBrowser()
         {
-            var appsettings = ConfigurationManager.AppSettings;
-            driverForRun = new ChromeDriver(appsettings["ChromeDriverPath"]);
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            if (!config.HasFile)
+            { throw new FileNotFoundException("Missing configuration file for test dll"); }
+            var chromeDriverPathSetting = config.AppSettings.Settings["ChromeDriverPath"].Value;
+            driverForRun = new ChromeDriver(chromeDriverPathSetting);
         }
 
         [OneTimeTearDown]
@@ -65,20 +70,13 @@ namespace OwnableCI_TestLib.Tests
             Thread.Sleep(5000);
         }
 
-        public virtual bool ValidateGuest()
-        {
-            SmallSleep();
-            driverForRun.FindElement(By.XPath("//button[text()=' Sign In ']"));
-            return true;
-        }
-
         public virtual bool ValidateUser(TestUser user)
         {
-            MidSleep();        
+            SmallSleep();        
             driverForRun.FindElement(By.XPath("//div[@class='modal-content']//button/div[text()=' START BROWSING ']")).Click();
-            SmallSleep();
+            MidSleep();
             var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-            if (confirmElement.Text == String.Format("Hello, " + user.Email.ToLower()))
+            if (confirmElement.Text == String.Format("HELLO, " + user.Email.ToUpper()))
             { return true; }
             else
             { return false; }

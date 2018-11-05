@@ -16,7 +16,6 @@ namespace OwnableCI.Tests
             this.user = user;
         }
 
-        [Test]
         public void MemberViableUser()
         {
 

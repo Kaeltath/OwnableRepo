@@ -1,17 +1,22 @@
 ﻿using OwnableCI.TestDataObjs;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace OwnableCI.XMLParsers
 {
-    class XMLParseStatesAndCodes
+    public class XMLParseStatesAndCodes
     {
         public List<CodeAndState> CardsForTests()
         {
-            var appSettings = ConfigurationManager.AppSettings;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            if (!config.HasFile)
+            { throw new FileNotFoundException("Missing configuration file for test dll"); }
+            var cardsPathSetting = config.AppSettings.Settings["TestUsersXMLPath"].Value;
             List<CodeAndState> parseCodes = new List<CodeAndState>();
-            XDocument cardsXML = XDocument.Load(appSettings["TestStatesAndCodesXMLPath"]);
+            XDocument cardsXML = XDocument.Load(cardsPathSetting);
             var xmlUsers = cardsXML.Root.Elements("state");
             foreach (XElement elem in xmlUsers)
             {

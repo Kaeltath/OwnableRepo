@@ -7,7 +7,7 @@ using OwnableCI.TestDataObjs;
 
 namespace OwnableCI_TestLib.Pages
 {
-    abstract class BasePage
+    public abstract class BasePage
     {
         protected IWebDriver driver;
         protected string errorMessageToLog;

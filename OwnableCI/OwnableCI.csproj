@@ -58,8 +58,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants\ConstantStrings.cs" />
+    <Compile Include="Constants\Product.cs" />
     <Compile Include="Constants\TestProperties.cs" />
     <Compile Include="Enums\BrowserType.cs" />
+    <Compile Include="Enums\InterctionControlSet.cs" />
+    <Compile Include="Enums\ProductCategories.cs" />
+    <Compile Include="Enums\ProductContainer.cs" />
     <Compile Include="Pages\BasePage.cs" />
     <Compile Include="Pages\HomePage.cs" />
     <Compile Include="Pages\MemberCreationFifthPage.cs" />
@@ -74,10 +78,9 @@
     <Compile Include="TestDataObjs\CreditCard.cs" />
     <Compile Include="TestDataObjs\TestUser.cs" />
     <Compile Include="Tests\BaseTest.cs" />
-    <Compile Include="Tests\CartTests.cs" />
+    <Compile Include="Tests\ProductTests.cs" />
     <Compile Include="Tests\LoginsTest.cs" />
     <Compile Include="Tests\MemberCreationTest.cs" />
-    <Compile Include="Tests\UserCreationTest.cs" />
     <Compile Include="XMLParsers\XMLParseCreditCards.cs" />
     <Compile Include="XMLParsers\XMLParseStatesAndCodes.cs" />
     <Compile Include="XMLParsers\XMLParseTestUsers.cs" />
@@ -96,7 +99,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="OwnableCI.dll.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

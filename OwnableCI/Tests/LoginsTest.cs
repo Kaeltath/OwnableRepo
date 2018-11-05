@@ -13,13 +13,13 @@ namespace OwnableCI.Tests
 {
     [TestFixtureSource(typeof(TestProperties), "users")]
     [TestFixture]
-    public class EmailValidationTest : BaseTest
+    public class LoginsTest : BaseTest
     {
         private TestUser user;
         private IWebElement confirmElement;
         private bool expectedResults;
 
-        public EmailValidationTest(TestUser User)
+        public LoginsTest(TestUser User)
         {
             user = User;
         }
@@ -27,23 +27,25 @@ namespace OwnableCI.Tests
 
         [Test]
         [Order(1)]
-        public void FirstLogin()
+        public void UserCreation()
         {
             TestAction(() =>
             {
                 string currentTestName = "User Creation";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                SignInPage page = new SignInPage(driverForRun);              
-                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
-                var emailValidationPanel = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']"));
-                var emailValidationSkipButton = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
-                expectedResults = (emailValidationPanel.Count > 0 && emailValidationSkipButton.Count < 1);
-                Assume.That(expectedResults, "Not the first login");
+                SignUpPage page = new SignUpPage(driverForRun);
+                MidSleep();
+                page.inputEmail.SendKeys(user.Email);
+                page.inputPassword.SendKeys(user.Password);
+                page.chkIAgreeToTheTerms.Click();
+                page.btnLogIn.Click();
+                Assert.That(page.ValidateSignUp());
             });
         }
 
         [Test]
+        [Ignore("Not usable due to romoval of email validation flow")]
         [Order(2)]
         public void EMailValidation()
         {
@@ -71,10 +73,7 @@ namespace OwnableCI.Tests
                 string currentTestName = "User Creation";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                SignInPage page = new SignInPage(driverForRun);
-                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
-                confirmElement = driverForRun.FindElement(By.XPath("//div[@class='modal-body']"));
-                Assume.That(confirmElement != null, "Not a user, but member");
+                Assert.That(ValidateUser(user), "Not a user, but member");
             });           
         }
 
@@ -87,10 +86,7 @@ namespace OwnableCI.Tests
                 string currentTestName = "User Creation";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                SignInPage page = new SignInPage(driverForRun);
-                Assert.That(page.Login(user), "Login did not passed, incorect credentials");
-                confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-                Assert.That(confirmElement.Text == String.Format("Hello, " + user.FirstName));
+                Assert.That(ValidateMember(user), "Not a member, but user");
             });
         }
 

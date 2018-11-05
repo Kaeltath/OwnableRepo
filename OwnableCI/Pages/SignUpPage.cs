@@ -66,6 +66,18 @@ namespace OwnableCI.Pages
             throw new NotImplementedException();
         }
 
+        public bool ValidateSignUp()
+        {
+            try
+            {
+                var failedMessage = driver.FindElement(By.XPath("//span[@class='animated fadeInUp']"));
+            }
+            catch {
+                return true;
+            }           
+            return false;            
+        }
+
         public static implicit operator SignUpPage(SignInPage v)
         {
             throw new NotImplementedException();

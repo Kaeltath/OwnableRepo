@@ -1,18 +1,23 @@
 ﻿using OwnableCI.TestDataObjs;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
+using System.Reflection;
 using System.Xml.Linq;
 
 namespace OwnableCI.XMLParsers
 {
-    class XMLParseTestUsers
+    public class XMLParseTestUsers
     {
       
         public List<TestUser> UsersForTests()
         {
-            var appSettings = ConfigurationManager.AppSettings;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            if (!config.HasFile)
+            { throw new FileNotFoundException("Missing configuration file for test dll"); }
+            var userPathSetting = config.AppSettings.Settings["TestUsersXMLPath"].Value;
             List<TestUser> parsedUsers = new List<TestUser>();
-            XDocument usersXml = XDocument.Load(appSettings["TestUsersXMLPath"]);
+            XDocument usersXml = XDocument.Load(userPathSetting);
             var xmlUsers = usersXml.Root.Elements("user");
             foreach (XElement elem in xmlUsers)
             {
