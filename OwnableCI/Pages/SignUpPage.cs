@@ -38,7 +38,7 @@ namespace OwnableCI.Pages
         public IWebElement inputPassword;
 
 
-        [FindsBy(How = How.XPath, Using = "//input[@type='checkbox']")]
+        [FindsBy(How = How.XPath, Using = "//div[@class='auth0-lock-view-content']//label")]
         public IWebElement chkIAgreeToTheTerms;
 
 

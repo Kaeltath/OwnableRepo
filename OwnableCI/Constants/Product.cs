@@ -49,12 +49,12 @@ namespace OwnableCI.Constants
         private void GetProductFromCategory(ProductCategories category, int productNumber, HomePage page)
         {
             categoryControl = m_driverForRun.FindElement(By.XPath(category.GetDescription()));
-            if (categoryControl == null)
+            if (categoryControl != null)
             {
                 Thread.Sleep(2000);
                 categoryControl.Click();
                 Thread.Sleep(3000);
-                ProductName = m_driverForRun.FindElement(By.XPath("//div[@class='row product-list']/div["+productNumber.ToString()+ "]//div[@class='description']/div")).Text;
+                ProductName = m_driverForRun.FindElement(By.XPath("//div[@class='row product-list']/div["+productNumber.ToString()+"]//div[@class='description']/div")).Text;
             }
         }
     }

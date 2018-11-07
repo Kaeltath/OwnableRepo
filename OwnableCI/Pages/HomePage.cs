@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI.Pages;
 using OwnableCI.TestDataObjs;
+using System.Threading;
 
 namespace OwnableCI_TestLib.Pages
 {
@@ -279,6 +280,18 @@ namespace OwnableCI_TestLib.Pages
         {
             this.driver.Navigate().GoToUrl(parameter);
             InitPage(this);
+        }
+
+        public void OpenWishlist()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].click()", driver.FindElement(By.XPath("//button[@routerlink='wishlist']")));
+        }
+
+        public void OpenCart()
+        {
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            js.ExecuteScript("arguments[0].click()", lblCart);
         }
     }
 }

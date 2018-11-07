@@ -4,8 +4,8 @@
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
     <Adress>1113 Shade Tree Ln</Adress>
-    <Email>ownabletestmailforJohn@gmail.com</Email>
-    <Password>John1!Smith1!</Password>
+    <Email>testik@gmail.com</Email>
+    <Password>Goodtaste1!</Password>
     <City>Allen</City>
     <State>TX</State>
     <Zip>75013</Zip>
@@ -14,7 +14,7 @@
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>    
     <ExpectedResult>AcceptWithRisk</ExpectedResult>
   </user>
- <user>
+ <!--<user>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
     <Adress>1923 Lake Forest Rd</Adress>
@@ -41,6 +41,5 @@
     <BirthDate>08/04/1972</BirthDate>
     <LastDigitsOFSocial>6123</LastDigitsOFSocial>
     <ExpectedResult>AcceptWithRisk</ExpectedResult>
-  </user>
-</Users>
+  </user>-->
 </Users>
