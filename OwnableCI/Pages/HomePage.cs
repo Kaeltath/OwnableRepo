@@ -293,5 +293,12 @@ namespace OwnableCI_TestLib.Pages
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click()", lblCart);
         }
+
+        public string GetRentalCap()
+        {
+            string sRentalCap = driver.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
+            sRentalCap = sRentalCap.Split(new char[] { ':' })[2];
+            return sRentalCap;
+        }
     }
 }
