@@ -322,10 +322,10 @@ namespace OwnableCI.Tests
             });
         }
 
+        // need more testing to finilyze
         [Test]
         [Category("ProductIntearctionTest")]
         [Order(11)]
-        [Ignore("Not finilized")]
         public void WishlistSortingTest()
         {
             TestAction(() =>
@@ -350,6 +350,31 @@ namespace OwnableCI.Tests
                 handler.ValidateProductSorting(SortingMethods.Rating);
             });
         }
+
+        //[Test]
+        //[Category("ProductIntearctionTest")]
+        //[Explicit]
+        //public void Tester()
+        //{
+        //    string currentTestName = "WishlistSortingTest";
+        //    log.Debug("Starting " + currentTestName + " Test;");
+        //    log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //    HomePage home = new HomePage(driverForRun, false);
+        //    SignInPage signin = new SignInPage(driverForRun);
+        //    Assume.That(signin.Login(user), "Failed login, test will not run");
+        //    Assume.That(ValidateUser(user), "Logged-in account is not a user");
+        //    SmallSleep();
+        //    ProductHandler handler = new ProductHandler(driverForRun, home);
+        //    int[] selectedProductIndexes = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        //    handler.BuildProductCollection(selectedProductIndexes, ProductCategories.Top_deals);
+        //    //handler.AddProdutRangeToContainer(selectedProductIndexes, ProductContainer.WishList, ProductCategories.Top_deals);
+        //    handler.SortProducts(ProductContainer.WishList, SortingMethods.Brand);
+        //    handler.ValidateProductSorting(SortingMethods.Brand);
+        //    handler.SortProducts(ProductContainer.WishList, SortingMethods.Price);
+        //    handler.ValidateProductSorting(SortingMethods.Price);
+        //    handler.SortProducts(ProductContainer.WishList, SortingMethods.Rating);
+        //    handler.ValidateProductSorting(SortingMethods.Rating);
+        //}
 
     }
 }

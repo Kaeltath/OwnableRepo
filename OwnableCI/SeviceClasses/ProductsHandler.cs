@@ -195,7 +195,7 @@ namespace OwnableCI.Constants
                 case SortingMethods.Brand:
                     //sortedInitialList = ascending ? InitialCollection.OrderBy(o => o.Brand).ThenByDescending(o => o.ProductName).ToList() :
                     //    InitialCollection.OrderByDescending(o => o.Brand).ThenBy(o => o.ProductName).ToList();
-                    sortedInitialList = InitialCollection.OrderByDescending(o => o.Brand).ThenBy(o => o.ProductName).ToList();
+                    sortedInitialList = InitialCollection.OrderByDescending(o => o.Brand, StringComparer.Ordinal).ThenBy(o => o.ProductName, StringComparer.Ordinal).ToList();
                     extractedList = GetCurrentProductsCollection(ProductContainer.WishList, sortingMethod, ascending);
                     Assert.That(sortedInitialList.SequenceEqual(extractedList, new ProductComparer()), "By Brand: Products is not ordere properly");
                     break;
@@ -206,7 +206,7 @@ namespace OwnableCI.Constants
                 case SortingMethods.Price:
                     //sortedInitialList = ascending ? InitialCollection.OrderBy(o => o.ProductPrice).ThenByDescending(o => o.Brand).ToList() :
                     //    InitialCollection.OrderByDescending(o => o.ProductPrice).ThenBy(o => o.Brand).ToList();
-                    sortedInitialList = InitialCollection.OrderByDescending(o => o.ProductPrice).ThenBy(o => o.Brand).ToList();
+                    sortedInitialList = InitialCollection.OrderByDescending(o => o.ProductPrice).ThenBy(o => o.Brand, StringComparer.Ordinal).ToList();
                     extractedList = GetCurrentProductsCollection(ProductContainer.WishList, sortingMethod, ascending);
                     Assert.That(sortedInitialList.SequenceEqual(extractedList, new ProductComparer()), "By Price: Products is not ordere properly");
                     break;
