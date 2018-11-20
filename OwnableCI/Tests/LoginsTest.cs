@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OwnableCI.Pages;
+using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Tests;
@@ -45,7 +46,7 @@ namespace OwnableCI.Tests
                 SmallSleep();
                 if (!SignUpSuccesfull)
                 {
-                    page.btnClose.Click();
+                    TestHelper.JSexecutorClick(page.btnClose, driverForRun);
                 }
                 Assume.That(SignUpSuccesfull, "User already exists");
             });
@@ -59,7 +60,7 @@ namespace OwnableCI.Tests
         {
             TestAction(() =>
             {
-                string currentTestName = "User Creation";
+                string currentTestName = "EMailValidation";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 SignInPage page = new SignInPage(driverForRun);
@@ -79,7 +80,7 @@ namespace OwnableCI.Tests
         {
             TestAction(() =>
             {
-                string currentTestName = "User Creation";
+                string currentTestName = "UserLogin";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 bool newUserCreated = false;
@@ -107,7 +108,7 @@ namespace OwnableCI.Tests
         {
             TestAction(() =>
             {
-                string currentTestName = "User Creation";
+                string currentTestName = "MemberLogin";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 Assume.That(ValidateMember(user), "Login successfull, but not for member, but for user");
