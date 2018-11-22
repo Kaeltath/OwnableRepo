@@ -23,16 +23,19 @@ namespace OwnableCI.XMLParsers
             {
                 TestUser userToAdd = new TestUser
                 {
+                    Email = elem.Element("Email").Value,
+                    Password = elem.Element("Password").Value,
                     FirstName = elem.Element("FirstName").Value,
                     LastName = elem.Element("LastName").Value,
                     Adress = elem.Element("Adress").Value,
-                    Email = elem.Element("Email").Value,
-                    Password = elem.Element("Password").Value,
                     City = elem.Element("City").Value,
                     State = elem.Element("State").Value,
-                    Zip = elem.Element("Zip").Value,
+                    ZipCode = elem.Element("ZipCode").Value,
                     Mobile = elem.Element("Mobile").Value,
-                    BirthDate = elem.Element("BirthDate").Value,
+                    BirthDate = elem.Element("Birthdate").Value,
+                    MonthlyIncome = elem.Element("MonthlyIncome").Value,
+                    Company = elem.Element("Company").Value,
+                    YearsEmployed = elem.Element("YearsEmployed").Value,
                     LastDigitsOFSocial = elem.Element("LastDigitsOFSocial").Value,
                     ExpResult = elem.Element("ExpectedResult").Value
                 };
