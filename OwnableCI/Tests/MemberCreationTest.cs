@@ -36,7 +36,7 @@ namespace OwnableCI.Tests
                 MidSleep();
                 pageSignUp.inputEmail.SendKeys(user.Email);
                 pageSignUp.inputPassword.SendKeys(user.Password);
-                pageSignUp.chkIAgreeToTheTerms.Click();
+                //pageSignUp.chkIAgreeToTheTerms.Click(); //removed from current version
                 pageSignUp.btnLogIn.Click();
                 log.Debug("Start get your rental cap");
                 MidSleep();
@@ -51,19 +51,18 @@ namespace OwnableCI.Tests
                 pagePersonalInfo.inputCity.SendKeys(user.City);
                 pagePersonalInfo.lstState.Click();
                 driverForRun.FindElement(By.XPath("//span[text()='Texas']")).Click();
-                pagePersonalInfo.inputZipCode.SendKeys(user.Zip);
+                pagePersonalInfo.inputZipCode.SendKeys(user.ZipCode);
                 pagePersonalInfo.inputMobile.SendKeys(user.Mobile);
                 pagePersonalInfo.inputBirthdate.SendKeys(user.BirthDate);
                 pagePersonalInfo.chkAgreement.Click();
                 pagePersonalInfo.btnNext.Click();
 
                 //TODO: move set "Income Info" to separate method
-                //TODO: add Income Info data to TestUsers.xml file
                 MidSleep();
                 MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
-                pageIncomeInfo.inputMonthlyIncome.SendKeys("1200");
-                pageIncomeInfo.inputCompany.SendKeys("IT");
-                pageIncomeInfo.inputYearsEmployed.SendKeys("2");
+                pageIncomeInfo.inputMonthlyIncome.SendKeys(user.MonthlyIncome);
+                pageIncomeInfo.inputCompany.SendKeys(user.Company);
+                pageIncomeInfo.inputYearsEmployed.SendKeys(user.YearsEmployed);
                 pageIncomeInfo.inputSSN.SendKeys("12345"+user.LastDigitsOFSocial);
                 pageIncomeInfo.btnBecomeMember.Click();
 
@@ -72,7 +71,7 @@ namespace OwnableCI.Tests
                 MemberCreationThirdPage pageMembershipAgreement = new MemberCreationThirdPage(driverForRun);
                 pageMembershipAgreement.btnAgree.Click(); //do this for going to txtMemberSignature field
                 SmallSleep();
-                pageMembershipAgreement.txtMemberSignature.Click();
+                pageMembershipAgreement.txtMemberSignature.Click(); //set digital signature
                 SmallSleep();
                 pageMembershipAgreement.btnAgree.Click();
 

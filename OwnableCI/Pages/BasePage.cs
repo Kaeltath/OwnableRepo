@@ -61,7 +61,7 @@ namespace OwnableCI_TestLib.Pages
                 {                    
                     if (!elem.Displayed)
                     {
-                        errorMessageToLog = "Element " + field.Name + " is not loadede, or not visible, please check the problem"; 
+                        errorMessageToLog = "Element " + field.Name + " is not loaded, or not visible, please check the problem";
                     }
                 }
                 catch (Exception e)
