@@ -2,18 +2,20 @@
 {
     public class TestUser
     {
-        public string FirstName;
-        public string LastName;
         public string Email;
         public string Password;
+        public string FirstName;
+        public string LastName;
         public string Adress;
         public string City;
         public string State;
-        public string Zip;
+        public string ZipCode;
         public string Mobile;
         public string BirthDate;
+        public string MonthlyIncome;
+        public string Company;
+        public string YearsEmployed;
         public string LastDigitsOFSocial;
         public string ExpResult;
-
     }
 }
