@@ -1,18 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Users>
   <user>
+    <Email>testik@gmail.com</Email>
+    <Password>Goodtaste1!</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
     <Adress>1113 Shade Tree Ln</Adress>
-    <Email>testik@gmail.com</Email>
-    <Password>Goodtaste1!</Password>
     <City>Allen</City>
     <State>Texas</State>
-    <Zip>75013</Zip>
+    <ZipCode>75013</ZipCode>
     <Mobile>2145551212</Mobile>
-    <BirthDate>05/15/1970</BirthDate>
-    <LastDigitsOFSocial>6543</LastDigitsOFSocial>    
-    <ExpectedResult>AcceptWithRisk</ExpectedResult>
+    <Birthdate>05/15/1970</Birthdate>
+    <MonthlyIncome>1200</MonthlyIncome>
+    <Company>IT</Company>
+    <YearsEmployed>2</YearsEmployed>
+    <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <ExpectedResult>Accept</ExpectedResult>
   </user>
  <!--<user>
     <FirstName>Jane</FirstName>
