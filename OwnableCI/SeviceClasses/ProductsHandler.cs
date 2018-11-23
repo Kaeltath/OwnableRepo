@@ -160,7 +160,7 @@ namespace OwnableCI.Constants
             }
         }
 
-        private List<Product> GetCurrentProductsCollection(ProductContainer conteiner, SortingMethods sortingMethod = SortingMethods.Rating, bool ascending = false)
+        public List<Product> GetCurrentProductsList(ProductContainer conteiner, SortingMethods sortingMethod = SortingMethods.Rating, bool ascending = false)
         {
             List<Product> currentProductsList = new List<Product>();
             switch (conteiner)
@@ -187,35 +187,26 @@ namespace OwnableCI.Constants
 
         public void ValidateProductSorting(SortingMethods sortingMethod, bool ascending = false)
         {
-            List<Product> sortedInitialList;
-            List<Product> extractedList;
-
             switch (sortingMethod)
             {
                 case SortingMethods.Brand:
-                    //sortedInitialList = ascending ? InitialCollection.OrderBy(o => o.Brand).ThenByDescending(o => o.ProductName).ToList() :
-                    //    InitialCollection.OrderByDescending(o => o.Brand).ThenBy(o => o.ProductName).ToList();
-                    sortedInitialList = InitialCollection.OrderByDescending(o => o.Brand, StringComparer.Ordinal).ThenBy(o => o.ProductName, StringComparer.Ordinal).ToList();
-                    extractedList = GetCurrentProductsCollection(ProductContainer.WishList, sortingMethod, ascending);
-                    Assert.That(sortedInitialList.SequenceEqual(extractedList, new ProductComparer()), "By Brand: Products is not ordere properly");
+                    var extractedList = GetCurrentProductsList(ProductContainer.WishList, sortingMethod, ascending);
+                    var expectedList = ascending ? extractedList.OrderBy(o => o.Brand, StringComparer.Ordinal) : extractedList.OrderByDescending(o => o.Brand, StringComparer.Ordinal);
+                    Assert.That(extractedList.SequenceEqual(expectedList));
                     break;
                 case SortingMethods.Category:
                     throw new NotImplementedException("This sorting type validation is not implemented yet");
                 case SortingMethods.Newest:
                     throw new NotImplementedException("This sorting type validation is not implemented yet");
                 case SortingMethods.Price:
-                    //sortedInitialList = ascending ? InitialCollection.OrderBy(o => o.ProductPrice).ThenByDescending(o => o.Brand).ToList() :
-                    //    InitialCollection.OrderByDescending(o => o.ProductPrice).ThenBy(o => o.Brand).ToList();
-                    sortedInitialList = InitialCollection.OrderByDescending(o => o.ProductPrice).ThenBy(o => o.Brand, StringComparer.Ordinal).ToList();
-                    extractedList = GetCurrentProductsCollection(ProductContainer.WishList, sortingMethod, ascending);
-                    Assert.That(sortedInitialList.SequenceEqual(extractedList, new ProductComparer()), "By Price: Products is not ordere properly");
+                    extractedList = GetCurrentProductsList(ProductContainer.WishList, sortingMethod, ascending);
+                    expectedList = ascending ? extractedList.OrderBy(o => o.ProductPrice) : extractedList.OrderByDescending(o => o.ProductPrice);
+                    Assert.That(extractedList.SequenceEqual(expectedList));
                     break;
                 case SortingMethods.Rating:
-                    //sortedInitialList = ascending ? InitialCollection.OrderBy(o => o.ProductRate).ThenByDescending(o => o.VotesCount).ToList() :
-                    //    InitialCollection.OrderByDescending(o => o.ProductRate).ThenBy(o => o.VotesCount).ToList();
-                    sortedInitialList = InitialCollection.OrderByDescending(o => o.VotesCount).ThenByDescending(o => o.ProductRate).ToList();
-                    extractedList = GetCurrentProductsCollection(ProductContainer.WishList, sortingMethod, ascending);
-                    Assert.That(sortedInitialList.SequenceEqual(extractedList, new ProductComparer()), "By Rating: Products is not ordere properly");
+                    extractedList = GetCurrentProductsList(ProductContainer.WishList, sortingMethod, ascending);
+                    expectedList = ascending ? extractedList.OrderBy(o => o.ProductRate) : extractedList.OrderByDescending(o => o.ProductRate);
+                    Assert.That(extractedList.SequenceEqual(expectedList));
                     break;
                 default: break;
             }
@@ -256,13 +247,23 @@ namespace OwnableCI.Constants
         {
             var element = m_driver.FindElement(By.XPath("//div[@class='row justify-content-end products-sort']//span[@class='ng-arrow-wrapper']"));
             element.Click();
-            MidSleep();
-            var options = m_driver.FindElements(By.XPath("//div[@class='row justify-content-end products-sort']//div[@role='option']"));
+            SmallSleep();
+            var options = m_driver.FindElements(By.XPath("//div[@class='row']//div[@class='row justify-content-end products-sort']//div[@role='option']"));
             options[(Int32)sortingMethod].Click();
             MidSleep();
-            var ascDscButton = m_driver.FindElement(By.XPath("//div[@class='row justify-content-end products-sort']//button[@class='btn btn-outline-secondary']"));
-            if (ascending)
-                ascDscButton.Click();
+            var ascDscButton = m_driver.FindElement(By.XPath("//div[@class='row justify-content-end products-sort']//button[@class='btn btn-outline-secondary']/i"));
+            string indicator = ascDscButton.GetAttribute("class");
+            if (indicator.Contains("-desc"))
+            {
+                if (ascending)
+                    ascDscButton.Click();
+
+            }
+            else
+            {
+                if (!ascending)
+                    ascDscButton.Click();
+            }
         }
 
         public int CountProductsInContainer(ProductContainer container)
