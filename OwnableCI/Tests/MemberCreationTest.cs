@@ -4,7 +4,7 @@ using OwnableCI.Pages;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Tests;
-using OwnableCI_TestLib.Pages;
+using System;
 
 
 namespace OwnableCI.Tests
@@ -27,81 +27,110 @@ namespace OwnableCI.Tests
         [Order(1)]
         public void MemberCreationSignUp()
         {
-            TestAction(() =>
+            if (user.ExpResult == "Accept")
             {
-                string currentTestName = "Member Creation from SignUp";
-                log.Debug("Starting " + currentTestName + " Test;");
-                log.Debug("For user " + user.FirstName + user.LastName + ";");
-                SignUpPage pageSignUp = new SignUpPage(driverForRun);
-                MidSleep();
-                pageSignUp.inputEmail.SendKeys(user.Email);
-                pageSignUp.inputPassword.SendKeys(user.Password);
-                pageSignUp.chkIAgreeToTheTerms.Click();
-                pageSignUp.btnLogIn.Click();
-                log.Debug("Start get your rental cap");
-                MidSleep();
-                driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
+                TestAction(() =>
+                {
+                    string currentTestName = "Member Creation from SignUp";
+                    log.Debug("Starting " + currentTestName + " Test;");
+                    log.Debug("For user " + user.FirstName + user.LastName + ";");
+                    SignUpPage pageSignUp = new SignUpPage(driverForRun);
+                    MidSleep();
+                    pageSignUp.UserSignUp(user);
+                    log.Debug("Start get your rental cap");
+                    BigSleep();
+                    BigSleep();
+                    driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
 
-                //TODO: move set "Personal Info" to separate method
-                MidSleep();
-                MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
-                pagePersonalInfo.inputFirstName.SendKeys(user.FirstName);
-                pagePersonalInfo.inputLastName.SendKeys(user.LastName);
-                pagePersonalInfo.inputHomeAddress.SendKeys(user.Adress);
-                pagePersonalInfo.inputCity.SendKeys(user.City);
-                pagePersonalInfo.lstState.Click();
-                driverForRun.FindElement(By.XPath("//span[text()='Texas']")).Click();
-                pagePersonalInfo.inputZipCode.SendKeys(user.Zip);
-                pagePersonalInfo.inputMobile.SendKeys(user.Mobile);
-                pagePersonalInfo.inputBirthdate.SendKeys(user.BirthDate);
-                pagePersonalInfo.chkAgreement.Click();
-                pagePersonalInfo.btnNext.Click();
+                    MidSleep();
+                    MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+                    pagePersonalInfo.SetPersonalInfo(user);
 
-                //TODO: move set "Income Info" to separate method
-                //TODO: add Income Info data to TestUsers.xml file
-                MidSleep();
-                MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
-                pageIncomeInfo.inputMonthlyIncome.SendKeys("1200");
-                pageIncomeInfo.inputCompany.SendKeys("IT");
-                pageIncomeInfo.inputYearsEmployed.SendKeys("2");
-                pageIncomeInfo.inputSSN.SendKeys("12345"+user.LastDigitsOFSocial);
-                pageIncomeInfo.btnBecomeMember.Click();
+                    MidSleep();
+                    MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
+                    pageIncomeInfo.SetIncomeInfo(user);
 
-                //MEMBERSHIP AGREEMENT
-                MidSleep();
-                MemberCreationThirdPage pageMembershipAgreement = new MemberCreationThirdPage(driverForRun);
-                pageMembershipAgreement.btnAgree.Click(); //do this for going to txtMemberSignature field
-                SmallSleep();
-                pageMembershipAgreement.txtMemberSignature.Click();
-                SmallSleep();
-                pageMembershipAgreement.btnAgree.Click();
+                    MidSleep();
+                    MemberCreationThirdPage pageMembershipAgreement = new MemberCreationThirdPage(driverForRun);
+                    pageMembershipAgreement.SetMembershipAgreement(user);
 
-                //APPLICATION DISCLOSURE
-                MidSleep();
-                MemberCreationFourthPage pageApplicationDisclosure = new MemberCreationFourthPage(driverForRun);
-                pageApplicationDisclosure.btnAgree.Click();
+                    MidSleep();
+                    MemberCreationFourthPage pageApplicationDisclosure = new MemberCreationFourthPage(driverForRun);
+                    pageApplicationDisclosure.btnAgree.Click();
 
-                //CONGRATULATIONS!
-                MidSleep();
-                MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
-                string sRentValue = pageCongratulations.txtRentalCapValue.Text;
-                Assert.AreEqual("$500.00", sRentValue);
-                pageCongratulations.btnStartShopping.Click();
+                    MidSleep();
+                    MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
+                    string rentActualValue = pageCongratulations.txtRentalCapValue.Text;
+                    string rentExpectedValue = RentalCapExpected(user);
+                    Assert.AreEqual(rentExpectedValue, rentActualValue);
+                    pageCongratulations.btnStartShopping.Click();
 
-                //Home Page
-                MidSleep();
-                HomePage pageHome = new HomePage(driverForRun);
-                ValidateMember(user);
-                Assert.AreEqual("$500.00",pageHome.GetRentalCap());
-            });
+                    BigSleep();
+                    ValidateMember(user);
+                    Assert.AreEqual(rentExpectedValue, GetRentalCap());
+                });
+            }
         }
 
         [Test]
         [Category("MemberCreationTest")]
         [Order(2)]
-        public void MemberCreationFromCart()
+        public void MemberCreationLowIncome()
         {
+            if (user.ExpResult == "Reject-Low Income")
+            {
+                TestAction(() =>
+                {
+                    string currentTestName = "Member Creation from SignUp";
+                    log.Debug("Starting " + currentTestName + " Test;");
+                    log.Debug("For user " + user.FirstName + user.LastName + ";");
+                    SignUpPage pageSignUp = new SignUpPage(driverForRun);
+                    MidSleep();
+                    pageSignUp.UserSignUp(user);
+                    log.Debug("Start get your rental cap");
+                    BigSleep();
+                    BigSleep();
+                    driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
 
+                    MidSleep();
+                    MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+                    pagePersonalInfo.SetPersonalInfo(user);
+
+                    MidSleep();
+                    MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
+                    pageIncomeInfo.SetIncomeInfo(user);
+
+                    BigSleep();
+                    BigSleep();
+                    IWebElement elemWeSorry = driverForRun.FindElement(By.XPath("//h3[text() = 'We are sorry...']"));
+                    if (!elemWeSorry.Displayed)
+                    {
+                        log.Error("Element " + elemWeSorry + " is not exists, please check the problem");
+                    }
+                    else
+                    {
+                        driverForRun.FindElement(By.XPath("//span[text()='Close']")).Click();
+                    }
+
+                    MidSleep();
+                    ValidateMember(user);
+                    try
+                    {
+                        IWebElement elemRentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]"));
+                        log.Error("Element " + elemRentalCap + " is displayed, but not expected");
+                    }
+                    catch (Exception)
+                    {
+                    }
+                });
+            }
+        }
+
+        private string GetRentalCap()
+        {
+            string rentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
+            rentalCap = rentalCap.Split(new char[] { ':' })[2];
+            return rentalCap;
         }
 
     }

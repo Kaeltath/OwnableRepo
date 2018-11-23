@@ -276,9 +276,10 @@ namespace OwnableCI_TestLib.Pages
             return signIn.Login(user);
         }
 
-        public override void NavigateToPage(string parameter = "http://staging.ownable.us/app/home")
+        public override void NavigateToPage(string parameter = "http://dev.ownable.us/app/home")
         {
             this.driver.Navigate().GoToUrl(parameter);
+            this.driver.Manage().Window.Maximize();
             InitPage(this);
         }
 
@@ -292,13 +293,6 @@ namespace OwnableCI_TestLib.Pages
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click()", lblCart);
-        }
-
-        public string GetRentalCap()
-        {
-            string sRentalCap = driver.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
-            sRentalCap = sRentalCap.Split(new char[] { ':' })[2];
-            return sRentalCap;
         }
     }
 }

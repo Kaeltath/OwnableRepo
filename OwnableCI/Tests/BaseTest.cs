@@ -73,8 +73,8 @@ namespace OwnableCI_TestLib.Tests
         public virtual bool ValidateUser(TestUser user)
         {
             SmallSleep();        
-            driverForRun.FindElement(By.XPath("//div[@class='modal-content']//button/div[text()=' START BROWSING ']")).Click();
-            MidSleep();
+            driverForRun.FindElement(By.XPath("//div[@class='modal-content']//div[@class='modal-footer ng-star-inserted']//button/div[text()=' START BROWSING ']")).Click();
+            SmallSleep();
             var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
             if (confirmElement.Text == String.Format("HELLO, " + user.Email.ToUpper()))
             { return true; }
@@ -89,6 +89,35 @@ namespace OwnableCI_TestLib.Tests
             { return true; }
             else
             { return false; }
+        }
+
+        public string RentalCapExpected(TestUser user)
+        {
+            int incoming = int.Parse(user.MonthlyIncome);
+            string rentExpected;
+            if (1200 <= incoming)
+            {
+                if (incoming < 2000)
+                {
+                    rentExpected = "$500.00";
+                }
+                else
+                {
+                    if (incoming <= 4000)
+                    {
+                        rentExpected = "$750.00";
+                    }
+                    else
+                    {
+                        rentExpected = "$1000.00";
+                    }
+                }
+            }
+            else
+            {
+                rentExpected = "Low Income";
+            }
+            return rentExpected;
         }
 
     }

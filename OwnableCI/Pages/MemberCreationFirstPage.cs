@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI_TestLib.Pages;
+using OwnableCI.TestDataObjs;
 
 namespace OwnableCI.Pages
 {
@@ -72,6 +73,21 @@ namespace OwnableCI.Pages
             driver = usedBrowser;
             PageFactory.InitElements(driver, this);
             
+        }
+
+        public void SetPersonalInfo(TestUser user)
+        {
+            inputFirstName.SendKeys(user.FirstName);
+            inputLastName.SendKeys(user.LastName);
+            inputHomeAddress.SendKeys(user.Adress);
+            inputCity.SendKeys(user.City);
+            lstState.Click();
+            driver.FindElement(By.XPath("//span[text()='" + user.State + "']")).Click();
+            inputZipCode.SendKeys(user.ZipCode);
+            inputMobile.SendKeys(user.Mobile);
+            inputBirthdate.SendKeys(user.BirthDate);
+            chkAgreement.Click();
+            btnNext.Click();
         }
     }
 }
