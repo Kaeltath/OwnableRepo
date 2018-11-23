@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI_TestLib.Pages;
+using OwnableCI.TestDataObjs;
 
 namespace OwnableCI.Pages
 {
@@ -35,6 +36,15 @@ namespace OwnableCI.Pages
             driver = usedBrowser;
             PageFactory.InitElements(driver, this);
             
+        }
+
+        public void SetIncomeInfo(TestUser user)
+        {
+            inputMonthlyIncome.SendKeys(user.MonthlyIncome);
+            inputCompany.SendKeys(user.Company);
+            inputYearsEmployed.SendKeys(user.YearsEmployed);
+            inputSSN.SendKeys("12345" + user.LastDigitsOFSocial); //first 5 SSN numbers are random
+            btnBecomeMember.Click();
         }
     }
 }
