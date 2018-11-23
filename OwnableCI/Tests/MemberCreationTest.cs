@@ -44,8 +44,6 @@ namespace OwnableCI.Tests
 
                     MidSleep();
                     MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
-                    pagePersonalInfo.lstState.Click();
-                    driverForRun.FindElement(By.XPath("//span[text()='Texas']")).Click(); //QQ: need to implement selection state inside SetPersonalInfo() method
                     pagePersonalInfo.SetPersonalInfo(user);
 
                     MidSleep();
@@ -64,14 +62,12 @@ namespace OwnableCI.Tests
                     MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
                     string rentActualValue = pageCongratulations.txtRentalCapValue.Text;
                     string rentExpectedValue = RentalCapExpected(user);
-                    Assert.AreEqual(rentExpectedValue, rentActualValue); //QQ: how to make non-stop on this verification?
+                    Assert.AreEqual(rentExpectedValue, rentActualValue);
                     pageCongratulations.btnStartShopping.Click();
 
-                    //Home Page
-                    MidSleep();
-                    //HomePage pageHome = new HomePage(driverForRun); //QQ: how to skip validation declared controls here
+                    BigSleep();
                     ValidateMember(user);
-                    //Assert.AreEqual(rentExpectedValue,pageHome.GetRentalCap());
+                    Assert.AreEqual(rentExpectedValue, GetRentalCap());
                 });
             }
         }
@@ -98,8 +94,6 @@ namespace OwnableCI.Tests
 
                     MidSleep();
                     MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
-                    pagePersonalInfo.lstState.Click();
-                    driverForRun.FindElement(By.XPath("//span[text()='Texas']")).Click(); //QQ: need to implement selection state inside SetPersonalInfo() method
                     pagePersonalInfo.SetPersonalInfo(user);
 
                     MidSleep();
@@ -118,7 +112,6 @@ namespace OwnableCI.Tests
                         driverForRun.FindElement(By.XPath("//span[text()='Close']")).Click();
                     }
 
-                    //Home Page
                     MidSleep();
                     ValidateMember(user);
                     try
@@ -131,6 +124,13 @@ namespace OwnableCI.Tests
                     }
                 });
             }
+        }
+
+        private string GetRentalCap()
+        {
+            string rentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
+            rentalCap = rentalCap.Split(new char[] { ':' })[2];
+            return rentalCap;
         }
 
     }

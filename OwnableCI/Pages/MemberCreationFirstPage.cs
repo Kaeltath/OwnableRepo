@@ -81,6 +81,8 @@ namespace OwnableCI.Pages
             inputLastName.SendKeys(user.LastName);
             inputHomeAddress.SendKeys(user.Adress);
             inputCity.SendKeys(user.City);
+            lstState.Click();
+            driver.FindElement(By.XPath("//span[text()='" + user.State + "']")).Click();
             inputZipCode.SendKeys(user.ZipCode);
             inputMobile.SendKeys(user.Mobile);
             inputBirthdate.SendKeys(user.BirthDate);

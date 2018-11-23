@@ -55,7 +55,7 @@ namespace OwnableCI_TestLib.Pages
         //[FindsBy(How = How.XPath, Using = "//button[@routerlink='wishlist']")]
         //public IWebElement btnWishlist;
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//button[text()=' Top Deals ' or text()=' Black Friday ']")] //temporary solution for Black Friday
+        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//button[text()=' Top Deals ']")]
         public IWebElement btnTopDeals;
 
         [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']/button[9]")]
@@ -292,13 +292,6 @@ namespace OwnableCI_TestLib.Pages
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click()", lblCart);
-        }
-
-        public string GetRentalCap()
-        {
-            string rentalCap = driver.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
-            rentalCap = rentalCap.Split(new char[] { ':' })[2];
-            return rentalCap;
         }
     }
 }
