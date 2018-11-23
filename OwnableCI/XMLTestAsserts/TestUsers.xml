@@ -1,8 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Users>
   <user>
-    <Email>testik@gmail.com</Email>
-    <Password>Goodtaste1!</Password>
+    <Email>gotobuy10@gmail.com</Email>
+    <Password>!Gotobuy007</Password>
+    <FirstName>John</FirstName>
+    <LastName>Smith</LastName>
+    <Adress>1113 Shade Tree Ln</Adress>
+    <City>Allen</City>
+    <State>Texas</State>
+    <ZipCode>75013</ZipCode>
+    <Mobile>2145551212</Mobile>
+    <Birthdate>05/15/1970</Birthdate>
+    <MonthlyIncome>1199</MonthlyIncome>
+    <Company>IT</Company>
+    <YearsEmployed>2</YearsEmployed>
+    <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <ExpectedResult>Reject-Low Income</ExpectedResult>
+  </user>
+  <user>
+    <Email>gotobuy11@gmail.com</Email>
+    <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
     <Adress>1113 Shade Tree Ln</Adress>
