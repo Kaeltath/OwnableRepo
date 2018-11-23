@@ -55,7 +55,7 @@ namespace OwnableCI_TestLib.Pages
         //[FindsBy(How = How.XPath, Using = "//button[@routerlink='wishlist']")]
         //public IWebElement btnWishlist;
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//button[text()=' Top Deals ']")]
+        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//button[text()=' Top Deals ' or text()=' Black Friday ']")] //temporary solution for Black Friday
         public IWebElement btnTopDeals;
 
         [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']/button[9]")]
