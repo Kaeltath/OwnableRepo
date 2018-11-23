@@ -40,7 +40,7 @@ namespace OwnableCI.Tests
                 MidSleep();
                 page.inputEmail.SendKeys(user.Email);
                 page.inputPassword.SendKeys(user.Password);
-                page.chkIAgreeToTheTerms.Click();
+                //page.chkIAgreeToTheTerms.Click(); //obsolete control
                 page.btnLogIn.Click();
                 bool SignUpSuccesfull = page.ValidateSignUp();
                 SmallSleep();
