@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using System.Threading;
+using OwnableCI.TestDataObjs;
 using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI_TestLib.Pages;
 
@@ -55,7 +57,15 @@ namespace OwnableCI.Pages
         {
             driver = usedBrowser;
             PageFactory.InitElements(driver, this);
-            
+        }
+
+        public void SetMembershipAgreement(TestUser user)
+        {
+            btnAgree.Click(); //do this for going to txtMemberSignature field
+            Thread.Sleep(2000);
+            txtMemberSignature.Click(); //set digital signature
+            Thread.Sleep(2000);
+            btnAgree.Click();
         }
     }
 }
