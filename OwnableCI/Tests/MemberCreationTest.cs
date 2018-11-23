@@ -62,16 +62,16 @@ namespace OwnableCI.Tests
 
                     MidSleep();
                     MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
-                    string sRentActualValue = pageCongratulations.txtRentalCapValue.Text;
-                    string sRentExpectedValue = RentalCapExpected(user);
-                    Assert.AreEqual(sRentExpectedValue, sRentActualValue); //QQ: how to make non-stop on this verification?
+                    string rentActualValue = pageCongratulations.txtRentalCapValue.Text;
+                    string rentExpectedValue = RentalCapExpected(user);
+                    Assert.AreEqual(rentExpectedValue, rentActualValue); //QQ: how to make non-stop on this verification?
                     pageCongratulations.btnStartShopping.Click();
 
                     //Home Page
                     MidSleep();
                     //HomePage pageHome = new HomePage(driverForRun); //QQ: how to skip validation declared controls here
                     ValidateMember(user);
-                    //Assert.AreEqual(sRentExpectedValue,pageHome.GetRentalCap());
+                    //Assert.AreEqual(rentExpectedValue,pageHome.GetRentalCap());
                 });
             }
         }

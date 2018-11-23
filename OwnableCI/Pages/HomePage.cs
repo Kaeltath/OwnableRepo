@@ -296,9 +296,9 @@ namespace OwnableCI_TestLib.Pages
 
         public string GetRentalCap()
         {
-            string sRentalCap = driver.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
-            sRentalCap = sRentalCap.Split(new char[] { ':' })[2];
-            return sRentalCap;
+            string rentalCap = driver.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
+            rentalCap = rentalCap.Split(new char[] { ':' })[2];
+            return rentalCap;
         }
     }
 }

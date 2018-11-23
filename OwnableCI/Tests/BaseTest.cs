@@ -91,9 +91,33 @@ namespace OwnableCI_TestLib.Tests
             { return false; }
         }
 
-        public string RentalCapExpected(TestUser user) //to implement calculation logic
+        public string RentalCapExpected(TestUser user)
         {
-            return "$500.00";
+            int incoming = int.Parse(user.MonthlyIncome);
+            string rentExpected;
+            if (1200 <= incoming)
+            {
+                if (incoming < 2000)
+                {
+                    rentExpected = "$500.00";
+                }
+                else
+                {
+                    if (incoming <= 4000)
+                    {
+                        rentExpected = "$750.00";
+                    }
+                    else
+                    {
+                        rentExpected = "$1000.00";
+                    }
+                }
+            }
+            else
+            {
+                rentExpected = "Low Income";
+            }
+            return rentExpected;
         }
 
     }
