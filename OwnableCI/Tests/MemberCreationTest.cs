@@ -4,7 +4,7 @@ using OwnableCI.Pages;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Tests;
-using OwnableCI_TestLib.Pages;
+using System;
 
 
 namespace OwnableCI.Tests
@@ -79,9 +79,58 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTest")]
         [Order(2)]
-        public void MemberCreationFromCart()
+        public void MemberCreationLowIncome()
         {
+            if (user.ExpResult == "Reject-Low Income")
+            {
+                TestAction(() =>
+                {
+                    string currentTestName = "Member Creation from SignUp";
+                    log.Debug("Starting " + currentTestName + " Test;");
+                    log.Debug("For user " + user.FirstName + user.LastName + ";");
+                    SignUpPage pageSignUp = new SignUpPage(driverForRun);
+                    MidSleep();
+                    pageSignUp.UserSignUp(user);
+                    log.Debug("Start get your rental cap");
+                    BigSleep();
+                    BigSleep();
+                    driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
 
+                    MidSleep();
+                    MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+                    pagePersonalInfo.lstState.Click();
+                    driverForRun.FindElement(By.XPath("//span[text()='Texas']")).Click(); //QQ: need to implement selection state inside SetPersonalInfo() method
+                    pagePersonalInfo.SetPersonalInfo(user);
+
+                    MidSleep();
+                    MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
+                    pageIncomeInfo.SetIncomeInfo(user);
+
+                    BigSleep();
+                    BigSleep();
+                    IWebElement elemWeSorry = driverForRun.FindElement(By.XPath("//h3[text() = 'We are sorry...']"));
+                    if (!elemWeSorry.Displayed)
+                    {
+                        log.Error("Element " + elemWeSorry + " is not exists, please check the problem");
+                    }
+                    else
+                    {
+                        driverForRun.FindElement(By.XPath("//span[text()='Close']")).Click();
+                    }
+
+                    //Home Page
+                    MidSleep();
+                    ValidateMember(user);
+                    try
+                    {
+                        IWebElement elemRentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]"));
+                        log.Error("Element " + elemRentalCap + " is displayed, but not expected");
+                    }
+                    catch (Exception)
+                    {
+                    }
+                });
+            }
         }
 
     }
