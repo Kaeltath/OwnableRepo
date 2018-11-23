@@ -91,5 +91,10 @@ namespace OwnableCI_TestLib.Tests
             { return false; }
         }
 
+        public string RentalCapExpected(TestUser user) //to implement calculation logic
+        {
+            return "$500.00";
+        }
+
     }
 }
