@@ -38,8 +38,8 @@ namespace OwnableCI.Pages
         public IWebElement inputPassword;
 
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='auth0-lock-view-content']//label")]
-        public IWebElement chkIAgreeToTheTerms;
+        //[FindsBy(How = How.XPath, Using = "//div[@class='auth0-lock-view-content']//label")] //obsolete control
+        //public IWebElement chkIAgreeToTheTerms;
 
 
         [FindsBy(How = How.XPath, Using = "//button[@name='submit']/span[text()='Sign Up']")]
@@ -76,6 +76,14 @@ namespace OwnableCI.Pages
                 return true;
             }           
             return false;            
+        }
+
+        public void UserSignUp(TestUser user)
+        {
+            inputEmail.SendKeys(user.Email);
+            inputPassword.SendKeys(user.Password);
+            //pageSignUp.chkIAgreeToTheTerms.Click(); //removed from current version
+            btnLogIn.Click();
         }
 
         public static implicit operator SignUpPage(SignInPage v)
