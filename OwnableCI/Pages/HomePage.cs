@@ -41,8 +41,8 @@ namespace OwnableCI_TestLib.Pages
         public IWebElement lstAll;
 
 
-        [FindsBy(How = How.XPath, Using = "//input[@container='body']")]
-        public IWebElement inputSearch;
+        //[FindsBy(How = How.XPath, Using = "//input[@container='body']")]
+        //public IWebElement inputSearch;
 
 
         [FindsBy(How = How.XPath, Using = "//button[text()='Search']")]
@@ -55,8 +55,8 @@ namespace OwnableCI_TestLib.Pages
         //[FindsBy(How = How.XPath, Using = "//button[@routerlink='wishlist']")]
         //public IWebElement btnWishlist;
 
-        [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//button[text()=' Top Deals ']")]
-        public IWebElement btnTopDeals;
+        //[FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']//button[text()=' Top Deals ']")]
+        //public IWebElement btnTopDeals;
 
         [FindsBy(How = How.XPath, Using = "//div[@id='v-pills-tab']/button[9]")]
         public IWebElement btnTVs;

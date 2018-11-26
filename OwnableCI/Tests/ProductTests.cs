@@ -15,6 +15,7 @@ namespace OwnableCI.Tests
 {
     [TestFixtureSource(typeof(TestProperties), "users")]
     [TestFixture]
+    [Order(3)]
     class ProductTests : BaseTest
     {
         TestUser user;
@@ -31,8 +32,8 @@ namespace OwnableCI.Tests
         [Order(1)]
         public void AddingProductToCartUser()
         {
-            TestAction(() =>
-            {
+            //TestAction(() =>
+            //{
                 string currentTestName = "AddingProductToCartUser";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
@@ -53,7 +54,7 @@ namespace OwnableCI.Tests
                 MidSleep();
                 Assert.That((prodctsInCart + 1) == handler.CountProductsInContainer(ProductContainer.Cart, product), "Product wasn't added properly");
                 Assert.That((counter + 1) == handler.GetContainerCounter(ProductContainer.Cart), "Conter wasn't updated properly");
-            });
+            //});
         }
 
         [Test]
@@ -322,10 +323,9 @@ namespace OwnableCI.Tests
             });
         }
 
-        // need more testing to finilyze
         [Test]
         [Category("ProductIntearctionTest")]
-        [Order(11)]
+        [Order(12)]
         public void WishlistSortingTest()
         {
             TestAction(() =>
@@ -351,31 +351,31 @@ namespace OwnableCI.Tests
             });
         }
 
-        [Test]
-        [Category("ProductIntearctionTest")]
-        [Explicit]
-        public void Tester()
-        {
-            string currentTestName = "WishlistSortingTest";
-            log.Debug("Starting " + currentTestName + " Test;");
-            log.Debug("For user " + user.FirstName + user.LastName + ";");
-            SignInPage signin = new SignInPage(driverForRun);
-            Assume.That(signin.Login(user), "Failed login, test will not run");
-            Assume.That(ValidateUser(user), "Logged-in account is not a user");
-            HomePage home = new HomePage(driverForRun, false);
-            SmallSleep();
-            ProductHandler handler = new ProductHandler(driverForRun, home);
-            //int[] selectedProductIndexes = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-            //handler.BuildProductCollection(selectedProductIndexes, ProductCategories.Top_deals);
-            //handler.AddProdutRangeToContainer(selectedProductIndexes, ProductContainer.WishList, ProductCategories.Top_deals);
-            //handler.InitialCollection = handler.GetCurrentProductsList(ProductContainer.WishList);
-            handler.SortProducts(ProductContainer.WishList, SortingMethods.Brand);
-            handler.ValidateProductSorting(SortingMethods.Brand);
-            handler.SortProducts(ProductContainer.WishList, SortingMethods.Price);
-            handler.ValidateProductSorting(SortingMethods.Price);
-            handler.SortProducts(ProductContainer.WishList, SortingMethods.Rating);
-            handler.ValidateProductSorting(SortingMethods.Rating);
-        }
+        //[Test]
+        //[Category("ProductIntearctionTest")]
+        //[Explicit]
+        //public void Tester()
+        //{
+        //    string currentTestName = "WishlistSortingTest";
+        //    log.Debug("Starting " + currentTestName + " Test;");
+        //    log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //    SignInPage signin = new SignInPage(driverForRun);
+        //    Assume.That(signin.Login(user), "Failed login, test will not run");
+        //    Assume.That(ValidateUser(user), "Logged-in account is not a user");
+        //    HomePage home = new HomePage(driverForRun, false);
+        //    SmallSleep();
+        //    ProductHandler handler = new ProductHandler(driverForRun, home);
+        //    //int[] selectedProductIndexes = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        //    //handler.BuildProductCollection(selectedProductIndexes, ProductCategories.Top_deals);
+        //    //handler.AddProdutRangeToContainer(selectedProductIndexes, ProductContainer.WishList, ProductCategories.Top_deals);
+        //    //handler.InitialCollection = handler.GetCurrentProductsList(ProductContainer.WishList);
+        //    handler.SortProducts(ProductContainer.WishList, SortingMethods.Brand);
+        //    handler.ValidateProductSorting(SortingMethods.Brand);
+        //    handler.SortProducts(ProductContainer.WishList, SortingMethods.Price);
+        //    handler.ValidateProductSorting(SortingMethods.Price);
+        //    handler.SortProducts(ProductContainer.WishList, SortingMethods.Rating);
+        //    handler.ValidateProductSorting(SortingMethods.Rating);
+        //}
 
     }
 }

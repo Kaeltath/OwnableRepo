@@ -57,14 +57,28 @@ namespace OwnableCI.Constants
 
         private void GetProductFromCategory(ProductCategories category, int productNumber)
         {
-            categoryControl = m_driverForRun.FindElement(By.XPath(category.GetDescription()));
-            if (categoryControl != null)
+            if (category == ProductCategories.Top_deals)
             {
+                var blackFridayControl = m_driverForRun.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
+                blackFridayControl.Click();
                 Thread.Sleep(2000);
+                categoryControl = m_driverForRun.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
                 categoryControl.Click();
                 Thread.Sleep(3000);
-                CaptureProductProperties(productNumber);
             }
+            else {
+                categoryControl = m_driverForRun.FindElement(By.XPath(category.GetDescription()));
+                categoryControl.Click();
+                Thread.Sleep(3000);
+
+            }
+            //if (categoryControl != null)
+            //{
+                //Thread.Sleep(2000);
+                //categoryControl.Click();
+                //Thread.Sleep(3000);
+                CaptureProductProperties(productNumber);
+            //}
         }
 
         private void CaptureProductProperties(int productNumber)
@@ -205,7 +219,7 @@ namespace OwnableCI.Constants
                     break;
                 case SortingMethods.Rating:
                     extractedList = GetCurrentProductsList(ProductContainer.WishList, sortingMethod, ascending);
-                    expectedList = ascending ? extractedList.OrderBy(o => o.ProductRate) : extractedList.OrderByDescending(o => o.ProductRate);
+                    expectedList = ascending ? extractedList.OrderBy(o => o.VotesCount) : extractedList.OrderByDescending(o => o.VotesCount);
                     Assert.That(extractedList.SequenceEqual(expectedList));
                     break;
                 default: break;
@@ -393,7 +407,12 @@ namespace OwnableCI.Constants
                                 throw new NotSupportedException("Adding new product from cart is not supported");
                             }
                         case InterctionControlSet.Product_Details:
-                            product.categoryControl.Click();
+                            var blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
+                            blackFridayControl.Click();
+                            Thread.Sleep(2000);
+                            var categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
+                            categoryControl.Click();
+                            //product.categoryControl.Click();
                             MidSleep();
                             m_driver.FindElement(By.XPath("//div[@class='product-card-container']//div[@class='description']//div[text()='" + product.ProductName + "']//parent::div")).Click();
                             SmallSleep();
@@ -416,14 +435,24 @@ namespace OwnableCI.Constants
                     switch (controlSet)
                     {
                         case InterctionControlSet.Product_Title:
-                            product.categoryControl.Click();
+                            //product.categoryControl.Click();
+                            var blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
+                            blackFridayControl.Click();
+                            Thread.Sleep(2000);
+                            var categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
+                            categoryControl.Click();
                             MidSleep();
                             TestHelper.JSexecutorClick(m_driver.FindElement(By.XPath("//div[@class='description']//div[text()='" + product.ProductName + "']/ancestor::div[@class='product-card-container']//button[text()='Add to Wishlist']")), m_driver);
                             break;
                         case InterctionControlSet.From_container:
                             throw new NotSupportedException("Adding product from wishlist to wishlist is not supported");
                         case InterctionControlSet.Product_Details:
-                            product.categoryControl.Click();
+                            //product.categoryControl.Click();
+                            blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
+                            blackFridayControl.Click();
+                            Thread.Sleep(2000);
+                            categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
+                            categoryControl.Click();
                             MidSleep();
                             var element = m_driver.FindElement(By.XPath("//div[@class='row product-list']//div[@class='product-card-container']//div[@class='description']/div[text()='" + product.ProductName + "']"));
                             TestHelper.JSexecutorClick(element, m_driver);
@@ -468,12 +497,22 @@ namespace OwnableCI.Constants
                     switch (controlSet)
                     {
                         case InterctionControlSet.Product_Title:
-                            product.categoryControl.Click();
+                            //product.categoryControl.Click();
+                            var blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
+                            blackFridayControl.Click();
+                            Thread.Sleep(2000);
+                            var categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
+                            categoryControl.Click();
                             MidSleep();
                             m_driver.FindElement(By.XPath("//div[@class='description']//div[text()='" + product.ProductName + "']/ancestor::div[@class='product-card-container']//button[text()='Remove from Wishlist']")).Click();
                             break;
                         case InterctionControlSet.Product_Details:
-                            product.categoryControl.Click();
+                            //product.categoryControl.Click();
+                            blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
+                            blackFridayControl.Click();
+                            Thread.Sleep(2000);
+                            categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
+                            categoryControl.Click();
                             MidSleep();
                             m_driver.FindElement(By.XPath("//div[@class='row product-list']//div[@class='product-card-container']//div[@class='description']/div[text()='" + product.ProductName + "']")).Click();
                             SmallSleep();
