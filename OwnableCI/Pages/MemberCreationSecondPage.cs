@@ -27,7 +27,7 @@ namespace OwnableCI.Pages
         [FindsBy(How = How.XPath, Using = "//input[@placeholder='SSN']")]
         public IWebElement inputSSN;
 
-        [FindsBy(How = How.XPath, Using = "//button[text()='Become a member']")]
+        [FindsBy(How = How.XPath, Using = "//button[text()='Become a member' or text()='Next']")] //adapted for Stage and Dev
         public IWebElement btnBecomeMember;
         #endregion
 
