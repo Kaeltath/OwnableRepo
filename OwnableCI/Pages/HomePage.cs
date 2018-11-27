@@ -5,6 +5,9 @@ using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI.Pages;
 using OwnableCI.TestDataObjs;
 using System.Threading;
+using System.Configuration;
+using System.IO;
+using System.Reflection;
 
 namespace OwnableCI_TestLib.Pages
 {
@@ -226,6 +229,7 @@ namespace OwnableCI_TestLib.Pages
         #endregion
 
         log4net.ILog logger;
+        private string defaultSite;
 
         // <summary>
         /// Call the base class constructor
@@ -233,17 +237,19 @@ namespace OwnableCI_TestLib.Pages
         /// <param name="browser"></param>
         public HomePage(IWebDriver browser) : base(browser)
         {
+            defaultSite = GetTestSite();
             logger = log4net.LogManager.GetLogger(typeof(HomePage));
             PageFactory.InitElements(driver, this);
-            NavigateToPage();            
+            NavigateToPage(defaultSite);            
         }
 
         public HomePage(IWebDriver browser, bool navigate) : base(browser)
         {
+            defaultSite = GetTestSite();
             if (navigate)
             {
                 PageFactory.InitElements(driver, this);
-                NavigateToPage();
+                NavigateToPage(defaultSite);
             } 
         }
 
@@ -276,7 +282,7 @@ namespace OwnableCI_TestLib.Pages
             return signIn.Login(user);
         }
 
-        public override void NavigateToPage(string parameter = "http://dev.ownable.us/app/home")
+        public override void NavigateToPage(string parameter)
         {
             this.driver.Navigate().GoToUrl(parameter);
             this.driver.Manage().Window.Maximize();
@@ -293,6 +299,14 @@ namespace OwnableCI_TestLib.Pages
         {
             IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
             js.ExecuteScript("arguments[0].click()", lblCart);
+        }
+
+        private string GetTestSite()
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
+            if (!config.HasFile)
+            { throw new FileNotFoundException("Missing configuration file for test dll"); }
+            return config.AppSettings.Settings["TestSite"].Value;
         }
     }
 }
