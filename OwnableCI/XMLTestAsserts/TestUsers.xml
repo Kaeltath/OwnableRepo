@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Users>
   <user>
-    <Email>gotobuy10@gmail.com</Email>
+    <Email>testik12@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -15,10 +15,11 @@
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
     <ExpectedResult>Reject-Low Income</ExpectedResult>
   </user>
   <user>
-    <Email>gotobuy11@gmail.com</Email>
+    <Email>testik11@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -32,34 +33,25 @@
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
     <ExpectedResult>Accept</ExpectedResult>
   </user>
- <!--<user>
-    <FirstName>Jane</FirstName>
-    <LastName>Doe</LastName>
-    <Adress>1923 Lake Forest Rd</Adress>
-    <Email>ownabletestmailforjane@gmail.com</Email>
-    <Password>Jane1!Doe1!</Password>
-    <City>Grapevine</City>
-    <State>TX</State>
-    <Zip>76051</Zip>
-    <Mobile>1722234010</Mobile>
-    <BirthDate>08/04/1972</BirthDate>
-    <LastDigitsOFSocial>6777</LastDigitsOFSocial>
-    <ExpectedResult>Pass</ExpectedResult>
-  </user>
   <user>
-    <FirstName>Robert</FirstName>
-    <LastName>Williams</LastName>
-    <Adress>235 Grape St</Adress>
-    <Email>ownabletestmailforRobert@gmail.com</Email>
-    <Password>Robert1!Williams1!</Password>
-    <City>Denver</City>
-    <State>CO</State>
-    <Zip>80220</Zip>
-    <Mobile>1842234100</Mobile>
-    <BirthDate>08/04/1972</BirthDate>
-    <LastDigitsOFSocial>6123</LastDigitsOFSocial>
-    <ExpectedResult>AcceptWithRisk</ExpectedResult>
-  </user>-->
+    <Email>testik4@gmail.com</Email>
+    <Password>Goodtaste1!</Password>
+    <FirstName>John</FirstName>
+    <LastName>Smith</LastName>
+    <Adress>1113 Shade Tree Ln</Adress>
+    <City>Allen</City>
+    <State>Texas</State>
+    <ZipCode>75013</ZipCode>
+    <Mobile>2145551212</Mobile>
+    <Birthdate>05/15/1970</Birthdate>
+    <MonthlyIncome>1200</MonthlyIncome>
+    <Company>IT</Company>
+    <YearsEmployed>2</YearsEmployed>
+    <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <TestRole>Reusable</TestRole>
+    <ExpectedResult>Accept</ExpectedResult>
+  </user>
 </Users>

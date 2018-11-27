@@ -9,7 +9,7 @@ using System;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "users")]
+    [TestFixtureSource(typeof(TestProperties), "oneTimeUsers")]
     [TestFixture]
     class MemberCreationTest : BaseTest
     {
@@ -25,7 +25,7 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTest")]
         [Order(1)]
-        public void MemberCreationSignUp()
+        public void MemberCreationSuccessful()
         {
             TestAction(() =>
             {
@@ -33,9 +33,9 @@ namespace OwnableCI.Tests
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 Assume.That(user.ExpResult == "Accept", "User is not from this test. Test will not run.");
-                SignUpPage pageSignUp = new SignUpPage(driverForRun);
-                MidSleep();
-                pageSignUp.UserSignUp(user);
+                SignInPage signIn = new SignInPage(driverForRun);
+                SmallSleep();
+                signIn.Login(user);
                 log.Debug("Start get your rental cap");
                 BigSleep();
                 BigSleep();
@@ -73,7 +73,7 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTest")]
         [Order(2)]
-        public void MemberCreationLowIncome()
+        public void MemberCreationFailedLowIncome()
         {
             TestAction(() =>
             {
@@ -81,11 +81,10 @@ namespace OwnableCI.Tests
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 Assume.That(user.ExpResult == "Reject-Low Income", "User is not from this test. Test will not run.");
-                SignUpPage pageSignUp = new SignUpPage(driverForRun);
-                MidSleep();
-                pageSignUp.UserSignUp(user);
+                SignInPage signIn = new SignInPage(driverForRun);
+                SmallSleep();
+                signIn.Login(user);
                 log.Debug("Start get your rental cap");
-                BigSleep();
                 BigSleep();
                 driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
 

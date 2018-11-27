@@ -51,6 +51,7 @@ namespace OwnableCI_TestLib.Tests
         [OneTimeTearDown]
         public void CloseBrowser()
         {
+            driverForRun.Manage().Cookies.DeleteAllCookies();
             driverForRun.Close();
             driverForRun.Quit();
         }

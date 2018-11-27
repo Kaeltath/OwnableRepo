@@ -511,12 +511,14 @@ namespace OwnableCI.Constants
                             blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
                             blackFridayControl.Click();
                             Thread.Sleep(2000);
-                            categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
-                            categoryControl.Click();
+                            categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));                         
+                            TestHelper.JSexecutorClick(categoryControl, m_driver);
                             MidSleep();
-                            m_driver.FindElement(By.XPath("//div[@class='row product-list']//div[@class='product-card-container']//div[@class='description']/div[text()='" + product.ProductName + "']")).Click();
+                            var element = m_driver.FindElement(By.XPath("//div[@class='row product-list']//div[@class='product-card-container']//div[@class='description']/div[text()='" + product.ProductName + "']"));
+                            TestHelper.JSexecutorClick(element, m_driver);
                             SmallSleep();
-                            m_driver.FindElement(By.XPath("//div[@class='wishlist-placeholder ng-star-inserted']//button/span[text()='Remove from wishlist']")).Click();
+                            var element2 = m_driver.FindElement(By.XPath("//div[@class='wishlist-placeholder ng-star-inserted']//button/span[text()='Remove from wishlist']"));
+                            TestHelper.JSexecutorClick(element2, m_driver);
                             break;
                         case InterctionControlSet.Container_Switch:
                             throw new NotSupportedException("Product need to be removed, not moved to other ontainer");

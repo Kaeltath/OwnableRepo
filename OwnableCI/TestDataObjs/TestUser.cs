@@ -16,6 +16,7 @@
         public string Company;
         public string YearsEmployed;
         public string LastDigitsOFSocial;
+        public string TestRole;
         public string ExpResult;
     }
 }

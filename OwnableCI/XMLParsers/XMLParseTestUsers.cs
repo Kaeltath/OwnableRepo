@@ -10,7 +10,7 @@ namespace OwnableCI.XMLParsers
     public class XMLParseTestUsers
     {
       
-        public List<TestUser> UsersForTests()
+        public List<TestUser> UsersForTests(bool IsReusable)
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             if (!config.HasFile)
@@ -37,9 +37,19 @@ namespace OwnableCI.XMLParsers
                     Company = elem.Element("Company").Value,
                     YearsEmployed = elem.Element("YearsEmployed").Value,
                     LastDigitsOFSocial = elem.Element("LastDigitsOFSocial").Value,
+                    TestRole = elem.Element("TestRole").Value,
                     ExpResult = elem.Element("ExpectedResult").Value
                 };
-                parsedUsers.Add(userToAdd);
+                if (IsReusable)
+                {
+                    if (userToAdd.TestRole == "Reusable")
+                        parsedUsers.Add(userToAdd);
+                }
+                else
+                {
+                    if (userToAdd.TestRole == "OneTime")
+                        parsedUsers.Add(userToAdd);
+                }
             }
             return parsedUsers;
 

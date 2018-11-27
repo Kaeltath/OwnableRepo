@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "users")]
+    [TestFixtureSource(typeof(TestProperties), "oneTimeUsers")]
     [TestFixture]
     public class LoginsTest : BaseTest
     {

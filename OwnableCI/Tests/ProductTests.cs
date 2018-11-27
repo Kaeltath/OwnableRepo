@@ -13,9 +13,8 @@ using System.Collections.ObjectModel;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "users")]
+    [TestFixtureSource(typeof(TestProperties), "reusableUsers")]
     [TestFixture]
-    [Order(3)]
     class ProductTests : BaseTest
     {
         TestUser user;
@@ -261,6 +260,9 @@ namespace OwnableCI.Tests
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 HomePage home = new HomePage(driverForRun, false);
+                //SignInPage signin = new SignInPage(driverForRun);
+                //Assume.That(signin.Login(user), "Failed login, test will not run");
+                //Assume.That(ValidateUser(user), "Logged-in account is not a user");
                 SmallSleep();
                 ProductHandler handler = new ProductHandler(driverForRun, home);
                 Product product = new Product(ProductCategories.Top_deals, 4, driverForRun);
