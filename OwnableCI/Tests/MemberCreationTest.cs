@@ -3,23 +3,23 @@ using OpenQA.Selenium;
 using OwnableCI.Pages;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
+using OwnableCI_TestLib.Enums;
 using OwnableCI_TestLib.Tests;
 using System;
-
+using System.Collections.Generic;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "oneTimeUsers")]
+    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSoure")]
     [TestFixture]
     class MemberCreationTest : BaseTest
     {
         private TestUser user;
-        private IWebElement confirmElement;
-        private bool expectedResults;
 
-        public MemberCreationTest(TestUser user)
+        public MemberCreationTest(KeyValuePair<TestUser, BrowserType> source)
         {
-            this.user = user;
+            user = source.Key;
+            currentBrowser = source.Value;
         }
 
         [Test]

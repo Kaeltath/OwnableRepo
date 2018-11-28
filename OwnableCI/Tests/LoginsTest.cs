@@ -4,27 +4,29 @@ using OwnableCI.Pages;
 using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
+using OwnableCI_TestLib.Enums;
 using OwnableCI_TestLib.Tests;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 using System.Threading;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "oneTimeUsers")]
+    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSoure")]
     [TestFixture]
     public class LoginsTest : BaseTest
     {
         private TestUser user;
-        private IWebElement confirmElement;
         private bool expectedResults;
 
-        public LoginsTest(TestUser User)
+        public LoginsTest(KeyValuePair<TestUser, BrowserType> source)
         {
-            user = User;
+            user = source.Key;
+            currentBrowser = source.Value;
         }
-
 
         [Test]
         [Category("UserIntearctionTest")]

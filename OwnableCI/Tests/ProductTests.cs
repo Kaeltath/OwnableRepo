@@ -13,17 +13,16 @@ using System.Collections.ObjectModel;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "reusableUsers")]
+    [TestFixtureSource(typeof(TestProperties), "reusableTestSoure")]
     [TestFixture]
     class ProductTests : BaseTest
     {
         TestUser user;
-        IWebElement confirmElement;
-        ReadOnlyCollection<IWebElement> confirmElements;
 
-        public ProductTests(TestUser user)
+        public ProductTests(KeyValuePair<TestUser, BrowserType> source)
         {
-            this.user = user;
+            user = source.Key;
+            currentBrowser = source.Value;
         }
 
         [Test]
@@ -31,8 +30,8 @@ namespace OwnableCI.Tests
         [Order(1)]
         public void AddingProductToCartUser()
         {
-            //TestAction(() =>
-            //{
+            TestAction(() =>
+            {
                 string currentTestName = "AddingProductToCartUser";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
@@ -53,7 +52,7 @@ namespace OwnableCI.Tests
                 MidSleep();
                 Assert.That((prodctsInCart + 1) == handler.CountProductsInContainer(ProductContainer.Cart, product), "Product wasn't added properly");
                 Assert.That((counter + 1) == handler.GetContainerCounter(ProductContainer.Cart), "Conter wasn't updated properly");
-            //});
+            });
         }
 
         [Test]

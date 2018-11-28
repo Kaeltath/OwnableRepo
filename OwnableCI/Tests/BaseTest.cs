@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using System;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Firefox;
 using NUnit.Framework;
 using System.Diagnostics;
 using System.Configuration;
@@ -8,6 +9,7 @@ using System.Threading;
 using OwnableCI.TestDataObjs;
 using System.IO;
 using System.Reflection;
+using OwnableCI_TestLib.Enums;
 
 namespace OwnableCI_TestLib.Tests
 {
@@ -16,7 +18,7 @@ namespace OwnableCI_TestLib.Tests
     {
         internal log4net.ILog log = log4net.LogManager.GetLogger(typeof(BaseTest));
         internal IWebDriver driverForRun;
-        
+        internal BrowserType currentBrowser;
 
         protected void TestAction(Action action)
         {
@@ -44,8 +46,19 @@ namespace OwnableCI_TestLib.Tests
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             if (!config.HasFile)
             { throw new FileNotFoundException("Missing configuration file for test dll"); }
-            var chromeDriverPathSetting = config.AppSettings.Settings["ChromeDriverPath"].Value;
-            driverForRun = new ChromeDriver(chromeDriverPathSetting);
+            var DriverPathSetting = config.AppSettings.Settings["DriversPath"].Value;
+            switch (currentBrowser)
+            {
+                case BrowserType.Chrome:
+                    driverForRun = new ChromeDriver(DriverPathSetting);
+                    break;
+                case BrowserType.FireFox:
+                    driverForRun = new FirefoxDriver(DriverPathSetting);
+                    break;
+                default:
+                    driverForRun = new ChromeDriver(DriverPathSetting);
+                    break;
+            }
         }
 
         [OneTimeTearDown]

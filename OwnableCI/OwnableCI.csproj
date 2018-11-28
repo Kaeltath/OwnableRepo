@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Drivers\chromedriver.exe" />
+    <Content Include="Drivers\geckodriver.exe" />
     <Content Include="XMLTestAsserts\CreditCards.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
