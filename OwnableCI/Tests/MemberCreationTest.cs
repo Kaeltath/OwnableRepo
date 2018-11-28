@@ -125,7 +125,7 @@ namespace OwnableCI.Tests
         private string GetRentalCap()
         {
             string rentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
-            rentalCap = rentalCap.Split(new char[] { ':' })[2];
+            rentalCap = rentalCap.Split(new char[] { ':' })[1];
             return rentalCap;
         }
 

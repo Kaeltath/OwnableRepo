@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.PageObjects;
 using OwnableCI_TestLib.Pages;
 using OwnableCI.TestDataObjs;
+using OwnableCI.ServiceClasses;
 
 namespace OwnableCI.Pages
 {
@@ -44,7 +45,7 @@ namespace OwnableCI.Pages
             inputCompany.SendKeys(user.Company);
             inputYearsEmployed.SendKeys(user.YearsEmployed);
             inputSSN.SendKeys("12345" + user.LastDigitsOFSocial); //first 5 SSN numbers are random
-            btnBecomeMember.Click();
+            TestHelper.JSexecutorClick(btnBecomeMember, driver);
         }
     }
 }

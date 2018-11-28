@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Users>
   <user>
-    <Email>testik12@gmail.com</Email>
+    <Email>testikus20@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -19,7 +19,7 @@
     <ExpectedResult>Reject-Low Income</ExpectedResult>
   </user>
   <user>
-    <Email>testik11@gmail.com</Email>
+    <Email>testikus21@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>

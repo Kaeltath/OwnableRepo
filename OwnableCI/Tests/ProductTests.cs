@@ -8,7 +8,7 @@ using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Enums;
 using OwnableCI_TestLib.Pages;
 using OwnableCI_TestLib.Tests;
-using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace OwnableCI.Tests
@@ -342,14 +342,25 @@ namespace OwnableCI.Tests
                 SmallSleep();
                 ProductHandler handler = new ProductHandler(driverForRun, home);
                 int[] selectedProductIndexes = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-                handler.BuildProductCollection(selectedProductIndexes, ProductCategories.Top_deals);
-                handler.AddProdutRangeToContainer(selectedProductIndexes, ProductContainer.WishList, ProductCategories.Top_deals);
-                handler.SortProducts(ProductContainer.WishList, SortingMethods.Brand);
-                handler.ValidateProductSorting(SortingMethods.Brand);
-                handler.SortProducts(ProductContainer.WishList, SortingMethods.Price, true);
-                handler.ValidateProductSorting(SortingMethods.Price);
-                handler.SortProducts(ProductContainer.WishList, SortingMethods.Rating);
-                handler.ValidateProductSorting(SortingMethods.Rating);
+                try
+                {
+                    handler.BuildProductCollection(selectedProductIndexes, ProductCategories.Top_deals);
+                    handler.AddProdutRangeToContainer(selectedProductIndexes, ProductContainer.WishList, ProductCategories.Top_deals);
+                    handler.SortProducts(ProductContainer.WishList, SortingMethods.Brand);
+                    handler.ValidateProductSorting(SortingMethods.Brand);
+                    handler.SortProducts(ProductContainer.WishList, SortingMethods.Price, true);
+                    handler.ValidateProductSorting(SortingMethods.Price);
+                    handler.SortProducts(ProductContainer.WishList, SortingMethods.Rating);
+                    handler.ValidateProductSorting(SortingMethods.Rating);
+                }
+                finally
+                {
+                    List<Product> cleanUpCollection = handler.GetCurrentProductsList(ProductContainer.WishList);
+                    foreach (var product in cleanUpCollection)
+                    {
+                        handler.RemoveProductFromContainer(ProductContainer.WishList, InterctionControlSet.Product_Title, product);
+                    }
+                }
             });
         }
 
