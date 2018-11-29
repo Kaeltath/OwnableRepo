@@ -55,6 +55,16 @@ namespace OwnableCI.Pages
             NavigateToPage();
         }
 
+        public SignInPage(IWebDriver browser, bool navigate) : base(browser)
+        {
+            this.browser = browser;
+            if (navigate)
+            {
+                PageFactory.InitElements(driver, this);
+                NavigateToPage();
+            }
+        }
+
         public override void NavigateToPage(string parameter = "")
         {
             new HomePage(browser).btnSignIn.Click();
