@@ -12,7 +12,7 @@ namespace OwnableCI_TestLib.Constants
         public static List<TestUser> reusableUsers = new XMLParseTestUsers().UsersForTests(true);
         public static List<CreditCard> cards = new XMLParseCreditCards().CardsForTests();
         public static List<CodeAndState> statesCodes = new XMLParseStatesAndCodes().CardsForTests();
-        public static List<KeyValuePair<TestUser, BrowserType>> oneTimeTestSoure = GetTestSource(oneTimeUsers);
+        public static List<KeyValuePair<TestUser, BrowserType>> oneTimeTestSource = GetTestSource(oneTimeUsers);
         public static List<KeyValuePair<TestUser, BrowserType>> reusableTestSoure = GetTestSource(reusableUsers);
 
         private static List<KeyValuePair<TestUser, BrowserType>> GetTestSource(List<TestUser> users)

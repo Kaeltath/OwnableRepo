@@ -12,11 +12,10 @@ using System.Collections.Generic;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSoure")]
+    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSource")]
     [TestFixture]
     class MemberCreationTest : BaseTest
     {
-        private TestUser user;
         private WebDriverWait wait;
 
         public MemberCreationTest(KeyValuePair<TestUser, BrowserType> source)

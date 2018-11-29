@@ -17,8 +17,6 @@ namespace OwnableCI.Tests
     [TestFixture]
     class ProductTests : BaseTest
     {
-        TestUser user;
-
         public ProductTests(KeyValuePair<TestUser, BrowserType> source)
         {
             user = source.Key;

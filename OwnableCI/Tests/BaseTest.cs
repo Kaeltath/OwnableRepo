@@ -19,6 +19,7 @@ namespace OwnableCI_TestLib.Tests
         internal log4net.ILog log = log4net.LogManager.GetLogger(typeof(BaseTest));
         internal IWebDriver driverForRun;
         internal BrowserType currentBrowser;
+        internal TestUser user;
 
         protected void TestAction(Action action)
         {
