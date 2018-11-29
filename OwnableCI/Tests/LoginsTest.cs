@@ -98,6 +98,8 @@ namespace OwnableCI.Tests
                     Assert.That(page.Login(user), "Login failed");
                 }
 
+                BigSleep(); //moved from ValidateUser()
+                driverForRun.FindElement(By.XPath("//button[contains(@class,'d-md-block')]/div[text()=' START BROWSING ']")).Click();
                 Assume.That(ValidateUser(user), "Login successfull, but not for user, but for member");
             });           
         }
