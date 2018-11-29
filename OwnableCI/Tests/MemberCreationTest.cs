@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI.Pages;
+using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Enums;
@@ -15,6 +17,7 @@ namespace OwnableCI.Tests
     class MemberCreationTest : BaseTest
     {
         private TestUser user;
+        private WebDriverWait wait;
 
         public MemberCreationTest(KeyValuePair<TestUser, BrowserType> source)
         {
@@ -25,48 +28,44 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTest")]
         [Order(1)]
-        public void MemberCreationSuccessful()
+        public void MemberCreationAcceptFromLogIn()
         {
             TestAction(() =>
             {
-                string currentTestName = "Member Creation from SignUp";
+                string currentTestName = "Member Creation Accept from LogIn";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                Assume.That(user.ExpResult == "Accept", "User is not from this test. Test will not run.");
+                Assume.That(user.ExpResult == "Accept-FromLogIn", "User is not from this test. Test will not run.");
                 SignInPage signIn = new SignInPage(driverForRun);
                 SmallSleep();
                 signIn.Login(user);
-                log.Debug("Start get your rental cap");
-                BigSleep();
-                BigSleep();
-                driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
 
-                MidSleep();
+                wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(20));
+                string btnGetRentalCapXPath = "//button/div[text()=' GET YOUR RENTAL CAP ']";
+                wait.Until(ExpectedConditions.ElementExists(By.XPath(btnGetRentalCapXPath)));
+                driverForRun.FindElement(By.XPath(btnGetRentalCapXPath)).Click();
+
                 MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
                 pagePersonalInfo.SetPersonalInfo(user);
 
-                MidSleep();
                 MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
                 pageIncomeInfo.SetIncomeInfo(user);
 
-                MidSleep();
                 MemberCreationThirdPage pageMembershipAgreement = new MemberCreationThirdPage(driverForRun);
                 pageMembershipAgreement.SetMembershipAgreement(user);
 
-                MidSleep();
                 MemberCreationFourthPage pageApplicationDisclosure = new MemberCreationFourthPage(driverForRun);
-                pageApplicationDisclosure.btnAgree.Click();
+                pageApplicationDisclosure.SetAgreement();
 
-                MidSleep();
                 MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
-                string rentActualValue = pageCongratulations.txtRentalCapValue.Text;
                 string rentExpectedValue = RentalCapExpected(user);
+                string rentActualValue = pageCongratulations.GetRentalCapValue();
                 Assert.AreEqual(rentExpectedValue, rentActualValue);
-                pageCongratulations.btnStartShopping.Click();
+                //pageCongratulations.btnStartShopping.Click();
+                TestHelper.JSexecutorClick(pageCongratulations.btnStartShopping, driverForRun);
 
-                BigSleep();
-                ValidateMember(user);
-                Assert.AreEqual(rentExpectedValue, GetRentalCap());
+                Assert.AreEqual(rentExpectedValue, GetCurrentRentalCap());
+                Assert.IsTrue(ValidateMember(user), "Member validation is Failed");
             });
         }
 
@@ -80,7 +79,7 @@ namespace OwnableCI.Tests
                 string currentTestName = "Member Creation from SignUp";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                Assume.That(user.ExpResult == "Reject-Low Income", "User is not from this test. Test will not run.");
+                Assume.That(user.ExpResult == "Reject-LowIncome", "User is not from this test. Test will not run.");
                 SignInPage signIn = new SignInPage(driverForRun);
                 SmallSleep();
                 signIn.Login(user);
@@ -122,12 +121,14 @@ namespace OwnableCI.Tests
             });
         }
 
-        private string GetRentalCap()
+        private string GetCurrentRentalCap() //on Home page
         {
-            string rentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]")).Text;
+            wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+            string txtRentalCapXPath = "//li[@container='body']//span[contains(text(),'Rental cap:')]";
+            wait.Until(ExpectedConditions.ElementExists(By.XPath(txtRentalCapXPath)));
+            string rentalCap = driverForRun.FindElement(By.XPath(txtRentalCapXPath)).Text;
             rentalCap = rentalCap.Split(new char[] { ':' })[1];
             return rentalCap;
         }
-
     }
 }
