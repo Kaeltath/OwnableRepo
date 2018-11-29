@@ -1,11 +1,14 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using OwnableCI.Constants;
+using OwnableCI.Enums;
 using OwnableCI.Pages;
 using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Enums;
+using OwnableCI_TestLib.Pages;
 using OwnableCI_TestLib.Tests;
 using System;
 using System.Collections.Generic;
@@ -14,12 +17,12 @@ namespace OwnableCI.Tests
 {
     [TestFixtureSource(typeof(TestProperties), "oneTimeTestSoure")]
     [TestFixture]
-    class MemberCreationTest : BaseTest
+    class MemberCreationTests : BaseTest
     {
         private TestUser user;
         private WebDriverWait wait;
 
-        public MemberCreationTest(KeyValuePair<TestUser, BrowserType> source)
+        public MemberCreationTests(KeyValuePair<TestUser, BrowserType> source)
         {
             user = source.Key;
             currentBrowser = source.Value;
@@ -28,23 +31,55 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTest")]
         [Order(1)]
-        public void MemberCreationAcceptFromLogIn()
+        public void MemberCreationAccept()
         {
             TestAction(() =>
             {
-                string currentTestName = "Member Creation Accept from LogIn";
+                string currentTestName = "Member Creation successfully";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                Assume.That(user.ExpResult == "Accept-FromLogIn", "User is not from this test. Test will not run.");
-                SignInPage signIn = new SignInPage(driverForRun);
+                bool navigate = true;
+                bool letsGetYourRentalCapMessageExpected = true;
+                switch (user.ExpResult)
+                {
+                    case "Accept-FromLogIn":
+                        log.Debug("How to Invoke: from LogIn");
+                        break;
+                    case "Accept-FromCart":
+                        log.Debug("How to Invoke: from Cart");
+                        HomePage home = new HomePage(driverForRun);
+                        SmallSleep();
+                        ProductHandler handler = new ProductHandler(driverForRun, home);
+                        Product product = new Product(ProductCategories.Top_deals, 1, driverForRun);
+                        SmallSleep();
+                        handler.AddProductToContainer(ProductContainer.Cart, InterctionControlSet.Product_Details, product);
+                        wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+                        string btnBecomeMemberInCartXPath = "//button[text()='become a member']";
+                        wait.Until(ExpectedConditions.ElementExists(By.XPath(btnBecomeMemberInCartXPath)));
+                        var btnBecomeMemberInCart = driverForRun.FindElement(By.XPath(btnBecomeMemberInCartXPath));
+                        TestHelper.JSexecutorClick(btnBecomeMemberInCart, driverForRun);
+                        navigate = false;
+                        letsGetYourRentalCapMessageExpected = false;
+                        break;
+                    case "Accept-FinishLater":
+                    default:
+                        Assume.That(false, "User is not from this test. Test will not run.");
+                        break;
+                }
+
+
+                SignInPage signIn = new SignInPage(driverForRun,navigate);
                 SmallSleep();
                 signIn.Login(user);
 
-                wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(20));
-                string btnGetRentalCapXPath = "//button/div[text()=' GET YOUR RENTAL CAP ']";
-                wait.Until(ExpectedConditions.ElementExists(By.XPath(btnGetRentalCapXPath)));
-                driverForRun.FindElement(By.XPath(btnGetRentalCapXPath)).Click();
-
+                if (letsGetYourRentalCapMessageExpected)
+                {
+                    wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(20));
+                    string btnGetRentalCapXPath = "//button/div[text()=' GET YOUR RENTAL CAP ']";
+                    wait.Until(ExpectedConditions.ElementExists(By.XPath(btnGetRentalCapXPath)));
+                    driverForRun.FindElement(By.XPath(btnGetRentalCapXPath)).Click();
+                }
+                
                 MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
                 pagePersonalInfo.SetPersonalInfo(user);
 
@@ -64,7 +99,7 @@ namespace OwnableCI.Tests
                 //pageCongratulations.btnStartShopping.Click();
                 TestHelper.JSexecutorClick(pageCongratulations.btnStartShopping, driverForRun);
 
-                Assert.AreEqual(rentExpectedValue, GetCurrentRentalCap());
+                Assert.IsTrue(rentExpectedValue == GetCurrentRentalCap(), "Rental Cap validation is Failed");
                 Assert.IsTrue(ValidateMember(user), "Member validation is Failed");
             });
         }
