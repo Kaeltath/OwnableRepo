@@ -90,7 +90,7 @@ namespace OwnableCI_TestLib.Tests
             driverForRun.FindElement(By.XPath("//div[@class='modal-content']//div[@class='modal-footer ng-star-inserted']//button/div[text()=' START BROWSING ']")).Click();
             SmallSleep();
             var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-            if (confirmElement.Text == String.Format("HELLO, " + user.Email.ToUpper()))
+            if (confirmElement.Text.Trim() == String.Format("HELLO, " + user.Email.ToUpper()))
             { return true; }
             else
             { return false; }
@@ -99,7 +99,7 @@ namespace OwnableCI_TestLib.Tests
         public virtual bool ValidateMember(TestUser user)
         {
             var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-            if (confirmElement.Text == String.Format("Hello, " + user.FirstName))
+            if (confirmElement.Text.Trim() == String.Format("HELLO, " + user.FirstName.ToUpper()))
             { return true; }
             else
             { return false; }
