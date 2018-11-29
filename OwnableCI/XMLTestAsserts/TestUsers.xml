@@ -37,6 +37,42 @@
     <ExpectedResult>Accept-FromLogIn</ExpectedResult>
   </user>
   <user>
+    <Email>qaa_testik10@gmail.com</Email>
+    <Password>!Gotobuy007</Password>
+    <FirstName>Jane</FirstName>
+    <LastName>Doe</LastName>
+    <Adress>1923 Lake Forest Rd</Adress>
+    <City>Grapevine</City>
+    <State>Texas</State>
+    <ZipCode>76051</ZipCode>
+    <Mobile>1722234010</Mobile>
+    <Birthdate>08/04/1972</Birthdate>
+    <MonthlyIncome>2000</MonthlyIncome>
+    <Company>Dealer</Company>
+    <YearsEmployed>1</YearsEmployed>
+    <LastDigitsOFSocial>6777</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
+    <ExpectedResult>Accept-FromCart</ExpectedResult>
+  </user> 
+  <user>
+    <Email>qaa_testik11@gmail.com</Email>
+    <Password>!Gotobuy007</Password>
+    <FirstName>Jane</FirstName>
+    <LastName>Doe</LastName>
+    <Adress>1923 Lake Forest Rd</Adress>
+    <City>Grapevine</City>
+    <State>Texas</State>
+    <ZipCode>76051</ZipCode>
+    <Mobile>1722234010</Mobile>
+    <Birthdate>08/04/1972</Birthdate>
+    <MonthlyIncome>4001</MonthlyIncome>
+    <Company>Police</Company>
+    <YearsEmployed>3</YearsEmployed>
+    <LastDigitsOFSocial>6777</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
+    <ExpectedResult>Accept-FinishLater</ExpectedResult>
+  </user> 
+  <user>
     <Email>testik4@gmail.com</Email>
     <Password>Goodtaste1!</Password>
     <FirstName>John</FirstName>
