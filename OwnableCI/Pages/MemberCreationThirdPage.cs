@@ -1,8 +1,10 @@
 ﻿using OpenQA.Selenium;
-using System.Threading;
 using OwnableCI.TestDataObjs;
+using OwnableCI.ServiceClasses;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI_TestLib.Pages;
+using System;
 
 namespace OwnableCI.Pages
 {
@@ -49,7 +51,7 @@ namespace OwnableCI.Pages
         public IWebElement btnDecline;
 
 
-        [FindsBy(How = How.XPath, Using = "//span[text()='AGREE']")]
+        [FindsBy(How = How.XPath, Using = "//span[text()='AGREE']/parent::button")]
         public IWebElement btnAgree;
         #endregion
 
@@ -61,11 +63,15 @@ namespace OwnableCI.Pages
 
         public void SetMembershipAgreement(TestUser user)
         {
-            btnAgree.Click(); //do this for going to txtMemberSignature field
-            Thread.Sleep(2000);
-            txtMemberSignature.Click(); //set digital signature
-            Thread.Sleep(2000);
-            btnAgree.Click();
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//span[text()='AGREE']")));//ToDo: need to wait 'btnAgree' here
+            //btnAgree.Click(); //click this for going to txtMemberSignature field
+            TestHelper.JSexecutorClick(btnAgree, driver);
+            wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//p[text()=' Member Signature: ']//preceding::div[1]")));//ToDo: need to wait 'txtMemberSignature' here
+            //txtMemberSignature.Click(); //click for set digital signature
+            TestHelper.JSexecutorClick(txtMemberSignature, driver);
+            //btnAgree.Click();
+            TestHelper.JSexecutorClick(btnAgree, driver);
         }
     }
 }

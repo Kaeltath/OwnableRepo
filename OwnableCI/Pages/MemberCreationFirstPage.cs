@@ -1,7 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI_TestLib.Pages;
 using OwnableCI.TestDataObjs;
+using System;
 
 namespace OwnableCI.Pages
 {
@@ -77,6 +79,8 @@ namespace OwnableCI.Pages
 
         public void SetPersonalInfo(TestUser user)
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@id='firstName']")));//ToDo: need to wait 'inputFirstName' here
             inputFirstName.SendKeys(user.FirstName);
             inputLastName.SendKeys(user.LastName);
             inputHomeAddress.SendKeys(user.Adress);

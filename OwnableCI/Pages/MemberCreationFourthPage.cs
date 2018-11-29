@@ -1,6 +1,9 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI_TestLib.Pages;
+using OwnableCI.ServiceClasses;
+using System;
 
 namespace OwnableCI.Pages
 {
@@ -15,7 +18,7 @@ namespace OwnableCI.Pages
         public IWebElement btnDecline;
 
 
-        [FindsBy(How = How.XPath, Using = "//span[text()='AGREE']")]
+        [FindsBy(How = How.XPath, Using = "//span[text()='AGREE']/parent::button")]
         public IWebElement btnAgree;
         #endregion
 
@@ -24,6 +27,14 @@ namespace OwnableCI.Pages
             driver = usedBrowser;
             PageFactory.InitElements(driver, this);
             
+        }
+
+        public void SetAgreement()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//span[text()='AGREE']")));//ToDo: need to wait 'btnAgree' here
+            //btnAgree.Click();
+            TestHelper.JSexecutorClick(btnAgree, driver);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI_TestLib.Pages;
 using OwnableCI.TestDataObjs;
 using OwnableCI.ServiceClasses;
+using System;
 
 namespace OwnableCI.Pages
 {
@@ -41,6 +43,8 @@ namespace OwnableCI.Pages
 
         public void SetIncomeInfo(TestUser user)
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@placeholder='Monthly Income']")));//ToDo: need to wait 'inputMonthlyIncome' here
             inputMonthlyIncome.SendKeys(user.MonthlyIncome);
             inputCompany.SendKeys(user.Company);
             inputYearsEmployed.SendKeys(user.YearsEmployed);

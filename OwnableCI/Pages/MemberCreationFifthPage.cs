@@ -1,6 +1,9 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI_TestLib.Pages;
+using System;
 
 namespace OwnableCI.Pages
 {
@@ -20,6 +23,13 @@ namespace OwnableCI.Pages
             driver = usedBrowser;
             PageFactory.InitElements(driver, this);
             
+        }
+
+        public string GetRentalCapValue()
+        {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//span[starts-with(text(),'You can rent items worth ')]//span[starts-with(text(),'$')]")));//ToDo: need to wait 'txtRentalCapValue' here
+            return txtRentalCapValue.Text;
         }
     }
 }
