@@ -39,6 +39,7 @@ namespace OwnableCI.Tests
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 bool navigate = true;
                 bool letsGetYourRentalCapMessageExpected = true;
+                bool finishLater = false;
                 switch (user.ExpResult)
                 {
                     case "Accept-FromLogIn":
@@ -61,11 +62,13 @@ namespace OwnableCI.Tests
                         letsGetYourRentalCapMessageExpected = false;
                         break;
                     case "Accept-FinishLater":
+                        log.Debug("How to Invoke: from Finish Later - Become A Member");
+                        finishLater = true;
+                        break;
                     default:
                         Assume.That(false, "User is not from this test. Test will not run.");
                         break;
                 }
-
 
                 SignInPage signIn = new SignInPage(driverForRun,navigate);
                 SmallSleep();
@@ -80,6 +83,14 @@ namespace OwnableCI.Tests
                 }
                 
                 MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+                if (finishLater)
+                {
+                    MidSleep();
+                    pagePersonalInfo.btnFinishLater.Click();
+                    Assert.IsTrue(ValidateUser(user), "User validation is Failed");
+                    var btnBecomeMemberOnHome = driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']"));
+                    btnBecomeMemberOnHome.Click();
+                }
                 pagePersonalInfo.SetPersonalInfo(user);
 
                 MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
