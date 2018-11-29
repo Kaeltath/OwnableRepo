@@ -15,11 +15,10 @@ using System.Threading;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSoure")]
+    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSource")]
     [TestFixture]
     public class LoginsTest : BaseTest
     {
-        private TestUser user;
         private bool expectedResults;
 
         public LoginsTest(KeyValuePair<TestUser, BrowserType> source)
