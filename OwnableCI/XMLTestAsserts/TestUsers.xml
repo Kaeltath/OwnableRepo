@@ -16,7 +16,7 @@
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
-    <ExpectedResult>Reject-Low Income</ExpectedResult>
+    <ExpectedResult>Reject-LowIncome</ExpectedResult>
   </user>
   <user>
     <Email>testikus21@gmail.com</Email>
@@ -34,7 +34,7 @@
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
-    <ExpectedResult>Accept</ExpectedResult>
+    <ExpectedResult>Accept-FromLogIn</ExpectedResult>
   </user>
   <user>
     <Email>testik4@gmail.com</Email>
