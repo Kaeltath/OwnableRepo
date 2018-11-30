@@ -1,7 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?> 
 <Users>
   <user>
-    <Email>testikus20@gmail.com</Email>
+    <Email>qaa_testik34@gmail.com</Email>
+    <Password>!Gotobuy007</Password>
+    <FirstName>Robert</FirstName>
+    <LastName>Williams</LastName>
+    <Adress>235 Grape St</Adress>
+    <City>Adelaide</City>
+    <State>California</State>
+    <ZipCode>93446</ZipCode>
+    <Mobile>1842234100</Mobile>
+    <Birthdate>08/04/1972</Birthdate>
+    <MonthlyIncome>1200</MonthlyIncome>
+    <Company>IT</Company>
+    <YearsEmployed>2</YearsEmployed>
+    <LastDigitsOFSocial>6123</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
+    <ExpectedResult>Reject-UnsupportedState</ExpectedResult>
+  </user>  
+  <user>
+    <Email>qaa_testik35@gmail.com</Email>
+    <Password>!Gotobuy007</Password>
+    <FirstName>Jane</FirstName>
+    <LastName>Doe</LastName>
+    <Adress>1923 Lake Forest Rd</Adress>
+    <City>Grapevine</City>
+    <State>Texas</State>
+    <ZipCode>80220</ZipCode>
+    <Mobile>1722234010</Mobile>
+    <Birthdate>08/04/1972</Birthdate>
+    <MonthlyIncome>1200</MonthlyIncome>
+    <Company>IT</Company>
+    <YearsEmployed>2</YearsEmployed>
+    <LastDigitsOFSocial>6777</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
+    <ExpectedResult>Reject-WrongZipCode</ExpectedResult>
+  </user> 
+  <user>
+    <Email>qaa_testik36@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
