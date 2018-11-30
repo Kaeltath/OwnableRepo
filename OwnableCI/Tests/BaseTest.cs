@@ -89,13 +89,7 @@ namespace OwnableCI_TestLib.Tests
 
         public virtual bool ValidateUser(TestUser user)
         {
-            //SmallSleep(); //to discuss with VP: moved to where reference is call
-            //driverForRun.FindElement(By.XPath("//div[@class='modal-content']//div[@class='modal-footer ng-star-inserted']//button/div[text()=' START BROWSING ']")).Click();
-            //SmallSleep();
-            wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
-            string confirmElementXPath = "//a[@id='navbarDropdownMenuLink']";
-            wait.Until(ExpectedConditions.ElementExists(By.XPath(confirmElementXPath)));
-            if (driverForRun.FindElement(By.XPath(confirmElementXPath)).Text.Trim() == String.Format("HELLO, " + user.Email.ToUpper()))
+            if (HelloMenuTitleText() == String.Format("HELLO, " + user.Email.ToUpper()))
             { return true; }
             else
             { return false; }
@@ -103,13 +97,19 @@ namespace OwnableCI_TestLib.Tests
 
         public virtual bool ValidateMember(TestUser user)
         {
-            wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
-            string confirmElementXPath = "//a[@id='navbarDropdownMenuLink']";
-            wait.Until(ExpectedConditions.ElementExists(By.XPath(confirmElementXPath)));
-            if (driverForRun.FindElement(By.XPath(confirmElementXPath)).Text.Trim() == String.Format("HELLO, " + user.FirstName.ToUpper()))
+            if (HelloMenuTitleText() == String.Format("HELLO, " + user.FirstName.ToUpper()))
             { return true; }
             else
             { return false; }
+        }
+
+        private string HelloMenuTitleText()
+        {
+            wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+            string menuHelloXPath = "//a[@id='navbarDropdownMenuLink']";
+            wait.Until(ExpectedConditions.ElementExists(By.XPath(menuHelloXPath)));
+            string menuHelloTitleText = driverForRun.FindElement(By.XPath(menuHelloXPath)).Text.Trim();
+            return menuHelloTitleText;
         }
 
         public string RentalCapExpected(TestUser user)

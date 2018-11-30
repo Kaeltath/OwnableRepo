@@ -33,7 +33,6 @@ namespace OwnableCI.Pages
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementExists(By.XPath("//span[text()='AGREE']")));//ToDo: need to wait 'btnAgree' here
-            //btnAgree.Click();
             TestHelper.JSexecutorClick(btnAgree, driver);
         }
     }
