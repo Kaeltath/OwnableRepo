@@ -65,12 +65,9 @@ namespace OwnableCI.Pages
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementExists(By.XPath("//span[text()='AGREE']")));//ToDo: need to wait 'btnAgree' here
-            //btnAgree.Click(); //click this for going to txtMemberSignature field
             TestHelper.JSexecutorClick(btnAgree, driver);
             wait.Until(ExpectedConditions.ElementIsVisible(By.XPath("//p[text()=' Member Signature: ']//preceding::div[1]")));//ToDo: need to wait 'txtMemberSignature' here
-            //txtMemberSignature.Click(); //click for set digital signature
             TestHelper.JSexecutorClick(txtMemberSignature, driver);
-            //btnAgree.Click();
             TestHelper.JSexecutorClick(btnAgree, driver);
         }
     }

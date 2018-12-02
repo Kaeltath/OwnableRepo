@@ -10,6 +10,7 @@ using OwnableCI.TestDataObjs;
 using System.IO;
 using System.Reflection;
 using OwnableCI_TestLib.Enums;
+using OpenQA.Selenium.Support.UI;
 
 namespace OwnableCI_TestLib.Tests
 {
@@ -20,6 +21,7 @@ namespace OwnableCI_TestLib.Tests
         internal IWebDriver driverForRun;
         internal BrowserType currentBrowser;
         internal TestUser user;
+        private WebDriverWait wait;
 
         protected void TestAction(Action action)
         {
@@ -87,11 +89,7 @@ namespace OwnableCI_TestLib.Tests
 
         public virtual bool ValidateUser(TestUser user)
         {
-            SmallSleep();        
-            driverForRun.FindElement(By.XPath("//div[@class='modal-content']//div[@class='modal-footer ng-star-inserted']//button/div[text()=' START BROWSING ']")).Click();
-            SmallSleep();
-            var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-            if (confirmElement.Text.Trim() == String.Format("HELLO, " + user.Email.ToUpper()))
+            if (HelloMenuTitleText() == String.Format("HELLO, " + user.Email.ToUpper()))
             { return true; }
             else
             { return false; }
@@ -99,11 +97,19 @@ namespace OwnableCI_TestLib.Tests
 
         public virtual bool ValidateMember(TestUser user)
         {
-            var confirmElement = driverForRun.FindElement(By.XPath("//a[@id='navbarDropdownMenuLink']"));
-            if (confirmElement.Text.Trim() == String.Format("HELLO, " + user.FirstName.ToUpper()))
+            if (HelloMenuTitleText() == String.Format("HELLO, " + user.FirstName.ToUpper()))
             { return true; }
             else
             { return false; }
+        }
+
+        private string HelloMenuTitleText()
+        {
+            wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+            string menuHelloXPath = "//a[@id='navbarDropdownMenuLink']";
+            wait.Until(ExpectedConditions.ElementExists(By.XPath(menuHelloXPath)));
+            string menuHelloTitleText = driverForRun.FindElement(By.XPath(menuHelloXPath)).Text.Trim();
+            return menuHelloTitleText;
         }
 
         public string RentalCapExpected(TestUser user)
@@ -124,7 +130,7 @@ namespace OwnableCI_TestLib.Tests
                     }
                     else
                     {
-                        rentExpected = "$1000.00";
+                        rentExpected = "$1,000.00";
                     }
                 }
             }

@@ -28,7 +28,7 @@ namespace OwnableCI.Tests
         }
 
         [Test]
-        [Category("MemberCreationTest")]
+        [Category("MemberCreationTests")]
         [Order(1)]
         public void MemberCreationAccept()
         {
@@ -39,6 +39,7 @@ namespace OwnableCI.Tests
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
                 bool navigate = true;
                 bool letsGetYourRentalCapMessageExpected = true;
+                bool finishLater = false;
                 switch (user.ExpResult)
                 {
                     case "Accept-FromLogIn":
@@ -61,11 +62,13 @@ namespace OwnableCI.Tests
                         letsGetYourRentalCapMessageExpected = false;
                         break;
                     case "Accept-FinishLater":
+                        log.Debug("How to Invoke: from Finish Later - Become A Member");
+                        finishLater = true;
+                        break;
                     default:
                         Assume.That(false, "User is not from this test. Test will not run.");
                         break;
                 }
-
 
                 SignInPage signIn = new SignInPage(driverForRun,navigate);
                 SmallSleep();
@@ -73,13 +76,18 @@ namespace OwnableCI.Tests
 
                 if (letsGetYourRentalCapMessageExpected)
                 {
-                    wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(20));
-                    string btnGetRentalCapXPath = "//button/div[text()=' GET YOUR RENTAL CAP ']";
-                    wait.Until(ExpectedConditions.ElementExists(By.XPath(btnGetRentalCapXPath)));
-                    driverForRun.FindElement(By.XPath(btnGetRentalCapXPath)).Click();
+                    GetYourRentalCapButtonClick();
                 }
                 
                 MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+                if (finishLater)
+                {
+                    MidSleep();
+                    pagePersonalInfo.btnFinishLater.Click();
+                    Assert.IsTrue(ValidateUser(user), "User validation is Failed");
+                    var btnBecomeMemberOnHome = driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']"));
+                    btnBecomeMemberOnHome.Click();
+                }
                 pagePersonalInfo.SetPersonalInfo(user);
 
                 MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
@@ -95,7 +103,6 @@ namespace OwnableCI.Tests
                 string rentExpectedValue = RentalCapExpected(user);
                 string rentActualValue = pageCongratulations.GetRentalCapValue();
                 Assert.AreEqual(rentExpectedValue, rentActualValue);
-                //pageCongratulations.btnStartShopping.Click();
                 TestHelper.JSexecutorClick(pageCongratulations.btnStartShopping, driverForRun);
 
                 Assert.IsTrue(rentExpectedValue == GetCurrentRentalCap(), "Rental Cap validation is Failed");
@@ -104,54 +111,86 @@ namespace OwnableCI.Tests
         }
 
         [Test]
-        [Category("MemberCreationTest")]
+        [Category("MemberCreationTests")]
         [Order(2)]
-        public void MemberCreationFailedLowIncome()
+        public void MemberCreationReject()
         {
             TestAction(() =>
             {
-                string currentTestName = "Member Creation from SignUp";
+                string currentTestName = "Member Creation reject";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                Assume.That(user.ExpResult == "Reject-LowIncome", "User is not from this test. Test will not run.");
+                bool validationError = false;
+                string errorText = "";
+                bool btnBecomeMemberExpected = false;
+                bool popupErrorMessage = false;
+                bool gotoSecondPage = false;
+                switch (user.ExpResult)
+                {
+                    case "Reject-WrongZipCode":
+                        log.Debug("Fail reason: Wrong ZipCode");
+                        validationError = true;
+                        errorText = "Zip code and State do not match!";
+                        break;
+                    case "Reject-UnsupportedState":
+                        log.Debug("Fail reason: Unsupported State");
+                        btnBecomeMemberExpected = true;
+                        popupErrorMessage = true;
+                        errorText = "We are not yet available in your state.";
+                        break;
+                    case "Reject-LowIncome":
+                        log.Debug("Fail reason: Low Income");
+                        popupErrorMessage = true;
+                        gotoSecondPage = true;
+                        errorText = "We are sorry...";
+                        break;
+                    default:
+                        Assume.That(false, "User is not from this test. Test will not run.");
+                        break;
+                }
+
                 SignInPage signIn = new SignInPage(driverForRun);
                 SmallSleep();
                 signIn.Login(user);
-                log.Debug("Start get your rental cap");
-                BigSleep();
-                driverForRun.FindElement(By.XPath("//button/div[text()=' GET YOUR RENTAL CAP ']")).Click();
 
-                MidSleep();
+                GetYourRentalCapButtonClick();
+
                 MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
                 pagePersonalInfo.SetPersonalInfo(user);
 
-                MidSleep();
-                MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
-                pageIncomeInfo.SetIncomeInfo(user);
-
-                BigSleep();
-                BigSleep();
-                IWebElement elemWeSorry = driverForRun.FindElement(By.XPath("//h3[text() = 'We are sorry...']"));
-                if (!elemWeSorry.Displayed)
+                string errorTextXPath;
+                IWebElement txtErrorText;
+                if (validationError)
                 {
-                    log.Error("Element " + elemWeSorry + " is not exists, please check the problem");
-                }
-                else
-                {
-                    driverForRun.FindElement(By.XPath("//span[text()='Close']")).Click();
+                    errorTextXPath = "//li[text()='" +" " +errorText + " "+ "']";
+                    txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
+                    SmallSleep();
+                    Assert.That(txtErrorText.Displayed,"Error Message '" + errorText + "' is not displayed");
+                    pagePersonalInfo.btnFinishLater.Click();
+                    Assert.That(ValidateUser(user), "User validation is Failed");
+                    return;
                 }
 
-                MidSleep();
-                ValidateMember(user);
-                IWebElement elemRentalCap = null;
-                try
+                if (gotoSecondPage)
                 {
-                    elemRentalCap = driverForRun.FindElement(By.XPath("//li[@container='body']//span[contains(text(),'Rental cap:')]"));
+                    MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
+                    pageIncomeInfo.SetIncomeInfo(user);
                 }
-                catch (Exception)
+                if (popupErrorMessage)
                 {
+                    wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+                    errorTextXPath = "//h3[text()='" + errorText + "']";
+                    wait.Until(ExpectedConditions.ElementExists(By.XPath(errorTextXPath)));
+                    txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
+                    SmallSleep();
+                    Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
+                    driverForRun.FindElement(By.XPath("//span[text()='Close']/parent::button")).Click();
+                    Assert.That(ValidateMember(user), "Member validation is Failed");
+                    bool btnBecomeMemberExists = true;
+                    try { driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']")); }
+                    catch { btnBecomeMemberExists = false; }
+                    Assert.AreEqual(btnBecomeMemberExpected,btnBecomeMemberExists);
                 }
-                Assert.That(elemRentalCap == null, "Element " + elemRentalCap + " exists on Home page, but not expected for this User");
             });
         }
 
@@ -163,6 +202,14 @@ namespace OwnableCI.Tests
             string rentalCap = driverForRun.FindElement(By.XPath(txtRentalCapXPath)).Text;
             rentalCap = rentalCap.Split(new char[] { ':' })[1];
             return rentalCap;
+        }
+
+        private void GetYourRentalCapButtonClick() //"Lets Get Your Rental Cap" popup message => click button "Get Rental Cap"
+        {
+            wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(20));
+            string btnGetRentalCapXPath = "//button/div[text()=' GET YOUR RENTAL CAP ']";
+            wait.Until(ExpectedConditions.ElementExists(By.XPath(btnGetRentalCapXPath)));
+            driverForRun.FindElement(By.XPath(btnGetRentalCapXPath)).Click();
         }
     }
 }

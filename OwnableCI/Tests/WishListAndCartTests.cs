@@ -37,6 +37,8 @@ namespace OwnableCI.Tests
                 SignInPage signin = new SignInPage(driverForRun);
                 //bool isUserLogedIn = ValidateUser(user);
                 Assume.That(signin.Login(user), "Failed login, test will not run");
+                SmallSleep(); //moved from ValidateUser()
+                driverForRun.FindElement(By.XPath("//button[contains(@class,'d-md-block')]/div[text()=' START BROWSING ']")).Click();
                 Assume.That(ValidateUser(user), "Logged-in account is not a user");
                 SmallSleep();
                 ProductHandler handler = new ProductHandler(driverForRun, home);
