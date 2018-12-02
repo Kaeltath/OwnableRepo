@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSource")]
+    [TestFixtureSource(typeof(TestProperties), "MemberCreationTestSource")]
     [TestFixture]
     class MemberCreationTests : BaseTest
     {

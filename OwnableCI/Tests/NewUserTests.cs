@@ -7,21 +7,19 @@ using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Enums;
 using OwnableCI_TestLib.Tests;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-
 using System.Threading;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "oneTimeTestSource")]
+    [TestFixtureSource(typeof(TestProperties), "NewUsersTestSource")]
     [TestFixture]
-    public class LoginsTest : BaseTest
+    public class NewUserTests : BaseTest
     {
         private bool expectedResults;
 
-        public LoginsTest(KeyValuePair<TestUser, BrowserType> source)
+        public NewUserTests(KeyValuePair<TestUser, BrowserType> source)
         {
             user = source.Key;
             currentBrowser = source.Value;

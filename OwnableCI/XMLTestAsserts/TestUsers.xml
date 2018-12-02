@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Users>
   <user>
-    <Email>testikus20@gmail.com</Email>
+    <Email>testikus29@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -16,10 +16,11 @@
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
+    <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Reject-LowIncome</ExpectedResult>
   </user>
   <user>
-    <Email>testikus21@gmail.com</Email>
+    <Email>testikus25@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -34,10 +35,11 @@
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
+    <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Accept-FromLogIn</ExpectedResult>
   </user>
   <user>
-    <Email>qaa_testik10@gmail.com</Email>
+    <Email>qaa_testik14@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -52,10 +54,11 @@
     <YearsEmployed>1</YearsEmployed>
     <LastDigitsOFSocial>6777</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
+    <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Accept-FromCart</ExpectedResult>
-  </user> 
+  </user>
   <user>
-    <Email>qaa_testik11@gmail.com</Email>
+    <Email>qaa_testik15@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -70,8 +73,29 @@
     <YearsEmployed>3</YearsEmployed>
     <LastDigitsOFSocial>6777</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
+    <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Accept-FinishLater</ExpectedResult>
-  </user> 
+  </user>
+  <user>
+    <Email>testik14@gmail.com</Email>
+    <Password>Goodtaste1!</Password>
+    <FirstName>John</FirstName>
+    <LastName>Smith</LastName>
+    <Adress>1113 Shade Tree Ln</Adress>
+    <City>Allen</City>
+    <State>Texas</State>
+    <ZipCode>75013</ZipCode>
+    <Mobile>2145551212</Mobile>
+    <Birthdate>05/15/1970</Birthdate>
+    <MonthlyIncome>1200</MonthlyIncome>
+    <Company>IT</Company>
+    <YearsEmployed>2</YearsEmployed>
+    <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <TestRole>OneTime</TestRole>
+    <TestGroup>NewUserTests</TestGroup>
+    <ExpectedResult>
+    </ExpectedResult>
+  </user>
   <user>
     <Email>testik4@gmail.com</Email>
     <Password>Goodtaste1!</Password>
@@ -88,6 +112,8 @@
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>Reusable</TestRole>
-    <ExpectedResult>Accept</ExpectedResult>
+    <TestGroup>WishListAndCartTests</TestGroup>
+    <ExpectedResult>
+    </ExpectedResult>
   </user>
 </Users>

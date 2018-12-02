@@ -13,11 +13,11 @@ using System.Collections.ObjectModel;
 
 namespace OwnableCI.Tests
 {
-    [TestFixtureSource(typeof(TestProperties), "reusableTestSoure")]
+    [TestFixtureSource(typeof(TestProperties), "WishListAndCartTestsSource")]
     [TestFixture]
-    class ProductTests : BaseTest
+    class WishListAndCartTests : BaseTest
     {
-        public ProductTests(KeyValuePair<TestUser, BrowserType> source)
+        public WishListAndCartTests(KeyValuePair<TestUser, BrowserType> source)
         {
             user = source.Key;
             currentBrowser = source.Value;
