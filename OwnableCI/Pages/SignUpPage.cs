@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
 using OpenQA.Selenium.Support.UI;
+using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Pages;
 using System;
@@ -95,11 +96,11 @@ namespace OwnableCI.Pages
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(ExpectedConditions.ElementExists(By.XPath("//a[text()='Sign Up']")));//ToDo: need to wait 'tabSignUp' here
             Thread.Sleep(1000);
-            tabSignUp.Click();
+            TestHelper.JSexecutorClick(tabSignUp, driver);
             inputEmail.SendKeys(user.Email);
             inputPassword.SendKeys(user.Password);
             //pageSignUp.chkIAgreeToTheTerms.Click(); //removed from current version
-            btnLogIn.Click();
+            TestHelper.JSexecutorClick(btnLogIn, driver);
             Thread.Sleep(2000);
             try
             {

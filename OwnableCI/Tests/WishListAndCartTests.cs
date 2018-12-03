@@ -3,6 +3,7 @@ using OpenQA.Selenium;
 using OwnableCI.Constants;
 using OwnableCI.Enums;
 using OwnableCI.Pages;
+using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Constants;
 using OwnableCI_TestLib.Enums;
@@ -38,7 +39,8 @@ namespace OwnableCI.Tests
                 //bool isUserLogedIn = ValidateUser(user);
                 Assume.That(signin.Login(user), "Failed login, test will not run");
                 SmallSleep(); //moved from ValidateUser()
-                driverForRun.FindElement(By.XPath("//button[contains(@class,'d-md-block')]/div[text()=' START BROWSING ']")).Click();
+                var element = driverForRun.FindElement(By.XPath("//button[contains(@class,'d-md-block')]/div[text()=' START BROWSING ']"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Assume.That(ValidateUser(user), "Logged-in account is not a user");
                 SmallSleep();
                 ProductHandler handler = new ProductHandler(driverForRun, home);

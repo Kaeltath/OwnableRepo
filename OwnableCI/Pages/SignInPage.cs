@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OwnableCI.ServiceClasses;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Pages;
 using System.Threading;
@@ -75,7 +76,7 @@ namespace OwnableCI.Pages
         {
             inputEmail.SendKeys(user.Email);
             inputPassword.SendKeys(user.Password);
-            btnLogIn.Click();
+            TestHelper.JSexecutorClick(btnLogIn, driver);
             Thread.Sleep(2000);
             try
             {

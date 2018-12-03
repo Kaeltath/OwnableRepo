@@ -40,7 +40,7 @@ namespace OwnableCI.Tests
                 page.inputEmail.SendKeys(user.Email);
                 page.inputPassword.SendKeys(user.Password);
                 //page.chkIAgreeToTheTerms.Click(); //obsolete control
-                page.btnLogIn.Click();
+                TestHelper.JSexecutorClick(page.btnLogIn, driverForRun);
                 bool SignUpSuccesfull = page.ValidateSignUp();
                 SmallSleep();
                 if (!SignUpSuccesfull)
@@ -97,7 +97,8 @@ namespace OwnableCI.Tests
                 }
 
                 BigSleep(); //moved from ValidateUser()
-                driverForRun.FindElement(By.XPath("//button[contains(@class,'d-md-block')]/div[text()=' START BROWSING ']")).Click();
+                var element = driverForRun.FindElement(By.XPath("//button[contains(@class,'d-md-block')]/div[text()=' START BROWSING ']"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Assume.That(ValidateUser(user), "Login successfull, but not for user, but for member");
             });           
         }
@@ -123,14 +124,18 @@ namespace OwnableCI.Tests
                 SignInPage page = new SignInPage(driverForRun);
                 driverForRun.Navigate().GoToUrl("http://gmail.com");
                 driverForRun.FindElement(By.Id("identifierId")).SendKeys(user.Email);
-                driverForRun.FindElement(By.Id("identifierNext")).Click();
+                var element = driverForRun.FindElement(By.Id("identifierNext"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Thread.Sleep(2000);
                 driverForRun.FindElement(By.XPath("//input[@name='password']")).SendKeys(user.Password);
-                driverForRun.FindElement(By.Id("passwordNext")).Click();
+                element = driverForRun.FindElement(By.Id("passwordNext"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Thread.Sleep(3000);
-                driverForRun.FindElement(By.XPath("//div[@class='UI']//table/tbody/tr/td//div[@role='link']")).Click();
+                element = driverForRun.FindElement(By.XPath("//div[@class='UI']//table/tbody/tr/td//div[@role='link']"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Thread.Sleep(1000);
-                driverForRun.FindElement(By.XPath("//a[contains(text(),'ownable.auth0.com')]")).Click();
+                element = driverForRun.FindElement(By.XPath("//a[contains(text(),'ownable.auth0.com')]"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Thread.Sleep(4000);
                 ReadOnlyCollection<string> windowHandles = driverForRun.WindowHandles;
                 driverForRun.SwitchTo().Window(windowHandles[1]);
@@ -140,9 +145,9 @@ namespace OwnableCI.Tests
                 Thread.Sleep(4000);
                 page.Login(user);
                 Thread.Sleep(4000);
-                var element = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
-                if (element.Count > 0)
-                { element[0].Click(); }
+                var Testelement = driverForRun.FindElements(By.XPath("//div[@class='email-validation-holder']//button[text()='Skip']"));
+                if (Testelement.Count > 0)
+                { Testelement[0].Click(); }
             }
             catch (Exception ex)
             {

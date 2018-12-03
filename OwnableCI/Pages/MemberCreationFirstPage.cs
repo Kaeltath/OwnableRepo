@@ -4,6 +4,7 @@ using OpenQA.Selenium.Support.UI;
 using OwnableCI_TestLib.Pages;
 using OwnableCI.TestDataObjs;
 using System;
+using OwnableCI.ServiceClasses;
 
 namespace OwnableCI.Pages
 {
@@ -85,13 +86,14 @@ namespace OwnableCI.Pages
             inputLastName.SendKeys(user.LastName);
             inputHomeAddress.SendKeys(user.Adress);
             inputCity.SendKeys(user.City);
-            lstState.Click();
-            driver.FindElement(By.XPath("//span[text()='" + user.State + "']")).Click();
+            TestHelper.JSexecutorClick(lstState, driver);
+            var element = driver.FindElement(By.XPath("//span[text()='" + user.State + "']"));
+            TestHelper.JSexecutorClick(element, driver);
             inputZipCode.SendKeys(user.ZipCode);
             inputMobile.SendKeys(user.Mobile);
             inputBirthdate.SendKeys(user.BirthDate);
-            chkAgreement.Click();
-            btnNext.Click();
+            TestHelper.JSexecutorClick(chkAgreement, driver);
+            TestHelper.JSexecutorClick(btnNext, driver);
         }
     }
 }

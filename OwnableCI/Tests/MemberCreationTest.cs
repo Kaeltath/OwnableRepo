@@ -200,10 +200,11 @@ namespace OwnableCI.Tests
             if (finishLater)
             {
                 MidSleep();
-                pagePersonalInfo.btnFinishLater.Click();
+                TestHelper.JSexecutorClick(pagePersonalInfo.btnFinishLater, driverForRun);
+
                 Assert.IsTrue(ValidateUser(user), "User validation is Failed");
                 var btnBecomeMemberOnHome = driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']"));
-                btnBecomeMemberOnHome.Click();
+                TestHelper.JSexecutorClick(btnBecomeMemberOnHome, driverForRun);
             }
             pagePersonalInfo.SetPersonalInfo(user);
 
@@ -273,7 +274,7 @@ namespace OwnableCI.Tests
                 txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
                 SmallSleep();
                 Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
-                pagePersonalInfo.btnFinishLater.Click();
+                TestHelper.JSexecutorClick(pagePersonalInfo.btnFinishLater, driverForRun);
                 Assert.That(ValidateUser(user), "User validation is Failed");
                 return;
             }
@@ -291,7 +292,8 @@ namespace OwnableCI.Tests
                 txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
                 SmallSleep();
                 Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
-                driverForRun.FindElement(By.XPath("//span[text()='Close']/parent::button")).Click();
+                var element = driverForRun.FindElement(By.XPath("//span[text()='Close']/parent::button"));
+                TestHelper.JSexecutorClick(element, driverForRun);
                 Assert.That(ValidateMember(user), "Member validation is Failed");
                 bool btnBecomeMemberExists = true;
                 try { driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']")); }
@@ -315,7 +317,8 @@ namespace OwnableCI.Tests
             wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(20));
             string btnGetRentalCapXPath = "//button/div[text()=' GET YOUR RENTAL CAP ']";
             wait.Until(ExpectedConditions.ElementExists(By.XPath(btnGetRentalCapXPath)));
-            driverForRun.FindElement(By.XPath(btnGetRentalCapXPath)).Click();
+            var element = driverForRun.FindElement(By.XPath(btnGetRentalCapXPath));
+            TestHelper.JSexecutorClick(element, driverForRun);
         }
     }
 }
