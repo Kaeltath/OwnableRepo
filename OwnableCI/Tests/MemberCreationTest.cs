@@ -30,171 +30,279 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTests")]
         [Order(1)]
-        public void MemberCreationAccept()
+        public void MemberCreationAcceptFromLogIn()
         {
             TestAction(() =>
             {
-                string currentTestName = "Member Creation successfully";
+                string currentTestName = "MemberCreationAcceptFromLogIn";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                bool navigate = true;
-                bool letsGetYourRentalCapMessageExpected = true;
-                bool finishLater = false;
-                switch (user.ExpResult)
+                if (user.ExpResult == "Accept-FromLogIn")
                 {
-                    case "Accept-FromLogIn":
-                        log.Debug("How to Invoke: from LogIn");
-                        break;
-                    case "Accept-FromCart":
-                        log.Debug("How to Invoke: from Cart");
-                        HomePage home = new HomePage(driverForRun);
-                        SmallSleep();
-                        ProductHandler handler = new ProductHandler(driverForRun, home);
-                        Product product = new Product(ProductCategories.Top_deals, 1, driverForRun);
-                        SmallSleep();
-                        handler.AddProductToContainer(ProductContainer.Cart, InterctionControlSet.Product_Details, product);
-                        wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
-                        string btnBecomeMemberInCartXPath = "//button[text()='become a member']";
-                        wait.Until(ExpectedConditions.ElementExists(By.XPath(btnBecomeMemberInCartXPath)));
-                        var btnBecomeMemberInCart = driverForRun.FindElement(By.XPath(btnBecomeMemberInCartXPath));
-                        TestHelper.JSexecutorClick(btnBecomeMemberInCart, driverForRun);
-                        navigate = false;
-                        letsGetYourRentalCapMessageExpected = false;
-                        break;
-                    case "Accept-FinishLater":
-                        log.Debug("How to Invoke: from Finish Later - Become A Member");
-                        finishLater = true;
-                        break;
-                    default:
-                        Assume.That(false, "User is not from this test. Test will not run.");
-                        break;
+                    MemberCreationAccept(user);
                 }
-
-                SignInPage signIn = new SignInPage(driverForRun,navigate);
-                SmallSleep();
-                signIn.Login(user);
-
-                if (letsGetYourRentalCapMessageExpected)
+                else
                 {
-                    GetYourRentalCapButtonClick();
+                    Assume.That(false, "User is not from this test. Test will not run.");
                 }
-                
-                MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
-                if (finishLater)
-                {
-                    MidSleep();
-                    pagePersonalInfo.btnFinishLater.Click();
-                    Assert.IsTrue(ValidateUser(user), "User validation is Failed");
-                    var btnBecomeMemberOnHome = driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']"));
-                    btnBecomeMemberOnHome.Click();
-                }
-                pagePersonalInfo.SetPersonalInfo(user);
-
-                MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
-                pageIncomeInfo.SetIncomeInfo(user);
-
-                MemberCreationThirdPage pageMembershipAgreement = new MemberCreationThirdPage(driverForRun);
-                pageMembershipAgreement.SetMembershipAgreement(user);
-
-                MemberCreationFourthPage pageApplicationDisclosure = new MemberCreationFourthPage(driverForRun);
-                pageApplicationDisclosure.SetAgreement();
-
-                MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
-                string rentExpectedValue = RentalCapExpected(user);
-                string rentActualValue = pageCongratulations.GetRentalCapValue();
-                Assert.AreEqual(rentExpectedValue, rentActualValue);
-                TestHelper.JSexecutorClick(pageCongratulations.btnStartShopping, driverForRun);
-
-                Assert.IsTrue(rentExpectedValue == GetCurrentRentalCap(), "Rental Cap validation is Failed");
-                Assert.IsTrue(ValidateMember(user), "Member validation is Failed");
             });
         }
 
         [Test]
         [Category("MemberCreationTests")]
         [Order(2)]
-        public void MemberCreationReject()
+        public void MemberCreationAcceptFromCart()
         {
             TestAction(() =>
             {
-                string currentTestName = "Member Creation reject";
+                string currentTestName = "MemberCreationAcceptFromCart";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                bool validationError = false;
-                string errorText = "";
-                bool btnBecomeMemberExpected = false;
-                bool popupErrorMessage = false;
-                bool gotoSecondPage = false;
-                switch (user.ExpResult)
+                if (user.ExpResult == "Accept-FromCart")
                 {
-                    case "Reject-WrongZipCode":
-                        log.Debug("Fail reason: Wrong ZipCode");
-                        validationError = true;
-                        errorText = "Zip code and State do not match!";
-                        break;
-                    case "Reject-UnsupportedState":
-                        log.Debug("Fail reason: Unsupported State");
-                        btnBecomeMemberExpected = true;
-                        popupErrorMessage = true;
-                        errorText = "We are not yet available in your state.";
-                        break;
-                    case "Reject-LowIncome":
-                        log.Debug("Fail reason: Low Income");
-                        popupErrorMessage = true;
-                        gotoSecondPage = true;
-                        errorText = "We are sorry...";
-                        break;
-                    default:
-                        Assume.That(false, "User is not from this test. Test will not run.");
-                        break;
+                    MemberCreationAccept(user);
                 }
-
-                SignInPage signIn = new SignInPage(driverForRun);
-                SmallSleep();
-                signIn.Login(user);
-
-                GetYourRentalCapButtonClick();
-
-                MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
-                pagePersonalInfo.SetPersonalInfo(user);
-
-                string errorTextXPath;
-                IWebElement txtErrorText;
-                if (validationError)
+                else
                 {
-                    errorTextXPath = "//li[text()='" +" " +errorText + " "+ "']";
-                    txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
-                    SmallSleep();
-                    Assert.That(txtErrorText.Displayed,"Error Message '" + errorText + "' is not displayed");
-                    pagePersonalInfo.btnFinishLater.Click();
-                    Assert.That(ValidateUser(user), "User validation is Failed");
-                    return;
-                }
-
-                if (gotoSecondPage)
-                {
-                    MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
-                    pageIncomeInfo.SetIncomeInfo(user);
-                }
-                if (popupErrorMessage)
-                {
-                    wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
-                    errorTextXPath = "//h3[text()='" + errorText + "']";
-                    wait.Until(ExpectedConditions.ElementExists(By.XPath(errorTextXPath)));
-                    txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
-                    SmallSleep();
-                    Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
-                    driverForRun.FindElement(By.XPath("//span[text()='Close']/parent::button")).Click();
-                    Assert.That(ValidateMember(user), "Member validation is Failed");
-                    bool btnBecomeMemberExists = true;
-                    try { driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']")); }
-                    catch { btnBecomeMemberExists = false; }
-                    Assert.AreEqual(btnBecomeMemberExpected,btnBecomeMemberExists);
+                    Assume.That(false, "User is not from this test. Test will not run.");
                 }
             });
         }
 
-        private string GetCurrentRentalCap() //on Home page
+        [Test]
+        [Category("MemberCreationTests")]
+        [Order(3)]
+        public void MemberCreationAcceptFinishLater()
+        {
+            TestAction(() =>
+            {
+                string currentTestName = "MemberCreationAcceptFinishLater";
+                log.Debug("Starting " + currentTestName + " Test;");
+                log.Debug("For user " + user.FirstName + user.LastName + ";");
+                if (user.ExpResult == "Accept-FinishLater")
+                {
+                    MemberCreationAccept(user);
+                }
+                else
+                {
+                    Assume.That(false, "User is not from this test. Test will not run.");
+                }
+            });
+        }
+
+        [Test]
+        [Category("MemberCreationTests")]
+        [Order(4)]
+        public void MemberCreationRejectWrongZipCode()
+        {
+            TestAction(() =>
+            {
+                string currentTestName = "MemberCreationRejectWrongZipCode";
+                log.Debug("Starting " + currentTestName + " Test;");
+                log.Debug("For user " + user.FirstName + user.LastName + ";");
+                if (user.ExpResult == "Reject-WrongZipCode")
+                {
+                    MemberCreationReject(user);
+                }
+                else
+                {
+                    Assume.That(false, "User is not from this test. Test will not run.");
+                }
+            });
+        }
+
+        [Test]
+        [Category("MemberCreationTests")]
+        [Order(5)]
+        public void MemberCreationRejectUnsupportedState()
+        {
+            TestAction(() =>
+            {
+                string currentTestName = "MemberCreationRejectUnsupportedState";
+                log.Debug("Starting " + currentTestName + " Test;");
+                log.Debug("For user " + user.FirstName + user.LastName + ";");
+                if (user.ExpResult == "Reject-UnsupportedState")
+                {
+                    MemberCreationReject(user);
+                }
+                else
+                {
+                    Assume.That(false, "User is not from this test. Test will not run.");
+                }
+            });
+        }
+
+        [Test]
+        [Category("MemberCreationTests")]
+        [Order(6)]
+        public void MemberCreationRejectLowIncome()
+        {
+            TestAction(() =>
+            {
+                string currentTestName = "MemberCreationRejectLowIncome";
+                log.Debug("Starting " + currentTestName + " Test;");
+                log.Debug("For user " + user.FirstName + user.LastName + ";");
+                if (user.ExpResult == "Reject-LowIncome")
+                {
+                    MemberCreationReject(user);
+                }
+                else
+                {
+                    Assume.That(false, "User is not from this test. Test will not run.");
+                }
+            });
+        }
+
+        private void MemberCreationAccept(TestUser user)
+        {
+            bool navigate = true;
+            bool letsGetYourRentalCapMessageExpected = true;
+            bool finishLater = false;
+            switch (user.ExpResult)
+            {
+                case "Accept-FromLogIn":
+                    log.Debug("How to Invoke: from LogIn");
+                    break;
+                case "Accept-FromCart":
+                    log.Debug("How to Invoke: from Cart");
+                    HomePage home = new HomePage(driverForRun);
+                    SmallSleep();
+                    ProductHandler handler = new ProductHandler(driverForRun, home);
+                    Product product = new Product(ProductCategories.Top_deals, 1, driverForRun);
+                    SmallSleep();
+                    handler.AddProductToContainer(ProductContainer.Cart, InterctionControlSet.Product_Details, product);
+                    wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+                    string btnBecomeMemberInCartXPath = "//button[text()='become a member']";
+                    wait.Until(ExpectedConditions.ElementExists(By.XPath(btnBecomeMemberInCartXPath)));
+                    var btnBecomeMemberInCart = driverForRun.FindElement(By.XPath(btnBecomeMemberInCartXPath));
+                    TestHelper.JSexecutorClick(btnBecomeMemberInCart, driverForRun);
+                    navigate = false;
+                    letsGetYourRentalCapMessageExpected = false;
+                    break;
+                case "Accept-FinishLater":
+                    log.Debug("How to Invoke: from Finish Later - Become A Member");
+                    finishLater = true;
+                    break;
+                default:
+                    Assume.That(false, "User is not from this test. Test will not run.");
+                    break;
+            }
+
+            SignInPage signIn = new SignInPage(driverForRun, navigate);
+            SmallSleep();
+            signIn.Login(user);
+
+            if (letsGetYourRentalCapMessageExpected)
+            {
+                GetYourRentalCapButtonClick();
+            }
+
+            MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+            if (finishLater)
+            {
+                MidSleep();
+                pagePersonalInfo.btnFinishLater.Click();
+                Assert.IsTrue(ValidateUser(user), "User validation is Failed");
+                var btnBecomeMemberOnHome = driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']"));
+                btnBecomeMemberOnHome.Click();
+            }
+            pagePersonalInfo.SetPersonalInfo(user);
+
+            MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
+            pageIncomeInfo.SetIncomeInfo(user);
+
+            MemberCreationThirdPage pageMembershipAgreement = new MemberCreationThirdPage(driverForRun);
+            pageMembershipAgreement.SetMembershipAgreement(user);
+
+            MemberCreationFourthPage pageApplicationDisclosure = new MemberCreationFourthPage(driverForRun);
+            pageApplicationDisclosure.SetAgreement();
+
+            MemberCreationFifthPage pageCongratulations = new MemberCreationFifthPage(driverForRun);
+            string rentExpectedValue = RentalCapExpected(user);
+            string rentActualValue = pageCongratulations.GetRentalCapValue();
+            Assert.AreEqual(rentExpectedValue, rentActualValue);
+            TestHelper.JSexecutorClick(pageCongratulations.btnStartShopping, driverForRun);
+
+            Assert.IsTrue(rentExpectedValue == GetCurrentRentalCap(), "Rental Cap validation is Failed");
+            Assert.IsTrue(ValidateMember(user), "Member validation is Failed");
+        }
+
+        private void MemberCreationReject(TestUser user)
+        {
+            bool validationError = false;
+            string errorText = "";
+            bool btnBecomeMemberExpected = false;
+            bool popupErrorMessage = false;
+            bool gotoSecondPage = false;
+            switch (user.ExpResult)
+            {
+                case "Reject-WrongZipCode":
+                    log.Debug("Fail reason: Wrong ZipCode");
+                    validationError = true;
+                    errorText = "Zip code and State do not match!";
+                    break;
+                case "Reject-UnsupportedState":
+                    log.Debug("Fail reason: Unsupported State");
+                    btnBecomeMemberExpected = true;
+                    popupErrorMessage = true;
+                    errorText = "We are not yet available in your state.";
+                    break;
+                case "Reject-LowIncome":
+                    log.Debug("Fail reason: Low Income");
+                    popupErrorMessage = true;
+                    gotoSecondPage = true;
+                    errorText = "We are sorry...";
+                    break;
+                default:
+                    Assume.That(false, "User is not from this test. Test will not run.");
+                    break;
+            }
+
+            SignInPage signIn = new SignInPage(driverForRun);
+            SmallSleep();
+            signIn.Login(user);
+
+            GetYourRentalCapButtonClick();
+
+            MemberCreationFirstPage pagePersonalInfo = new MemberCreationFirstPage(driverForRun);
+            pagePersonalInfo.SetPersonalInfo(user);
+
+            string errorTextXPath;
+            IWebElement txtErrorText;
+            if (validationError)
+            {
+                errorTextXPath = "//li[text()='" + " " + errorText + " " + "']";
+                txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
+                SmallSleep();
+                Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
+                pagePersonalInfo.btnFinishLater.Click();
+                Assert.That(ValidateUser(user), "User validation is Failed");
+                return;
+            }
+
+            if (gotoSecondPage)
+            {
+                MemberCreationSecondPage pageIncomeInfo = new MemberCreationSecondPage(driverForRun);
+                pageIncomeInfo.SetIncomeInfo(user);
+            }
+            if (popupErrorMessage)
+            {
+                wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
+                errorTextXPath = "//h3[text()='" + errorText + "']";
+                wait.Until(ExpectedConditions.ElementExists(By.XPath(errorTextXPath)));
+                txtErrorText = driverForRun.FindElement(By.XPath(errorTextXPath));
+                SmallSleep();
+                Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
+                driverForRun.FindElement(By.XPath("//span[text()='Close']/parent::button")).Click();
+                Assert.That(ValidateMember(user), "Member validation is Failed");
+                bool btnBecomeMemberExists = true;
+                try { driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']")); }
+                catch { btnBecomeMemberExists = false; }
+                Assert.AreEqual(btnBecomeMemberExpected, btnBecomeMemberExists);
+            }
+        }
+
+        private string GetCurrentRentalCap() //return Rental Cap value on Home page
         {
             wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
             string txtRentalCapXPath = "//li[@container='body']//span[contains(text(),'Rental cap:')]";
