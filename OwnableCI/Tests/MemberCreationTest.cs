@@ -188,10 +188,9 @@ namespace OwnableCI.Tests
                     break;
             }
 
-            SignInPage signIn = new SignInPage(driverForRun, navigate);
-            SmallSleep();
-            signIn.Login(user);
-
+            SignUpPage signUp = new SignUpPage(driverForRun, navigate);
+            Assert.That(signUp.UserSignUp(user), "Sign Up failed");
+            
             if (letsGetYourRentalCapMessageExpected)
             {
                 GetYourRentalCapButtonClick();
@@ -258,9 +257,8 @@ namespace OwnableCI.Tests
                     break;
             }
 
-            SignInPage signIn = new SignInPage(driverForRun);
-            SmallSleep();
-            signIn.Login(user);
+            SignUpPage signUp = new SignUpPage(driverForRun);
+            Assert.That(signUp.UserSignUp(user), "Sign Up failed");
 
             GetYourRentalCapButtonClick();
 
@@ -302,7 +300,7 @@ namespace OwnableCI.Tests
             }
         }
 
-        private string GetCurrentRentalCap() //return Rental Cap value on Home page
+        private string GetCurrentRentalCap() //return Rental Cap value from Home page
         {
             wait = new WebDriverWait(driverForRun, TimeSpan.FromSeconds(10));
             string txtRentalCapXPath = "//li[@container='body']//span[contains(text(),'Rental cap:')]";
