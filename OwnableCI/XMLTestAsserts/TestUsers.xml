@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Users>
   <user>
-    <Email>MCTestRejectUS48@gmail.com</Email>
+    <Email>RejectNoInState@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Robert</FirstName>
     <LastName>Williams</LastName>
@@ -20,7 +20,7 @@
     <ExpectedResult>Reject-UnsupportedState</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestRejectWZC48@gmail.com</Email>
+    <Email>RejectWrongZipCode@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -39,7 +39,7 @@
     <ExpectedResult>Reject-WrongZipCode</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestRejectLI48@gmail.com</Email>
+    <Email>RejectLowIncome@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -58,7 +58,7 @@
     <ExpectedResult>Reject-LowIncome</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFL48@gmail.com</Email>
+    <Email>AcceptFromLogIn@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -77,7 +77,7 @@
     <ExpectedResult>Accept-FromLogIn</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFC48@gmail.com</Email>
+    <Email>AcceptFromCart@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -96,7 +96,7 @@
     <ExpectedResult>Accept-FromCart</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFL48@gmail.com</Email>
+    <Email>AcceptFinishLater@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
