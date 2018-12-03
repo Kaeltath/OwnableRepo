@@ -93,7 +93,8 @@ namespace OwnableCI.Pages
         public bool UserSignUp(TestUser user)
         {
             WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@name='email']")));//ToDo: need to wait 'inputEmail' here
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//a[text()='Sign Up']")));//ToDo: need to wait 'tabSignUp' here
+            Thread.Sleep(1000);
             tabSignUp.Click();
             inputEmail.SendKeys(user.Email);
             inputPassword.SendKeys(user.Password);
