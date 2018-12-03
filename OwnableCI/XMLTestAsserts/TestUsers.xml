@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Users>
   <user>
-    <Email>MCTestRejectUS@gmail.com</Email>
+    <Email>MCTestRejectUS48@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Robert</FirstName>
     <LastName>Williams</LastName>
@@ -15,11 +15,12 @@
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6123</LastDigitsOFSocial>
+    <TestGroup>MemberCreationTest</TestGroup>
     <TestRole>OneTime</TestRole>
     <ExpectedResult>Reject-UnsupportedState</ExpectedResult>
-  </user>  
+  </user>
   <user>
-    <Email>MCTestRejectWZC@gmail.com</Email>
+    <Email>MCTestRejectWZC48@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -33,11 +34,12 @@
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
     <LastDigitsOFSocial>6777</LastDigitsOFSocial>
+    <TestGroup>MemberCreationTest</TestGroup>
     <TestRole>OneTime</TestRole>
     <ExpectedResult>Reject-WrongZipCode</ExpectedResult>
-  </user> 
+  </user>
   <user>
-    <Email>MCTestRejectLI@gmail.com</Email>
+    <Email>MCTestRejectLI48@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -56,7 +58,7 @@
     <ExpectedResult>Reject-LowIncome</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFL@gmail.com</Email>
+    <Email>MCTestAcceptFL48@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -75,7 +77,7 @@
     <ExpectedResult>Accept-FromLogIn</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFC@gmail.com</Email>
+    <Email>MCTestAcceptFC48@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -94,7 +96,7 @@
     <ExpectedResult>Accept-FromCart</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFL@gmail.com</Email>
+    <Email>MCTestAcceptFL48@gmail.com</Email>
     <Password>!Gotobuy007</Password>
     <FirstName>Jane</FirstName>
     <LastName>Doe</LastName>
@@ -113,7 +115,7 @@
     <ExpectedResult>Accept-FinishLater</ExpectedResult>
   </user>
   <user>
-    <Email>NUTest@gmail.com</Email>
+    <Email>NUTest48@gmail.com</Email>
     <Password>Goodtaste1!</Password>
     <FirstName>John</FirstName>
     <LastName>Smith</LastName>
@@ -129,7 +131,8 @@
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>OneTime</TestRole>
     <TestGroup>NewUserTests</TestGroup>
-    <ExpectedResult></ExpectedResult>
+    <ExpectedResult>
+    </ExpectedResult>
   </user>
   <user>
     <Email>testik4@gmail.com</Email>
@@ -148,6 +151,7 @@
     <LastDigitsOFSocial>6543</LastDigitsOFSocial>
     <TestRole>Reusable</TestRole>
     <TestGroup>WishListAndCartTests</TestGroup>
-    <ExpectedResult></ExpectedResult>
+    <ExpectedResult>
+    </ExpectedResult>
   </user>
 </Users>

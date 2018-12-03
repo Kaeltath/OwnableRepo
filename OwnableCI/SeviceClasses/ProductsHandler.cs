@@ -60,7 +60,7 @@ namespace OwnableCI.Constants
             if (category == ProductCategories.Top_deals)
             {
                 var blackFridayControl = m_driverForRun.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
-                blackFridayControl.Click();
+                TestHelper.JSexecutorClick(blackFridayControl, m_driverForRun);
                 Thread.Sleep(2000);
                 categoryControl = m_driverForRun.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
                 categoryControl.Click();

@@ -88,6 +88,12 @@ namespace OwnableCI.SeviceClasses
                 var result = Regex.Replace(user.Email, @"(\d+)", Incrementor, RegexOptions.Multiline);
                 incrementedUser.Email = result;
             }
+            else
+            {
+                int incrementPosition = user.Email.IndexOf('@');
+                string incrementedEmail = user.Email.Insert(incrementPosition, "1");
+                incrementedUser.Email = incrementedEmail;
+            }
             return incrementedUser;
         }
 
