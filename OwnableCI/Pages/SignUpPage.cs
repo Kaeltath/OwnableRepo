@@ -1,8 +1,10 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Support.PageObjects;
+using OpenQA.Selenium.Support.UI;
 using OwnableCI.TestDataObjs;
 using OwnableCI_TestLib.Pages;
 using System;
+using System.Threading;
 
 namespace OwnableCI.Pages
 {
@@ -55,6 +57,16 @@ namespace OwnableCI.Pages
             NavigateToPage();
         }
 
+        public SignUpPage(IWebDriver browser, bool navigate) : base(browser)
+        {
+            this.browser = browser;
+            if (navigate)
+            {
+                PageFactory.InitElements(driver, this);
+                NavigateToPage();
+            }
+        }
+
         public override void NavigateToPage(string parameter = "")
         {
             new HomePage(browser).btnSignUp.Click();
@@ -78,12 +90,25 @@ namespace OwnableCI.Pages
             return false;            
         }
 
-        public void UserSignUp(TestUser user)
+        public bool UserSignUp(TestUser user)
         {
+            WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@name='email']")));//ToDo: need to wait 'inputEmail' here
+            tabSignUp.Click();
             inputEmail.SendKeys(user.Email);
             inputPassword.SendKeys(user.Password);
             //pageSignUp.chkIAgreeToTheTerms.Click(); //removed from current version
             btnLogIn.Click();
+            Thread.Sleep(2000);
+            try
+            {
+                var failedMessage = driver.FindElement(By.XPath("//span[contains(text(),'something went wrong when attempting to sign up') or contains(text(),'The user already exists')]")); //different messages on Dev and Stag
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
         }
 
         public static implicit operator SignUpPage(SignInPage v)
