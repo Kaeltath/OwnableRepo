@@ -36,7 +36,7 @@ namespace OwnableCI.XMLParsers
                     MonthlyIncome = elem.Element("MonthlyIncome").Value,
                     Company = elem.Element("Company").Value,
                     YearsEmployed = elem.Element("YearsEmployed").Value,
-                    LastDigitsOFSocial = elem.Element("LastDigitsOFSocial").Value,
+                    DigitsOFSocial = elem.Element("DigitsOFSocial").Value,
                     TestRole = elem.Element("TestRole").Value,
                     TestGroup = elem.Element("TestGroup").Value,
                     ExpResult = elem.Element("ExpectedResult").Value

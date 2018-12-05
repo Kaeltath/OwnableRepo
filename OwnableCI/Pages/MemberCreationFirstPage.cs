@@ -86,14 +86,14 @@ namespace OwnableCI.Pages
             inputLastName.SendKeys(user.LastName);
             inputHomeAddress.SendKeys(user.Adress);
             inputCity.SendKeys(user.City);
-            TestHelper.JSexecutorClick(lstState, driver);
+            lstState.Click();
             var element = driver.FindElement(By.XPath("//span[text()='" + user.State + "']"));
             TestHelper.JSexecutorClick(element, driver);
             inputZipCode.SendKeys(user.ZipCode);
             inputMobile.SendKeys(user.Mobile);
             inputBirthdate.SendKeys(user.BirthDate);
             TestHelper.JSexecutorClick(chkAgreement, driver);
-            TestHelper.JSexecutorClick(btnNext, driver);
+            btnNext.Click();
         }
     }
 }

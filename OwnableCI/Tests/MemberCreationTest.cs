@@ -30,128 +30,146 @@ namespace OwnableCI.Tests
         [Test]
         [Category("MemberCreationTests")]
         [Order(1)]
-        public void MemberCreationAcceptFromLogIn()
+        public void MemberCreationTest()
         {
             TestAction(() =>
             {
                 string currentTestName = "MemberCreationAcceptFromLogIn";
                 log.Debug("Starting " + currentTestName + " Test;");
                 log.Debug("For user " + user.FirstName + user.LastName + ";");
-                if (user.ExpResult == "Accept-FromLogIn")
+                switch (user.ExpResult)
                 {
-                    MemberCreationAccept(user);
-                }
-                else
-                {
-                    Assume.That(false, "User is not from this test. Test will not run.");
-                }
-            });
-        }
-
-        [Test]
-        [Category("MemberCreationTests")]
-        [Order(2)]
-        public void MemberCreationAcceptFromCart()
-        {
-            TestAction(() =>
-            {
-                string currentTestName = "MemberCreationAcceptFromCart";
-                log.Debug("Starting " + currentTestName + " Test;");
-                log.Debug("For user " + user.FirstName + user.LastName + ";");
-                if (user.ExpResult == "Accept-FromCart")
-                {
-                    MemberCreationAccept(user);
-                }
-                else
-                {
-                    Assume.That(false, "User is not from this test. Test will not run.");
+                    case "Accept-FromLogIn":
+                        MemberCreationAccept(user);
+                        break;
+                    case "Accept-FromCart":
+                        MemberCreationAccept(user);
+                        break;
+                    case "Accept-FinishLater":
+                        MemberCreationAccept(user);
+                        break;
+                    case "Reject-WrongZipCode":
+                        MemberCreationReject(user);
+                        break;
+                    case "Reject-UnsupportedState":
+                        MemberCreationReject(user);
+                        break;
+                    case "Reject-LowIncome":
+                        MemberCreationReject(user);
+                        break;
                 }
             });
         }
 
-        [Test]
-        [Category("MemberCreationTests")]
-        [Order(3)]
-        public void MemberCreationAcceptFinishLater()
-        {
-            TestAction(() =>
-            {
-                string currentTestName = "MemberCreationAcceptFinishLater";
-                log.Debug("Starting " + currentTestName + " Test;");
-                log.Debug("For user " + user.FirstName + user.LastName + ";");
-                if (user.ExpResult == "Accept-FinishLater")
-                {
-                    MemberCreationAccept(user);
-                }
-                else
-                {
-                    Assume.That(false, "User is not from this test. Test will not run.");
-                }
-            });
-        }
+        //[Test]
+        //[Category("MemberCreationTests")]
+        //[Order(2)]
+        //public void MemberCreationAcceptFromCart()
+        //{
+        //    TestAction(() =>
+        //    {
+        //        string currentTestName = "MemberCreationAcceptFromCart";
+        //        log.Debug("Starting " + currentTestName + " Test;");
+        //        log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //        if (user.ExpResult == "Accept-FromCart")
+        //        {
+        //            MemberCreationAccept(user);
+        //        }
+        //        else
+        //        {
+        //            //Assume.That(false, "User is not from this test. Test will not run.");
+        //            return;
+        //        }
+        //    });
+        //}
 
-        [Test]
-        [Category("MemberCreationTests")]
-        [Order(4)]
-        public void MemberCreationRejectWrongZipCode()
-        {
-            TestAction(() =>
-            {
-                string currentTestName = "MemberCreationRejectWrongZipCode";
-                log.Debug("Starting " + currentTestName + " Test;");
-                log.Debug("For user " + user.FirstName + user.LastName + ";");
-                if (user.ExpResult == "Reject-WrongZipCode")
-                {
-                    MemberCreationReject(user);
-                }
-                else
-                {
-                    Assume.That(false, "User is not from this test. Test will not run.");
-                }
-            });
-        }
+        //[Test]
+        //[Category("MemberCreationTests")]
+        //[Order(3)]
+        //public void MemberCreationAcceptFinishLater()
+        //{
+        //    TestAction(() =>
+        //    {
+        //        string currentTestName = "MemberCreationAcceptFinishLater";
+        //        log.Debug("Starting " + currentTestName + " Test;");
+        //        log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //        if (user.ExpResult == "Accept-FinishLater")
+        //        {
+        //            MemberCreationAccept(user);
+        //        }
+        //        else
+        //        {
+        //            //Assume.That(false, "User is not from this test. Test will not run.");
+        //            return;
+        //        }
+        //    });
+        //}
 
-        [Test]
-        [Category("MemberCreationTests")]
-        [Order(5)]
-        public void MemberCreationRejectUnsupportedState()
-        {
-            TestAction(() =>
-            {
-                string currentTestName = "MemberCreationRejectUnsupportedState";
-                log.Debug("Starting " + currentTestName + " Test;");
-                log.Debug("For user " + user.FirstName + user.LastName + ";");
-                if (user.ExpResult == "Reject-UnsupportedState")
-                {
-                    MemberCreationReject(user);
-                }
-                else
-                {
-                    Assume.That(false, "User is not from this test. Test will not run.");
-                }
-            });
-        }
+        //[Test]
+        //[Category("MemberCreationTests")]
+        //[Order(4)]
+        //public void MemberCreationRejectWrongZipCode()
+        //{
+        //    TestAction(() =>
+        //    {
+        //        string currentTestName = "MemberCreationRejectWrongZipCode";
+        //        log.Debug("Starting " + currentTestName + " Test;");
+        //        log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //        if (user.ExpResult == "Reject-WrongZipCode")
+        //        {
+        //            MemberCreationReject(user);
+        //        }
+        //        else
+        //        {
+        //            //Assume.That(false, "User is not from this test. Test will not run.");
+        //            return;
+        //        }
+        //    });
+        //}
 
-        [Test]
-        [Category("MemberCreationTests")]
-        [Order(6)]
-        public void MemberCreationRejectLowIncome()
-        {
-            TestAction(() =>
-            {
-                string currentTestName = "MemberCreationRejectLowIncome";
-                log.Debug("Starting " + currentTestName + " Test;");
-                log.Debug("For user " + user.FirstName + user.LastName + ";");
-                if (user.ExpResult == "Reject-LowIncome")
-                {
-                    MemberCreationReject(user);
-                }
-                else
-                {
-                    Assume.That(false, "User is not from this test. Test will not run.");
-                }
-            });
-        }
+        //[Test]
+        //[Category("MemberCreationTests")]
+        //[Order(5)]
+        //public void MemberCreationRejectUnsupportedState()
+        //{
+        //    TestAction(() =>
+        //    {
+        //        string currentTestName = "MemberCreationRejectUnsupportedState";
+        //        log.Debug("Starting " + currentTestName + " Test;");
+        //        log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //        if (user.ExpResult == "Reject-UnsupportedState")
+        //        {
+        //            MemberCreationReject(user);
+        //        }
+        //        else
+        //        {
+        //            //Assume.That(false, "User is not from this test. Test will not run.");
+        //            return;
+        //        }
+        //    });
+        //}
+
+        //[Test]
+        //[Category("MemberCreationTests")]
+        //[Order(6)]
+        //public void MemberCreationRejectLowIncome()
+        //{
+        //    TestAction(() =>
+        //    {
+        //        string currentTestName = "MemberCreationRejectLowIncome";
+        //        log.Debug("Starting " + currentTestName + " Test;");
+        //        log.Debug("For user " + user.FirstName + user.LastName + ";");
+        //        if (user.ExpResult == "Reject-LowIncome")
+        //        {
+        //            MemberCreationReject(user);
+        //        }
+        //        else
+        //        {
+        //            //Assume.That(false, "User is not from this test. Test will not run.");
+        //            return;
+        //        }
+        //    });
+        //}
 
         private void MemberCreationAccept(TestUser user)
         {
@@ -225,6 +243,18 @@ namespace OwnableCI.Tests
 
             Assert.IsTrue(rentExpectedValue == GetCurrentRentalCap(), "Rental Cap validation is Failed");
             Assert.IsTrue(ValidateMember(user), "Member validation is Failed");
+            switch (user.ExpResult)
+            {
+                case "Accept-FromLogIn":
+                    Assert.Pass("User succesfully registered as member from login");
+                    break;
+                case "Accept-FromCart":
+                    Assert.Pass("User succesfully registered as member from product cart item");
+                    break;
+                case "Accept-FinishLater":
+                    Assert.Pass("User succesfully registered as member, by finishing registration later");
+                    break;
+            }
         }
 
         private void MemberCreationReject(TestUser user)
@@ -276,7 +306,7 @@ namespace OwnableCI.Tests
                 Assert.That(txtErrorText.Displayed, "Error Message '" + errorText + "' is not displayed");
                 TestHelper.JSexecutorClick(pagePersonalInfo.btnFinishLater, driverForRun);
                 Assert.That(ValidateUser(user), "User validation is Failed");
-                return;
+                Assert.Pass("User rejected because of wrong zip code");
             }
 
             if (gotoSecondPage)
@@ -299,6 +329,15 @@ namespace OwnableCI.Tests
                 try { driverForRun.FindElement(By.XPath("//button[text()='BECOME A MEMBER']")); }
                 catch { btnBecomeMemberExists = false; }
                 Assert.AreEqual(btnBecomeMemberExpected, btnBecomeMemberExists);
+                switch (user.ExpResult)
+                {
+                    case "Reject-UnsupportedState":
+                        Assert.Pass("User rejected due unsuported state");
+                        break;
+                    case "Reject-LowIncome":
+                        Assert.Pass("User rejected due low income");
+                        break;
+                }
             }
         }
 

@@ -15,7 +15,7 @@
         public string MonthlyIncome;
         public string Company;
         public string YearsEmployed;
-        public string LastDigitsOFSocial;
+        public string DigitsOFSocial;
         public string TestRole;
         public string TestGroup;
         public string ExpResult;

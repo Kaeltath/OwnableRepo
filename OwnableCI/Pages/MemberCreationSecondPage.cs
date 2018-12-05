@@ -48,7 +48,7 @@ namespace OwnableCI.Pages
             inputMonthlyIncome.SendKeys(user.MonthlyIncome);
             inputCompany.SendKeys(user.Company);
             inputYearsEmployed.SendKeys(user.YearsEmployed);
-            inputSSN.SendKeys("12345" + user.LastDigitsOFSocial); //first 5 SSN numbers are random
+            inputSSN.SendKeys(user.DigitsOFSocial); //first 5 SSN numbers are random
             TestHelper.JSexecutorClick(btnBecomeMember, driver);
         }
     }

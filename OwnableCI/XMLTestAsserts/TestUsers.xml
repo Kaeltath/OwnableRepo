@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Users>
   <user>
-    <Email>MCTestRejectUS58@gmail.com</Email>
+    <Email>MCTestRejectUS134@gmail.com</Email>
     <Password>!Gotobuy007</Password>
-    <FirstName>Robert</FirstName>
-    <LastName>Williams</LastName>
-    <Adress>127 Grapest St</Adress>
+    <FirstName>Hector</FirstName>
+    <LastName>Grey</LastName>
+    <Adress>2345 Clair Street</Adress>
     <City>Adelaide</City>
     <State>California</State>
     <ZipCode>93446</ZipCode>
@@ -14,17 +14,17 @@
     <MonthlyIncome>1200</MonthlyIncome>
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
-    <LastDigitsOFSocial>1715</LastDigitsOFSocial>
+    <DigitsOFSocial>123459489</DigitsOFSocial>
     <TestGroup>MemberCreationTest</TestGroup>
     <TestRole>OneTime</TestRole>
     <ExpectedResult>Reject-UnsupportedState</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestRejectWZC58@gmail.com</Email>
+    <Email>MCTestRejectWZC134@gmail.com</Email>
     <Password>!Gotobuy007</Password>
-    <FirstName>Jane</FirstName>
-    <LastName>Doe</LastName>
-    <Adress>149 Lake Field Rd</Adress>
+    <FirstName>Warner</FirstName>
+    <LastName>Larue</LastName>
+    <Adress>2502 Dane Street</Adress>
     <City>Grapevine</City>
     <State>Texas</State>
     <ZipCode>80220</ZipCode>
@@ -33,17 +33,17 @@
     <MonthlyIncome>1200</MonthlyIncome>
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
-    <LastDigitsOFSocial>4315</LastDigitsOFSocial>
+    <DigitsOFSocial>123469489</DigitsOFSocial>
     <TestGroup>MemberCreationTest</TestGroup>
     <TestRole>OneTime</TestRole>
     <ExpectedResult>Reject-WrongZipCode</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestRejectLI58@gmail.com</Email>
+    <Email>MCTestRejectLI134@gmail.com</Email>
     <Password>!Gotobuy007</Password>
-    <FirstName>John</FirstName>
-    <LastName>Smith</LastName>
-    <Adress>398 Shade Wood Ln</Adress>
+    <FirstName>Mark</FirstName>
+    <LastName>Pinkney</LastName>
+    <Adress>4958 North Street</Adress>
     <City>Allen</City>
     <State>Texas</State>
     <ZipCode>75013</ZipCode>
@@ -52,55 +52,55 @@
     <MonthlyIncome>1199</MonthlyIncome>
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
-    <LastDigitsOFSocial>5698</LastDigitsOFSocial>
+    <DigitsOFSocial>123479489</DigitsOFSocial>
     <TestRole>OneTime</TestRole>
     <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Reject-LowIncome</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFL58@gmail.com</Email>
+    <Email>MCTestAcceptFLogin134@gmail.com</Email>
     <Password>!Gotobuy007</Password>
-    <FirstName>John</FirstName>
-    <LastName>Smith</LastName>
-    <Adress>398 Shade Wood Ln</Adress>
+    <FirstName>Justin</FirstName>
+    <LastName>Schendel</LastName>
+    <Adress>2584 Kelly Drive</Adress>
     <City>Allen</City>
     <State>Texas</State>
     <ZipCode>75013</ZipCode>
     <Mobile>2145551212</Mobile>
     <Birthdate>05/15/1970</Birthdate>
-    <MonthlyIncome>1200</MonthlyIncome>
+    <MonthlyIncome>2600</MonthlyIncome>
     <Company>IT</Company>
-    <YearsEmployed>2</YearsEmployed>
-    <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <YearsEmployed>5</YearsEmployed>
+    <DigitsOFSocial>123489489</DigitsOFSocial>
     <TestRole>OneTime</TestRole>
     <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Accept-FromLogIn</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFC58@gmail.com</Email>
+    <Email>MCTestAcceptFC134@gmail.com</Email>
     <Password>!Gotobuy007</Password>
-    <FirstName>Jane</FirstName>
-    <LastName>Doe</LastName>
-    <Adress>149 Lake Field Rd</Adress>
+    <FirstName>Franklin</FirstName>
+    <LastName>Bowden</LastName>
+    <Adress>3026 Burton Avenue</Adress>
     <City>Grapevine</City>
     <State>Texas</State>
     <ZipCode>76051</ZipCode>
     <Mobile>1722234010</Mobile>
     <Birthdate>08/04/1972</Birthdate>
-    <MonthlyIncome>2000</MonthlyIncome>
+    <MonthlyIncome>2600</MonthlyIncome>
     <Company>Dealer</Company>
-    <YearsEmployed>1</YearsEmployed>
-    <LastDigitsOFSocial>5298</LastDigitsOFSocial>
+    <YearsEmployed>5</YearsEmployed>
+    <DigitsOFSocial>123499489</DigitsOFSocial>
     <TestRole>OneTime</TestRole>
     <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Accept-FromCart</ExpectedResult>
   </user>
   <user>
-    <Email>MCTestAcceptFL58@gmail.com</Email>
+    <Email>MCTestAcceptFinishL134@gmail.com</Email>
     <Password>!Gotobuy007</Password>
-    <FirstName>Jane</FirstName>
-    <LastName>Doe</LastName>
-    <Adress>149 Lake Field Rd</Adress>
+    <FirstName>Joana</FirstName>
+    <LastName>Estrada</LastName>
+    <Adress>2574 Bluff Street</Adress>
     <City>Grapevine</City>
     <State>Texas</State>
     <ZipCode>76051</ZipCode>
@@ -108,18 +108,18 @@
     <Birthdate>08/04/1972</Birthdate>
     <MonthlyIncome>4001</MonthlyIncome>
     <Company>Police</Company>
-    <YearsEmployed>3</YearsEmployed>
-    <LastDigitsOFSocial>6358</LastDigitsOFSocial>
+    <YearsEmployed>5</YearsEmployed>
+    <DigitsOFSocial>123519489</DigitsOFSocial>
     <TestRole>OneTime</TestRole>
     <TestGroup>MemberCreationTest</TestGroup>
     <ExpectedResult>Accept-FinishLater</ExpectedResult>
   </user>
   <user>
-    <Email>NUTest58@gmail.com</Email>
+    <Email>NUTest134@gmail.com</Email>
     <Password>Goodtaste1!</Password>
-    <FirstName>John</FirstName>
-    <LastName>Smith</LastName>
-    <Adress>524 Shade Wood Ln</Adress>
+    <FirstName>Lucas</FirstName>
+    <LastName>Coppola</LastName>
+    <Adress>4697  Union Street</Adress>
     <City>Allen</City>
     <State>Texas</State>
     <ZipCode>75013</ZipCode>
@@ -128,7 +128,7 @@
     <MonthlyIncome>1200</MonthlyIncome>
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
-    <LastDigitsOFSocial>6458</LastDigitsOFSocial>
+    <DigitsOFSocial>123529489</DigitsOFSocial>
     <TestRole>OneTime</TestRole>
     <TestGroup>NewUserTests</TestGroup>
     <ExpectedResult>
@@ -137,9 +137,9 @@
   <user>
     <Email>testik4@gmail.com</Email>
     <Password>Goodtaste1!</Password>
-    <FirstName>John</FirstName>
-    <LastName>Smith</LastName>
-    <Adress>1113 Shade Tree Ln</Adress>
+    <FirstName>Lisbeth</FirstName>
+    <LastName>Douglas</LastName>
+    <Adress>2738  Ella Street</Adress>
     <City>Allen</City>
     <State>Texas</State>
     <ZipCode>75013</ZipCode>
@@ -148,7 +148,7 @@
     <MonthlyIncome>1200</MonthlyIncome>
     <Company>IT</Company>
     <YearsEmployed>2</YearsEmployed>
-    <LastDigitsOFSocial>6543</LastDigitsOFSocial>
+    <DigitsOFSocial>123539481</DigitsOFSocial>
     <TestRole>Reusable</TestRole>
     <TestGroup>WishListAndCartTests</TestGroup>
     <ExpectedResult>

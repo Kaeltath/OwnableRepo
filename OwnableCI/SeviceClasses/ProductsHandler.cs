@@ -60,22 +60,22 @@ namespace OwnableCI.Constants
             if (category == ProductCategories.Top_deals)
             {
                 var blackFridayControl = m_driverForRun.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
-                TestHelper.JSexecutorClick(blackFridayControl, m_driverForRun);
+                blackFridayControl.Click();
                 Thread.Sleep(2000);
                 categoryControl = m_driverForRun.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
-                TestHelper.JSexecutorClick(categoryControl, m_driverForRun);
+                categoryControl.Click();
                 Thread.Sleep(3000);
             }
             else {
                 categoryControl = m_driverForRun.FindElement(By.XPath(category.GetDescription()));
-                TestHelper.JSexecutorClick(categoryControl, m_driverForRun);
+                categoryControl.Click();
                 Thread.Sleep(3000);
 
             }
             //if (categoryControl != null)
             //{
             //Thread.Sleep(2000);
-            //TestHelper.JSexecutorClick(categoryControl, m_driverForRun);
+            //categoryControl.Click();
             //Thread.Sleep(3000);
             CaptureProductProperties(productNumber);
             //}
@@ -260,7 +260,7 @@ namespace OwnableCI.Constants
         private void Sort(SortingMethods sortingMethod, bool ascending = false)
         {
             var element = m_driver.FindElement(By.XPath("//div[@class='row justify-content-end products-sort']//span[@class='ng-arrow-wrapper']"));
-            TestHelper.JSexecutorClick(element, m_driver);
+            element.Click();
             SmallSleep();
             var options = m_driver.FindElements(By.XPath("//div[@class='row']//div[@class='row justify-content-end products-sort']//div[@role='option']"));
             TestHelper.JSexecutorClick(options[(Int32)sortingMethod], m_driver);
@@ -407,11 +407,11 @@ namespace OwnableCI.Constants
                             }
                         case InterctionControlSet.Product_Details:
                             var blackFridayControl = m_driver.FindElement(By.XPath("//div[@id='v-pills-tab']//button[text()=' Black Friday ']"));
-                            TestHelper.JSexecutorClick(blackFridayControl, m_driver);
+                            blackFridayControl.Click();
                             Thread.Sleep(2000);
                             var categoryControl = m_driver.FindElement(By.XPath("//div[@class='sub-menu opened']//div[@class='column ng-star-inserted']//li[1]/a"));
                             //TestHelper.JSexecutorClick(categoryControl, m_driver);
-                            TestHelper.JSexecutorClick(product.categoryControl, m_driver);
+                            TestHelper.JSexecutorClick(categoryControl, m_driver);
                             MidSleep();
                             var element = m_driver.FindElement(By.XPath("//div[@class='product-card-container']//div[@class='description']//div[text()='" + 
                                 product.ProductName + "']//parent::div"));

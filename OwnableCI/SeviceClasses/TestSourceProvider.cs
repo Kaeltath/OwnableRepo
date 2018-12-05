@@ -77,7 +77,7 @@ namespace OwnableCI.SeviceClasses
                 MonthlyIncome = user.MonthlyIncome,
                 Company = user.Company,
                 YearsEmployed = user.YearsEmployed,
-                LastDigitsOFSocial = user.LastDigitsOFSocial,
+                DigitsOFSocial = user.DigitsOFSocial,
                 TestRole = user.TestRole,
                 TestGroup = user.TestGroup,
                 ExpResult = user.ExpResult
@@ -85,8 +85,8 @@ namespace OwnableCI.SeviceClasses
 
             if (Regex.IsMatch(user.Email, @"(\d+)"))
             {
-                var result = Regex.Replace(user.Email, @"(\d+)", Incrementor, RegexOptions.Multiline);
-                incrementedUser.Email = result;
+                var newMail = Regex.Replace(user.Email, @"(\d+)", Incrementor, RegexOptions.Multiline);
+                incrementedUser.Email = newMail;
             }
             else
             {
@@ -94,6 +94,12 @@ namespace OwnableCI.SeviceClasses
                 string incrementedEmail = user.Email.Insert(incrementPosition, "1");
                 incrementedUser.Email = incrementedEmail;
             }
+
+            var newAdress = Regex.Replace(user.Adress, @"(\d+)", Incrementor, RegexOptions.Multiline);
+            incrementedUser.Adress = newAdress;
+            var newSocialNumber = Regex.Replace(user.DigitsOFSocial, @"(\d+)", Incrementor, RegexOptions.Multiline);
+            incrementedUser.DigitsOFSocial = newSocialNumber;
+
             return incrementedUser;
         }
 
@@ -118,6 +124,12 @@ namespace OwnableCI.SeviceClasses
                 var fieldToUpdate = usersTamplate.SelectNodes("/Users/user/Email[text()='" + iterationTracker.Key.Email + "']");
                 if (fieldToUpdate != null)
                     fieldToUpdate[0].InnerText = iterationTracker.Value.Email;
+                fieldToUpdate = usersTamplate.SelectNodes("/Users/user/Adress[text()='" + iterationTracker.Key.Adress + "']");
+                if (fieldToUpdate != null)
+                    fieldToUpdate[0].InnerText = iterationTracker.Value.Adress;
+                fieldToUpdate = usersTamplate.SelectNodes("/Users/user/DigitsOFSocial[text()='" + iterationTracker.Key.DigitsOFSocial + "']");
+                if (fieldToUpdate != null)
+                    fieldToUpdate[0].InnerText = iterationTracker.Value.DigitsOFSocial;
             }
             usersTamplate.Save(tamplateFileLocation);
         }
