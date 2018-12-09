@@ -11,7 +11,7 @@ namespace OwnableCI_TestLib.Pages
     {
         protected IWebDriver driver;
         protected string errorMessageToLog;
-        private log4net.ILog logger;
+        protected log4net.ILog logger;
 
         public BasePage(IWebDriver driver)
         {

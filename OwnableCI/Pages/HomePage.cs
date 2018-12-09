@@ -16,8 +16,8 @@ namespace OwnableCI_TestLib.Pages
         #region IWebelements        
 
         #region Header:
-        [FindsBy(How = How.XPath, Using = "//img[@class='logo_color']")]
-        public IWebElement lblOwnableLogo;
+        //[FindsBy(How = How.XPath, Using = "//img[@class='logo_color']")]
+        //public IWebElement lblOwnableLogo;
 
 
         [FindsBy(How = How.XPath, Using = "//li[@class='nav-item']//a[text()='Home']")]
@@ -228,8 +228,8 @@ namespace OwnableCI_TestLib.Pages
 
         #endregion
 
-        log4net.ILog logger;
-        private string defaultSite;
+        protected log4net.ILog logger;
+        protected string defaultSite;
 
         // <summary>
         /// Call the base class constructor
@@ -301,7 +301,7 @@ namespace OwnableCI_TestLib.Pages
             js.ExecuteScript("arguments[0].click()", lblCart);
         }
 
-        private string GetTestSite()
+        protected string GetTestSite()
         {
             Configuration config = ConfigurationManager.OpenExeConfiguration(Assembly.GetExecutingAssembly().Location);
             if (!config.HasFile)

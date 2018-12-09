@@ -120,17 +120,17 @@ namespace OwnableCI_TestLib.Tests
             {
                 if (incoming < 2000)
                 {
-                    rentExpected = "$500.00";
+                    rentExpected = "$300.00";
                 }
                 else
                 {
                     if (incoming <= 4000)
                     {
-                        rentExpected = "$750.00";
+                        rentExpected = "$600.00";
                     }
                     else
                     {
-                        rentExpected = "$1,000.00";
+                        rentExpected = "$850.00";
                     }
                 }
             }
